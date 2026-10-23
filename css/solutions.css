@@ -32,6 +32,65 @@
   box-shadow: var(--shadow-md);
 }
 
+/* Dark Card Variant for High-Security / Dark Sections */
+.solution-card-detailed.card-dark {
+  background: var(--navy-card);
+  border: 1px solid var(--navy-border-dark);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+  color: var(--white);
+}
+
+.solution-card-detailed.card-dark:hover {
+  transform: translateY(-5px);
+  border-color: var(--mint);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.45), 0 0 25px rgba(66, 214, 176, 0.18);
+}
+
+.solution-card-detailed.card-dark .solution-icon-lg {
+  background: rgba(66, 214, 176, 0.12);
+  color: var(--mint);
+  border: 1px solid rgba(66, 214, 176, 0.25);
+}
+
+.solution-card-detailed.card-dark:hover .solution-icon-lg {
+  background: var(--mint);
+  color: var(--navy);
+  box-shadow: 0 0 20px rgba(66, 214, 176, 0.4);
+}
+
+.solution-card-detailed.card-dark h3 {
+  color: var(--white);
+}
+
+.solution-card-detailed.card-dark p {
+  color: var(--white-text-muted);
+}
+
+.solution-card-detailed.card-dark .benefit-pill {
+  background: rgba(245, 247, 250, 0.08);
+  color: var(--white);
+  border: 1px solid rgba(245, 247, 250, 0.16);
+  transition: var(--transition);
+}
+
+.solution-card-detailed.card-dark .benefit-pill:hover {
+  background: rgba(66, 214, 176, 0.15);
+  border-color: var(--mint);
+  color: var(--white);
+}
+
+.solution-card-detailed.card-dark .feature-list li {
+  color: var(--white-text-muted);
+}
+
+.solution-card-detailed.card-dark .feature-list li i {
+  color: var(--mint);
+}
+
+.solution-card-detailed.card-dark .solution-card-footer {
+  border-top-color: var(--navy-border-dark);
+}
+
 .solution-card-header {
   display: flex;
   align-items: center;
