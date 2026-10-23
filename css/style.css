@@ -787,6 +787,148 @@ button, input, select, textarea {
   color: var(--white);
 }
 
+/* ==========================================================================
+   Interactive Product Tabs & Connected Financial Workflow
+   ========================================================================== */
+.product-interactive-tabs {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--white-surface);
+  border: 1px solid var(--navy-border);
+  border-radius: var(--radius-md);
+  padding: 0.45rem;
+  margin-bottom: 2.2rem;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  box-shadow: inset 0 2px 4px rgba(16, 29, 50, 0.04);
+}
+
+.product-interactive-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.product-tab-btn,
+.conn-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  background: transparent;
+  border: 1px solid transparent;
+  padding: 0.75rem 1.35rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-radius: var(--radius-sm);
+  color: var(--navy-text-muted);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  outline: none;
+  user-select: none;
+}
+
+.product-tab-btn i,
+.conn-tab-btn i {
+  font-size: 1rem;
+  color: #64748b;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), color 0.25s ease;
+}
+
+.product-tab-btn:hover,
+.conn-tab-btn:hover {
+  color: var(--navy);
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 2px 8px rgba(16, 29, 50, 0.05);
+  transform: translateY(-1px);
+}
+
+.product-tab-btn:hover i,
+.conn-tab-btn:hover i {
+  color: var(--navy);
+  transform: scale(1.1);
+}
+
+.product-tab-btn.active,
+.conn-tab-btn.active {
+  background: var(--navy);
+  color: var(--white-pure);
+  box-shadow: 0 4px 14px rgba(16, 29, 50, 0.18), 0 1px 3px rgba(16, 29, 50, 0.1);
+  border-color: rgba(66, 214, 176, 0.3);
+}
+
+.product-tab-btn.active i,
+.conn-tab-btn.active i {
+  color: var(--mint);
+  transform: scale(1.08);
+}
+
+.product-tab-btn:focus-visible,
+.conn-tab-btn:focus-visible {
+  outline: 2px solid var(--mint);
+  outline-offset: 2px;
+}
+
+/* Connected Experience Panes */
+.conn-pane {
+  display: none;
+  opacity: 0;
+}
+
+.conn-pane.active {
+  display: block;
+  animation: connPaneFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes connPaneFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.conn-pane .grid-2 {
+  align-items: center;
+  gap: 3rem;
+}
+
+.conn-pane h3 {
+  font-size: 1.65rem;
+  color: var(--navy);
+  margin-bottom: 0.9rem;
+  letter-spacing: -0.01em;
+}
+
+.conn-pane p {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--navy-text-muted);
+  margin-bottom: 1.5rem;
+}
+
+.conn-pane img {
+  border-radius: var(--radius-md);
+  border: 1px solid var(--navy-border);
+  box-shadow: var(--shadow-md);
+  transition: var(--transition);
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.conn-pane:hover img {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
 /* FAQ Accordion */
 .faq-list {
   max-width: 800px;
@@ -1203,3 +1345,5 @@ button, input, select, textarea {
 .d-flex { display: flex; }
 .align-center { align-items: center; }
 .justify-between { justify-content: space-between; }
+.rounded-lg { border-radius: var(--radius-md) !important; }
+.shadow { box-shadow: var(--shadow-md) !important; }

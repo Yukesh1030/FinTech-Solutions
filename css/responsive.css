@@ -171,6 +171,20 @@ img, video, canvas, svg, table {
     padding: 4rem 0;
   }
 
+  .product-interactive-tabs {
+    width: 100%;
+    gap: 0.35rem;
+    padding: 0.35rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .product-tab-btn,
+  .conn-tab-btn {
+    padding: 0.65rem 1rem;
+    font-size: 0.88rem;
+    gap: 0.5rem;
+  }
+
   .hero-section {
     padding: 4.5rem 0 3.5rem;
   }
@@ -264,6 +278,16 @@ img, video, canvas, svg, table {
   .chart-header-bar {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .product-interactive-tabs {
+    border-radius: var(--radius-sm);
+  }
+
+  .product-tab-btn,
+  .conn-tab-btn {
+    padding: 0.55rem 0.85rem;
+    font-size: 0.82rem;
   }
 }
 

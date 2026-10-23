@@ -407,22 +407,22 @@
         </div>
 
         <div class="interactive-demo-panel">
-          <div class="product-interactive-tabs">
-            <button type="button" class="product-tab-btn conn-tab-btn active" data-target="conn-account">
-              <i class="fas fa-wallet"></i> Account Overview
+          <div class="product-interactive-tabs" role="tablist" aria-label="Connected Financial Workflow Modules">
+            <button type="button" class="product-tab-btn conn-tab-btn active" data-target="conn-account" role="tab" aria-selected="true" id="tab-conn-account" aria-controls="conn-account">
+              <i class="fas fa-wallet"></i> <span>Account Overview</span>
             </button>
-            <button type="button" class="product-tab-btn conn-tab-btn" data-target="conn-payments">
-              <i class="fas fa-paper-plane"></i> Instant Payments
+            <button type="button" class="product-tab-btn conn-tab-btn" data-target="conn-payments" role="tab" aria-selected="false" id="tab-conn-payments" aria-controls="conn-payments">
+              <i class="fas fa-paper-plane"></i> <span>Instant Payments</span>
             </button>
-            <button type="button" class="product-tab-btn conn-tab-btn" data-target="conn-invoices">
-              <i class="fas fa-file-invoice-dollar"></i> Live Invoicing
+            <button type="button" class="product-tab-btn conn-tab-btn" data-target="conn-invoices" role="tab" aria-selected="false" id="tab-conn-invoices" aria-controls="conn-invoices">
+              <i class="fas fa-file-invoice-dollar"></i> <span>Live Invoicing</span>
             </button>
-            <button type="button" class="product-tab-btn conn-tab-btn" data-target="conn-reports">
-              <i class="fas fa-chart-pie"></i> Unified Reports
+            <button type="button" class="product-tab-btn conn-tab-btn" data-target="conn-reports" role="tab" aria-selected="false" id="tab-conn-reports" aria-controls="conn-reports">
+              <i class="fas fa-chart-pie"></i> <span>Unified Reports</span>
             </button>
           </div>
 
-          <div class="conn-pane active" id="conn-account">
+          <div class="conn-pane active" id="conn-account" role="tabpanel" aria-labelledby="tab-conn-account">
             <div class="grid-2">
               <div>
                 <h3>Real-Time Treasury Centralization</h3>
@@ -438,7 +438,7 @@
             </div>
           </div>
 
-          <div class="conn-pane" id="conn-payments" style="display: none;">
+          <div class="conn-pane" id="conn-payments" role="tabpanel" aria-labelledby="tab-conn-payments">
             <div class="grid-2">
               <div>
                 <h3>Sub-Second Disbursement Engines</h3>
@@ -454,7 +454,7 @@
             </div>
           </div>
 
-          <div class="conn-pane" id="conn-invoices" style="display: none;">
+          <div class="conn-pane" id="conn-invoices" role="tabpanel" aria-labelledby="tab-conn-invoices">
             <div class="grid-2">
               <div>
                 <h3>Self-Healing Invoices</h3>
@@ -470,7 +470,7 @@
             </div>
           </div>
 
-          <div class="conn-pane" id="conn-reports" style="display: none;">
+          <div class="conn-pane" id="conn-reports" role="tabpanel" aria-labelledby="tab-conn-reports">
             <div class="grid-2">
               <div>
                 <h3>One-Click Auditable Statements</h3>

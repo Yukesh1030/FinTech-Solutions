@@ -144,15 +144,31 @@ function initConnectedExperienceTabs() {
   const connBtns = document.querySelectorAll('.conn-tab-btn');
   const connPanels = document.querySelectorAll('.conn-pane');
 
+  if (!connBtns.length || !connPanels.length) return;
+
   connBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-      const target = btn.getAttribute('data-target');
-      connBtns.forEach(b => b.classList.remove('active'));
-      connPanels.forEach(p => p.classList.remove('active'));
+      const targetId = btn.getAttribute('data-target');
+      if (!targetId) return;
+
+      connBtns.forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      connPanels.forEach(p => {
+        p.classList.remove('active');
+        p.style.display = 'none';
+      });
 
       btn.classList.add('active');
-      const pane = document.getElementById(target);
-      if (pane) pane.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+      const targetPane = document.getElementById(targetId);
+      if (targetPane) {
+        targetPane.style.display = 'block';
+        // Force reflow for keyframe animation to restart cleanly
+        void targetPane.offsetWidth;
+        targetPane.classList.add('active');
+      }
     });
   });
 }
