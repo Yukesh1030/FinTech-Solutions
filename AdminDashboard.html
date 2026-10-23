@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="STACKLY FinTech Admin Dashboard - Monitor system transactions, volume charts, customer directories, and exceptions.">
+  <title>Admin Dashboard | STACKLY FinTech Solutions</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/webp" href="Assets/Brand-logo.webp">
+
+  <!-- Google Fonts & Font Awesome Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body class="dashboard-body">
+
+  <div class="dashboard-wrapper">
+    <!-- Mobile Sidebar Backdrop Overlay -->
+    <div class="dashboard-sidebar-overlay"></div>
+
+    <!-- ==========================================================================
+         SIDEBAR: Dark Sidebar with 5 Main Menus
+         ========================================================================== -->
+    <aside class="dashboard-sidebar">
+      <div class="sidebar-header">
+        <a href="index.html" class="sidebar-brand" aria-label="Go to STACKLY Home">
+          <img src="Assets/Brand-logo.webp" alt="STACKLY FinTech Logo" width="130" height="36">
+        </a>
+        <span class="sidebar-badge">Admin</span>
+      </div>
+
+      <!-- 5 Main Menus -->
+      <ul class="sidebar-menu">
+        <li class="sidebar-menu-item active" data-menu="dashboard">
+          <a href="#dashboard"><i class="fas fa-chart-pie"></i> <span>Dashboard</span></a>
+        </li>
+        <li class="sidebar-menu-item" data-menu="accounts">
+          <a href="#accounts"><i class="fas fa-users"></i> <span>Accounts &amp; Customers</span></a>
+        </li>
+        <li class="sidebar-menu-item" data-menu="transactions">
+          <a href="#transactions"><i class="fas fa-receipt"></i> <span>Transactions</span></a>
+        </li>
+        <li class="sidebar-menu-item" data-menu="reports">
+          <a href="#reports"><i class="fas fa-file-waveform"></i> <span>Reports &amp; Analytics</span></a>
+        </li>
+        <li class="sidebar-menu-item" data-menu="settings">
+          <a href="#settings"><i class="fas fa-gear"></i> <span>Settings</span></a>
+        </li>
+      </ul>
+
+      <div class="sidebar-footer">
+        <div class="user-mini-profile">
+          <div class="user-avatar-circle">AD</div>
+          <div class="user-meta">
+            <span id="adminUserEmail">admin@stackly.finance</span>
+            <small>Administrator</small>
+          </div>
+        </div>
+        <a href="login.html" class="logout-icon-btn" title="Sign out" aria-label="Sign out">
+          <i class="fas fa-right-from-bracket"></i>
+        </a>
+      </div>
+    </aside>
+
+    <!-- ==========================================================================
+         MAIN CONTENT AREA
+         ========================================================================== -->
+    <div class="dashboard-main">
+      <!-- Topbar Header -->
+      <header class="dashboard-topbar">
+        <div class="topbar-left">
+          <button type="button" class="dashboard-topbar-toggle" aria-label="Toggle menu">
+            <i class="fas fa-bars"></i>
+          </button>
+          <h1 class="dashboard-title-heading">Admin Overview</h1>
+        </div>
+
+        <div class="topbar-right">
+          <button type="button" class="btn-refresh btn-refresh-admin" aria-label="Refresh demo data">
+            <i class="fas fa-rotate"></i> <span>Refresh Data</span>
+          </button>
+
+          <a href="404.html" class="topbar-notify-btn" aria-label="Notifications">
+            <i class="far fa-bell"></i>
+            <span class="notify-badge">4</span>
+          </a>
+
+          <a href="index.html" class="btn btn-outline btn-sm" title="Back to Public Site">
+            <i class="fas fa-globe"></i> <span class="hide-mobile">Public Site</span>
+          </a>
+        </div>
+      </header>
+
+      <!-- Dashboard Body Content -->
+      <main class="dashboard-content">
+        <!-- Notice on Demo Values -->
+        <div class="illustrative-notice" style="margin-top: 0;">
+          <i class="fas fa-info-circle text-mint"></i> Illustrative demonstration values only; they do not represent real financial transactions or live bank accounts.
+        </div>
+
+        <!-- ==========================================================================
+             VIEW: DASHBOARD (Default)
+             ========================================================================== -->
+        <div class="dashboard-view-section" id="view-dashboard">
+          <!-- 3 KPI Cards -->
+          <div class="dashboard-kpi-grid">
+            <!-- KPI 1: TOTAL TRANSACTIONS -->
+            <div class="kpi-card-metric">
+              <div class="kpi-info-block">
+                <span>Total Transactions</span>
+                <h3 id="kpiTotalTxns">2,486</h3>
+                <div class="kpi-trend positive">
+                  <i class="fas fa-arrow-up"></i> +12.4% vs last week
+                </div>
+              </div>
+              <div class="kpi-icon-bubble">
+                <i class="fas fa-arrow-right-arrow-left"></i>
+              </div>
+            </div>
+
+            <!-- KPI 2: PENDING PAYMENTS -->
+            <div class="kpi-card-metric">
+              <div class="kpi-info-block">
+                <span>Pending Payments</span>
+                <h3 id="kpiPendingPay">34</h3>
+                <div class="kpi-trend neutral">
+                  <i class="fas fa-clock"></i> Requires settlement review
+                </div>
+              </div>
+              <div class="kpi-icon-bubble">
+                <i class="fas fa-hourglass-half"></i>
+              </div>
+            </div>
+
+            <!-- KPI 3: PROCESSED VOLUME -->
+            <div class="kpi-card-metric">
+              <div class="kpi-info-block">
+                <span>Processed Volume</span>
+                <h3 id="kpiProcessedVol">₹12.8L</h3>
+                <div class="kpi-trend positive">
+                  <i class="fas fa-arrow-trend-up"></i> +8.6% throughput
+                </div>
+              </div>
+              <div class="kpi-icon-bubble">
+                <i class="fas fa-coins text-mint"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Transaction Volume Chart Panel -->
+          <div class="dashboard-panel" style="margin-top: 1.5rem;">
+            <div class="panel-header">
+              <div>
+                <h2 class="panel-title">Transaction Volume Distribution</h2>
+                <p style="font-size: 0.85rem; margin: 0;">Hourly throughput across payment rails (Demonstration Feed)</p>
+              </div>
+              <div class="panel-actions">
+                <span class="badge" style="background: rgba(66, 214, 176, 0.2); color: #0b7252; padding: 4px 10px; border-radius: 4px; font-size: 0.78rem; font-weight: 700;">LIVE ENGINE</span>
+              </div>
+            </div>
+            <div style="height: 280px; position: relative;">
+              <canvas id="adminChartCanvas"></canvas>
+            </div>
+          </div>
+
+          <!-- Two Column Secondary Panels: Recent Transactions & Exceptions -->
+          <div class="dashboard-two-col" style="margin-top: 1.5rem;">
+            <!-- Left: Recent Transactions Table -->
+            <div class="dashboard-panel">
+              <div class="panel-header">
+                <div>
+                  <h2 class="panel-title">Recent Transactions</h2>
+                  <p style="font-size: 0.85rem; margin: 0;">Real-time stream of incoming/outgoing settlements</p>
+                </div>
+                <div class="panel-actions">
+                  <input type="text" id="adminTxnSearch" class="panel-search-input" placeholder="Search reference...">
+                  <select id="adminTxnStatusFilter" class="panel-select" aria-label="Filter transaction status">
+                    <option value="all">All Statuses</option>
+                    <option value="completed">Completed</option>
+                    <option value="pending">Pending</option>
+                    <option value="processing">Processing</option>
+                    <option value="failed">Failed</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="table-responsive">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Reference</th>
+                      <th>Type</th>
+                      <th>Amount</th>
+                      <th>Status</th>
+                      <th>Time</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="adminTxnTableBody">
+                    <tr data-status="completed">
+                      <td><strong>TXN-2041</strong></td>
+                      <td>Payment</td>
+                      <td><strong>₹4,500</strong></td>
+                      <td><span class="status-badge completed"><i class="fas fa-check-circle"></i> Completed</span></td>
+                      <td>2m ago</td>
+                      <td><button class="btn btn-sm btn-outline" onclick="viewTxnDetail('TXN-2041', 'Payment', '4500', 'Completed')">View</button></td>
+                    </tr>
+                    <tr data-status="pending">
+                      <td><strong>TXN-2040</strong></td>
+                      <td>Invoice</td>
+                      <td><strong>₹12,000</strong></td>
+                      <td><span class="status-badge pending"><i class="fas fa-clock"></i> Pending</span></td>
+                      <td>14m ago</td>
+                      <td><button class="btn btn-sm btn-outline" onclick="viewTxnDetail('TXN-2040', 'Invoice', '12000', 'Pending')">View</button></td>
+                    </tr>
+                    <tr data-status="processing">
+                      <td><strong>TXN-2039</strong></td>
+                      <td>Refund</td>
+                      <td><strong>₹1,200</strong></td>
+                      <td><span class="status-badge processing"><i class="fas fa-spinner fa-spin"></i> Processing</span></td>
+                      <td>28m ago</td>
+                      <td><button class="btn btn-sm btn-outline" onclick="viewTxnDetail('TXN-2039', 'Refund', '1200', 'Processing')">View</button></td>
+                    </tr>
+                    <tr data-status="completed">
+                      <td><strong>TXN-2038</strong></td>
+                      <td>Payment</td>
+                      <td><strong>₹8,750</strong></td>
+                      <td><span class="status-badge completed"><i class="fas fa-check-circle"></i> Completed</span></td>
+                      <td>42m ago</td>
+                      <td><button class="btn btn-sm btn-outline" onclick="viewTxnDetail('TXN-2038', 'Payment', '8750', 'Completed')">View</button></td>
+                    </tr>
+                    <tr data-status="failed">
+                      <td><strong>TXN-2037</strong></td>
+                      <td>Payment</td>
+                      <td><strong>₹2,100</strong></td>
+                      <td><span class="status-badge failed"><i class="fas fa-times-circle"></i> Failed</span></td>
+                      <td>1h ago</td>
+                      <td><button class="btn btn-sm btn-outline" onclick="viewTxnDetail('TXN-2037', 'Payment', '2100', 'Failed')">View</button></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Right: Payment Exceptions & System Activity -->
+            <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+              <!-- Panel 1: Payment Exceptions -->
+              <div class="dashboard-panel">
+                <div class="panel-header">
+                  <h2 class="panel-title">Payment Exceptions</h2>
+                  <span class="badge" style="background: #ffe8e8; color: #c5221f; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 700;">2 Open</span>
+                </div>
+                <div class="activity-feed-list">
+                  <div class="activity-item">
+                    <div class="activity-icon" style="color: #c5221f;"><i class="fas fa-triangle-exclamation"></i></div>
+                    <div class="activity-details">
+                      <p><strong>Gateway Timeout (HDFC Rail)</strong></p>
+                      <small>TXN-2037 failed due to 3D-Secure timeout. Auto-retried on backup rail.</small>
+                    </div>
+                  </div>
+                  <div class="activity-item">
+                    <div class="activity-icon" style="color: #9c6c06;"><i class="fas fa-shield-halved"></i></div>
+                    <div class="activity-details">
+                      <p><strong>Velocity Rule Triggered</strong></p>
+                      <small>User account ACC-918 flagged for review (3 high-value attempts in 60s).</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Panel 2: Invoice Status Summary -->
+              <div class="dashboard-panel">
+                <div class="panel-header">
+                  <h2 class="panel-title">Invoice Status</h2>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 0.9rem;">
+                  <div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.82rem; font-weight: 600; margin-bottom: 0.2rem;">
+                      <span>Paid Invoices (82%)</span>
+                      <span>₹9.8L</span>
+                    </div>
+                    <div style="height: 6px; border-radius: 3px; background: #e2e8f0; overflow: hidden;">
+                      <div style="width: 82%; height: 100%; background: var(--mint);"></div>
+                    </div>
+                  </div>
+                  <div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.82rem; font-weight: 600; margin-bottom: 0.2rem;">
+                      <span>Pending Invoices (15%)</span>
+                      <span>₹2.1L</span>
+                    </div>
+                    <div style="height: 6px; border-radius: 3px; background: #e2e8f0; overflow: hidden;">
+                      <div style="width: 15%; height: 100%; background: #e6a23c;"></div>
+                    </div>
+                  </div>
+                  <div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.82rem; font-weight: 600; margin-bottom: 0.2rem;">
+                      <span>Overdue Invoices (3%)</span>
+                      <span>₹0.4L</span>
+                    </div>
+                    <div style="height: 6px; border-radius: 3px; background: #e2e8f0; overflow: hidden;">
+                      <div style="width: 3%; height: 100%; background: #f56c6c;"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==========================================================================
+             VIEW: ACCOUNTS & CUSTOMERS
+             ========================================================================== -->
+        <div class="dashboard-view-section" id="view-accounts" style="display: none;">
+          <div class="dashboard-panel">
+            <div class="panel-header">
+              <div>
+                <h2 class="panel-title">Customer &amp; Merchant Directory</h2>
+                <p style="font-size: 0.85rem; margin: 0;">Registered accounts and treasury limits</p>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Account ID</th>
+                    <th>Customer Name</th>
+                    <th>KYC Status</th>
+                    <th>Assigned IBAN</th>
+                    <th>Total Volume</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>ACC-1082</strong></td>
+                    <td>Apex Global Technologies Ltd.</td>
+                    <td><span class="status-badge completed">Verified</span></td>
+                    <td><code>IN82STAK001928401</code></td>
+                    <td>₹18,40,000</td>
+                    <td><span class="status-badge completed">Active</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>ACC-1083</strong></td>
+                    <td>CloudScale Digital LLP</td>
+                    <td><span class="status-badge completed">Verified</span></td>
+                    <td><code>IN82STAK001928402</code></td>
+                    <td>₹9,25,000</td>
+                    <td><span class="status-badge completed">Active</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>ACC-1084</strong></td>
+                    <td>Zenith Logistics Solutions</td>
+                    <td><span class="status-badge pending">Under Review</span></td>
+                    <td><code>IN82STAK001928403</code></td>
+                    <td>₹2,80,000</td>
+                    <td><span class="status-badge pending">Restricted</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==========================================================================
+             VIEW: TRANSACTIONS
+             ========================================================================== -->
+        <div class="dashboard-view-section" id="view-transactions" style="display: none;">
+          <div class="dashboard-panel">
+            <div class="panel-header">
+              <div>
+                <h2 class="panel-title">Full Transaction Audit Ledger</h2>
+                <p style="font-size: 0.85rem; margin: 0;">Immutable records of all platform inflows and payouts</p>
+              </div>
+              <div class="panel-actions">
+                <button type="button" class="btn btn-sm btn-outline btn-download-statement"><i class="fas fa-download"></i> Export CSV</button>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Txn ID</th>
+                    <th>Description</th>
+                    <th>Merchant</th>
+                    <th>Amount</th>
+                    <th>Fee</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>TXN-2041</strong></td>
+                    <td>API Infrastructure Tier 3</td>
+                    <td>Apex Global Technologies</td>
+                    <td><strong>₹4,500</strong></td>
+                    <td>₹45.00</td>
+                    <td><span class="status-badge completed">Settled</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>TXN-2040</strong></td>
+                    <td>Monthly Retainer Settlement</td>
+                    <td>CloudScale Digital</td>
+                    <td><strong>₹12,000</strong></td>
+                    <td>₹120.00</td>
+                    <td><span class="status-badge pending">Pending</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>TXN-2039</strong></td>
+                    <td>Hardware Overcharge Refund</td>
+                    <td>Zenith Logistics</td>
+                    <td><strong>₹1,200</strong></td>
+                    <td>₹0.00</td>
+                    <td><span class="status-badge processing">Processing</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==========================================================================
+             VIEW: REPORTS & ANALYTICS
+             ========================================================================== -->
+        <div class="dashboard-view-section" id="view-reports" style="display: none;">
+          <div class="dashboard-panel">
+            <div class="panel-header">
+              <div>
+                <h2 class="panel-title">Operational Reports &amp; Financial Statements</h2>
+                <p style="font-size: 0.85rem; margin: 0;">Generate regulatory statements and net reconciliation sheets</p>
+              </div>
+            </div>
+            <div class="grid-3">
+              <div class="card" style="padding: 1.5rem;">
+                <h4>Daily Settlement Summary</h4>
+                <p style="font-size: 0.85rem;">Consolidated gross settlements and gateway fees for Oct 22, 2026.</p>
+                <button type="button" class="btn btn-sm btn-outline btn-download-statement"><i class="fas fa-file-csv"></i> Download CSV</button>
+              </div>
+              <div class="card" style="padding: 1.5rem;">
+                <h4>GST &amp; Tax Reconciler</h4>
+                <p style="font-size: 0.85rem;">Input tax credits and output tax liability by state jurisdiction.</p>
+                <button type="button" class="btn btn-sm btn-outline btn-download-statement"><i class="fas fa-file-csv"></i> Download CSV</button>
+              </div>
+              <div class="card" style="padding: 1.5rem;">
+                <h4>Dispute &amp; Chargeback Log</h4>
+                <p style="font-size: 0.85rem;">Complete audit report on resolved and active financial arbitrations.</p>
+                <button type="button" class="btn btn-sm btn-outline btn-download-statement"><i class="fas fa-file-csv"></i> Download CSV</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==========================================================================
+             VIEW: SETTINGS
+             ========================================================================== -->
+        <div class="dashboard-view-section" id="view-settings" style="display: none;">
+          <div class="dashboard-panel" style="max-width: 700px;">
+            <div class="panel-header">
+              <h2 class="panel-title">System &amp; Staff Permissions</h2>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 1.2rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 1rem; border-bottom: 1px solid var(--navy-border);">
+                <div>
+                  <strong style="color: var(--navy);">Two-Factor Biometric Mandate</strong>
+                  <p style="font-size: 0.85rem; margin: 0;">Require WebAuthn/FIDO2 keys for settlements exceeding ₹50,000</p>
+                </div>
+                <input type="checkbox" checked style="width: 20px; height: 20px; accent-color: var(--navy);">
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 1rem; border-bottom: 1px solid var(--navy-border);">
+                <div>
+                  <strong style="color: var(--navy);">Automated Webhook Retry Backoff</strong>
+                  <p style="font-size: 0.85rem; margin: 0;">Exponential backoff up to 72 hours for client HTTP 5xx errors</p>
+                </div>
+                <input type="checkbox" checked style="width: 20px; height: 20px; accent-color: var(--navy);">
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                  <strong style="color: var(--navy);">Real-time Anomaly Quarantine</strong>
+                  <p style="font-size: 0.85rem; margin: 0;">Temporarily hold transactions deviating &gt;3σ from baseline volume</p>
+                </div>
+                <input type="checkbox" checked style="width: 20px; height: 20px; accent-color: var(--navy);">
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Transaction Detail Modal -->
+  <div class="modal-overlay" id="txnDetailModal" role="dialog" aria-modal="true" aria-label="Transaction Details">
+    <div class="modal-box">
+      <button type="button" class="modal-close-btn" aria-label="Close modal"><i class="fas fa-times"></i></button>
+      <h3 style="margin-bottom: 1.2rem; font-size: 1.35rem; color: var(--navy);">Transaction Record</h3>
+      <div style="background: var(--white-surface); border-radius: var(--radius-sm); padding: 1.2rem; margin-bottom: 1.5rem; line-height: 1.9; font-size: 0.9rem;">
+        <div>Reference: <strong id="modalTxnRef">TXN-2041</strong></div>
+        <div>Type: <span id="modalTxnType">Payment</span></div>
+        <div>Amount: <strong id="modalTxnAmount" class="text-navy">₹4,500</strong></div>
+        <div>Status: <span id="modalTxnStatus" class="text-mint font-weight-bold">Completed</span></div>
+        <div>Channel: <span>UPI Fast Settlement (Simulated)</span></div>
+        <div>Timestamp: <span>2026-10-22 13:06:17</span></div>
+      </div>
+      <button type="button" class="btn btn-primary modal-close-trigger w-100">Close Record</button>
+    </div>
+  </div>
+
+  <!-- External CDNs & Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/admin-dashboard.js"></script>
+</body>
+</html>

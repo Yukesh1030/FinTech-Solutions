@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="STACKLY FinTech Products - One Platform. Connected Financial Workflows. Interactive payments, invoice manager, and expense tracker.">
+  <title>Products | STACKLY FinTech Solutions</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/webp" href="Assets/Brand-logo.webp">
+
+  <!-- Google Fonts & Font Awesome Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Core CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/products.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- ==========================================================================
+       HEADER & NAVBAR
+       ========================================================================== -->
+  <header class="site-header" id="siteHeader">
+    <div class="container navbar">
+      <a href="index.html" class="navbar-brand" aria-label="STACKLY FinTech Home">
+        <img src="Assets/Brand-logo.webp" alt="STACKLY FinTech Logo" width="150" height="42">
+      </a>
+
+      <nav class="nav-container" aria-label="Main Navigation">
+        <ul class="nav-menu">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="solutions.html" class="nav-link">Solutions</a></li>
+          <li><a href="products.html" class="nav-link active">Products</a></li>
+          <li><a href="about.html" class="nav-link">About</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="login.html" class="btn btn-primary btn-sm" id="navLoginBtn">
+          <i class="fas fa-lock"></i> Login
+        </a>
+        <button type="button" class="hamburger-btn" aria-label="Toggle navigation menu" aria-expanded="false">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div class="mobile-nav" id="mobileNav" role="dialog" aria-modal="true" aria-label="Mobile Navigation">
+    <div class="mobile-nav-header">
+      <div class="mobile-nav-brand">
+        <img src="Assets/Brand-logo.webp" alt="STACKLY FinTech">
+      </div>
+      <button type="button" class="mobile-close-btn" aria-label="Close menu">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <ul class="mobile-nav-links">
+      <li><a href="index.html" class="mobile-nav-link"><span>Home</span> <i class="fas fa-chevron-right"></i></a></li>
+      <li><a href="solutions.html" class="mobile-nav-link"><span>Solutions</span> <i class="fas fa-chevron-right"></i></a></li>
+      <li><a href="products.html" class="mobile-nav-link active"><span>Products</span> <i class="fas fa-chevron-right"></i></a></li>
+      <li><a href="about.html" class="mobile-nav-link"><span>About</span> <i class="fas fa-chevron-right"></i></a></li>
+      <li><a href="contact.html" class="mobile-nav-link"><span>Contact</span> <i class="fas fa-chevron-right"></i></a></li>
+    </ul>
+    <div class="mobile-nav-actions">
+      <a href="login.html" class="btn btn-accent btn-lg w-100"><i class="fas fa-user"></i> Login to Portal</a>
+      <a href="signup.html" class="btn btn-outline-mint btn-lg w-100">Create Free Account</a>
+    </div>
+  </div>
+
+  <main>
+    <!-- ==========================================================================
+         SECTION 1: PRODUCTS HERO
+         Hero: One Platform. Connected Financial Workflows.
+         ========================================================================== -->
+    <section class="inner-hero" id="prod-hero">
+      <div class="hero-glow-sphere"></div>
+      <div class="container inner-hero-content">
+        <div class="section-badge"><i class="fas fa-microchip"></i> Integrated Financial Suite</div>
+        <h1 class="inner-hero-title">
+          One Platform. <br><span class="text-mint">Connected Financial Workflows.</span>
+        </h1>
+        <p class="inner-hero-desc">
+          Replace disjointed banking portals and fragmented software with STACKLY's cohesive product suite. Test interactive prototypes below in real-time.
+        </p>
+
+        <!-- Animated Center-Aligned Cover Image -->
+        <div class="inner-hero-cover float-element">
+          <img src="Assets/cover.webp" alt="STACKLY Products Suite Cover" width="900" height="360">
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 2: PAYMENT MANAGEMENT
+         ========================================================================== -->
+    <section class="section-padding" id="prod-payments">
+      <div class="container grid-2">
+        <div>
+          <div class="section-badge"><i class="fas fa-terminal"></i> Working Prototype</div>
+          <h2>Payment Management Simulator</h2>
+          <p>
+            Experience our sub-second payment settlement simulation engine. Enter any demonstration amount and observe automated routing and webhook dispatch.
+          </p>
+
+          <div class="payment-simulator-box" style="margin-top: 1.5rem;">
+            <form id="paymentSimulatorForm">
+              <div class="simulator-form-grid">
+                <div>
+                  <label style="font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 0.35rem;">Simulated Amount (INR)</label>
+                  <input type="number" id="simAmountInput" class="auth-input" value="4500" min="100" max="500000" style="padding-left: 1rem;">
+                </div>
+                <div>
+                  <label style="font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 0.35rem;">Payment Channel</label>
+                  <select id="simMethodSelect" class="auth-select" style="padding-left: 1rem;">
+                    <option value="UPI Instant (240ms)">UPI Instant (240ms)</option>
+                    <option value="Credit Card 3DS2 (320ms)">Credit Card 3DS2 (320ms)</option>
+                    <option value="Virtual Corporate IBAN (180ms)">Virtual Corporate IBAN (180ms)</option>
+                  </select>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary w-100">
+                <i class="fas fa-play"></i> Run Payment Simulation
+              </button>
+            </form>
+
+            <div class="simulator-result-box" id="simulatorResult">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.4rem;">
+                <strong style="color: var(--navy);"><i class="fas fa-check-circle text-mint"></i> Payment Authorized</strong>
+                <span class="badge" style="background: rgba(66, 214, 176, 0.2); color: #0b7252; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 700;">LIVE DEMO</span>
+              </div>
+              <p style="font-size: 0.85rem; margin: 0; color: var(--navy-text-muted);">
+                Reference: <code id="simTxnId" style="color: var(--navy); font-weight: 700;">STK-729401</code> |
+                Amount: <span id="simAmount" style="font-weight: 700;">₹4,500</span> |
+                Latency: <span id="simLatency" class="text-mint font-weight-bold">184ms</span>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <img src="Assets/card.webp" alt="Payment management visual" class="rounded-lg shadow" width="560" height="400">
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 3: BUSINESS ACCOUNTS OVERVIEW
+         ========================================================================== -->
+    <section class="section-padding section-surface" id="prod-accounts">
+      <div class="container grid-2">
+        <div>
+          <img src="Assets/connected-financial-experience.webp" alt="Business Accounts Overview Preview" class="rounded-lg shadow" width="560" height="400">
+        </div>
+
+        <div>
+          <div class="section-badge"><i class="fas fa-building-columns"></i> Multi-Entity Banking</div>
+          <h2>Business Accounts Overview</h2>
+          <p>
+            Eliminate traditional branch visits with programmable virtual accounts. Issue dedicated collections IBANs for each corporate client, department, or subsidiary.
+          </p>
+
+          <ul class="feature-list">
+            <li><i class="fas fa-check-circle"></i> Instant zero-fee internal transfers between subsidiary sub-wallets.</li>
+            <li><i class="fas fa-check-circle"></i> Granular daily velocity limits and real-time fraud scoring.</li>
+            <li><i class="fas fa-check-circle"></i> Multi-currency treasury pools (INR, USD, EUR, GBP, AED).</li>
+          </ul>
+
+          <div style="margin-top: 2rem;">
+            <a href="404.html" class="btn btn-outline">Explore Virtual Accounts <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 4: INVOICE MANAGER
+         ========================================================================== -->
+    <section class="section-padding" id="prod-invoice-mgr">
+      <div class="container grid-2">
+        <div>
+          <div class="section-badge"><i class="fas fa-file-invoice"></i> Smart Billing Manager</div>
+          <h2>Intelligent Invoice Lifecycle Engine</h2>
+          <p>
+            Track invoice statuses in real-time from creation to bank settlement. Automatically apply regional tax laws, line-item discounts, and automated reconciliation.
+          </p>
+
+          <div class="card" style="margin-top: 1.5rem; background: var(--white-surface);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem;">
+              <span style="font-weight: 700; color: var(--navy); font-size: 0.95rem;">Sample Invoice Simulation</span>
+              <span class="status-badge completed">Reconciled</span>
+            </div>
+            <div style="font-size: 0.88rem; color: var(--navy-text-muted); line-height: 1.8;">
+              <div>Client: <strong>Apex Global Technologies Ltd.</strong></div>
+              <div>Amount: <strong>₹89,090.00</strong> (GST Included)</div>
+              <div>Auto-Reconciliation Status: <span class="text-mint font-weight-bold">Matched in 0.4s</span></div>
+            </div>
+          </div>
+
+          <div style="margin-top: 1.5rem;">
+            <a href="404.html" class="btn btn-primary">Try Interactive Invoice Builder <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <div>
+          <img src="Assets/billing-invoicing.webp" alt="Invoice manager dashboard" class="rounded-lg shadow" width="560" height="400">
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 5: EXPENSE TRACKER
+         ========================================================================== -->
+    <section class="section-padding section-surface" id="prod-expenses">
+      <div class="container grid-2">
+        <div>
+          <img src="Assets/real-time-financial-insights.webp" alt="Expense tracker visual categorization" class="rounded-lg shadow" width="560" height="400">
+        </div>
+
+        <div>
+          <div class="section-badge"><i class="fas fa-receipt"></i> Operational Spend Control</div>
+          <h2>Automated Expense Classification</h2>
+          <p>
+            Categorize corporate expenditures automatically using machine learning heuristics. Detect duplicate subscriptions, track department budgets, and eliminate receipt chasing.
+          </p>
+
+          <div style="display: flex; flex-direction: column; gap: 0.9rem; margin: 1.5rem 0;">
+            <div>
+              <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.3rem;">
+                <span>Cloud Infrastructure &amp; APIs</span>
+                <span>₹42,500 (45%)</span>
+              </div>
+              <div style="height: 8px; border-radius: 4px; background: #e2e8f0; overflow: hidden;">
+                <div style="width: 45%; height: 100%; background: var(--mint);"></div>
+              </div>
+            </div>
+
+            <div>
+              <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.3rem;">
+                <span>Marketing &amp; Growth Channels</span>
+                <span>₹28,300 (30%)</span>
+              </div>
+              <div style="height: 8px; border-radius: 4px; background: #e2e8f0; overflow: hidden;">
+                <div style="width: 30%; height: 100%; background: var(--navy);"></div>
+              </div>
+            </div>
+
+            <div>
+              <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.3rem;">
+                <span>Administrative &amp; Tools</span>
+                <span>₹14,200 (15%)</span>
+              </div>
+              <div style="height: 8px; border-radius: 4px; background: #e2e8f0; overflow: hidden;">
+                <div style="width: 15%; height: 100%; background: var(--navy-light);"></div>
+              </div>
+            </div>
+          </div>
+
+          <a href="404.html" class="btn btn-outline">Explore Expense Controls <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 6: ANALYTICS DASHBOARD
+         ========================================================================== -->
+    <section class="section-padding" id="prod-analytics-dash">
+      <div class="container grid-2">
+        <div>
+          <div class="section-badge"><i class="fas fa-chart-line"></i> Deep Financial Intelligence</div>
+          <h2>Live Analytics &amp; Forecasting Dashboard</h2>
+          <p>
+            Gain granular oversight across payment conversion rates, cohort churn metrics, and projected receivables. Built with exportable reports tailored for CFOs and investors.
+          </p>
+
+          <ul class="feature-list">
+            <li><i class="fas fa-check-circle"></i> Granular drill-down by payment rail and geography.</li>
+            <li><i class="fas fa-check-circle"></i> Automated monthly executive summary PDFs.</li>
+            <li><i class="fas fa-check-circle"></i> Predictive 90-day cash projection modeling.</li>
+          </ul>
+
+          <div style="margin-top: 2rem;">
+            <a href="login.html" class="btn btn-primary">Login to Analytics Dashboard <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <div>
+          <img src="Assets/financial-performance.webp" alt="Analytics dashboard report preview" class="rounded-lg shadow" width="560" height="400">
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 7: INTEGRATIONS OVERVIEW
+         ========================================================================== -->
+    <section class="section-padding section-surface" id="prod-integrations">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-badge"><i class="fas fa-plug"></i> Ecosystem Connectivity</div>
+          <h2>Integrations with Your Financial Stack</h2>
+          <p>Connect STACKLY seamlessly into your existing accounting, ERP, and payment infrastructure.</p>
+        </div>
+
+        <div class="integrations-grid">
+          <div class="integration-card">
+            <div class="integration-icon"><i class="fas fa-calculator"></i></div>
+            <h4>QuickBooks</h4>
+            <span>Automated 2-way Ledger Sync</span>
+          </div>
+
+          <div class="integration-card">
+            <div class="integration-icon"><i class="fas fa-book-journal-whills"></i></div>
+            <h4>Xero Accounting</h4>
+            <span>Real-time Bank Feeds</span>
+          </div>
+
+          <div class="integration-card">
+            <div class="integration-icon"><i class="fas fa-cubes-stacked"></i></div>
+            <h4>Zoho Books</h4>
+            <span>Invoice &amp; Tax Reconciler</span>
+          </div>
+
+          <div class="integration-card">
+            <div class="integration-icon"><i class="fas fa-server"></i></div>
+            <h4>SAP ERP</h4>
+            <span>High-Volume Batch Settlement</span>
+          </div>
+
+          <div class="integration-card">
+            <div class="integration-icon"><i class="fab fa-salesforce"></i></div>
+            <h4>Salesforce CRM</h4>
+            <span>Contract-to-Cash Automation</span>
+          </div>
+
+          <div class="integration-card">
+            <div class="integration-icon"><i class="fas fa-database"></i></div>
+            <h4>PostgreSQL / MySQL</h4>
+            <span>Direct Webhook Stream</span>
+          </div>
+        </div>
+
+        <div class="text-center" style="margin-top: 2.5rem;">
+          <a href="404.html" class="btn btn-outline">Browse All 40+ Integrations <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 8: GET STARTED CTA
+         ========================================================================== -->
+    <section class="section-padding section-dark text-center" id="prod-cta">
+      <div class="container" style="max-width: 780px;">
+        <div class="section-badge"><i class="fas fa-bolt"></i> Immediate Deployment</div>
+        <h2 style="margin-bottom: 1.2rem;">Start Building on STACKLY Today</h2>
+        <p style="font-size: 1.15rem; margin-bottom: 2.2rem; color: var(--white-text-muted);">
+          Sign up to test our full suite of digital payments, invoicing, and treasury management in our sandbox environment.
+        </p>
+        <div style="display: flex; justify-content: center; gap: 1.2rem; flex-wrap: wrap;">
+          <a href="signup.html" class="btn btn-accent btn-lg">
+            Create Free Account <i class="fas fa-arrow-right"></i>
+          </a>
+          <a href="contact.html" class="btn btn-outline-mint btn-lg">
+            Contact Technical Support
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="index.html" aria-label="STACKLY FinTech Home">
+            <img src="Assets/Brand-logo.webp" alt="STACKLY FinTech Brand" width="160" height="44">
+          </a>
+          <p>
+            Next-generation financial infrastructure providing frictionless digital payments, invoice automation, and real-time cash analytics.
+          </p>
+          <div class="footer-socials">
+            <a href="404.html" class="social-link" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+            <a href="404.html" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="404.html" class="social-link" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="404.html" class="social-link" aria-label="Discord"><i class="fab fa-discord"></i></a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="index.html" class="footer-link">Home</a></li>
+            <li><a href="solutions.html" class="footer-link">Solutions</a></li>
+            <li><a href="products.html" class="footer-link">Products</a></li>
+            <li><a href="about.html" class="footer-link">About</a></li>
+            <li><a href="contact.html" class="footer-link">Contact</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Platforms &amp; Rails</h4>
+          <ul class="footer-links">
+            <li><a href="404.html" class="footer-link">Digital Payments</a></li>
+            <li><a href="404.html" class="footer-link">Billing Automation</a></li>
+            <li><a href="404.html" class="footer-link">Cash-Flow Insights</a></li>
+            <li><a href="404.html" class="footer-link">Virtual Accounts</a></li>
+            <li><a href="404.html" class="footer-link">Developer API Docs</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Legal &amp; Trust</h4>
+          <ul class="footer-links">
+            <li><a href="404.html" class="footer-link">Help &amp; Support</a></li>
+            <li><a href="404.html" class="footer-link">Privacy Policy</a></li>
+            <li><a href="404.html" class="footer-link">Terms of Service</a></li>
+            <li><a href="404.html" class="footer-link">Security Information</a></li>
+            <li><a href="404.html" class="footer-link">Compliance Declarations</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 STACKLY FinTech Solutions. All rights reserved.</div>
+        <div class="footer-legal-note">
+          Notice: This application is a visual front-end prototype designed for interface demonstration. Simulated transaction values, mock account summaries, and sample invoices do not constitute live financial transactions.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/products.js"></script>
+</body>
+</html>

@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="STACKLY FinTech Solutions - Financial Tools Built Around Your Business. Digital payments, billing, analytics, and security.">
+  <title>Solutions | STACKLY FinTech Solutions</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/webp" href="Assets/Brand-logo.webp">
+
+  <!-- Google Fonts & Font Awesome Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Core CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/solutions.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- ==========================================================================
+       HEADER & NAVBAR (Standard across pages)
+       ========================================================================== -->
+  <header class="site-header" id="siteHeader">
+    <div class="container navbar">
+      <a href="index.html" class="navbar-brand" aria-label="STACKLY FinTech Home">
+        <img src="Assets/Brand-logo.webp" alt="STACKLY FinTech Logo" width="150" height="42">
+      </a>
+
+      <nav class="nav-container" aria-label="Main Navigation">
+        <ul class="nav-menu">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="solutions.html" class="nav-link active">Solutions</a></li>
+          <li><a href="products.html" class="nav-link">Products</a></li>
+          <li><a href="about.html" class="nav-link">About</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="login.html" class="btn btn-primary btn-sm" id="navLoginBtn">
+          <i class="fas fa-lock"></i> Login
+        </a>
+        <button type="button" class="hamburger-btn" aria-label="Toggle navigation menu" aria-expanded="false">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div class="mobile-nav" id="mobileNav" role="dialog" aria-modal="true" aria-label="Mobile Navigation">
+    <div class="mobile-nav-header">
+      <div class="mobile-nav-brand">
+        <img src="Assets/Brand-logo.webp" alt="STACKLY FinTech">
+      </div>
+      <button type="button" class="mobile-close-btn" aria-label="Close menu">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <ul class="mobile-nav-links">
+      <li><a href="index.html" class="mobile-nav-link"><span>Home</span> <i class="fas fa-chevron-right"></i></a></li>
+      <li><a href="solutions.html" class="mobile-nav-link active"><span>Solutions</span> <i class="fas fa-chevron-right"></i></a></li>
+      <li><a href="products.html" class="mobile-nav-link"><span>Products</span> <i class="fas fa-chevron-right"></i></a></li>
+      <li><a href="about.html" class="mobile-nav-link"><span>About</span> <i class="fas fa-chevron-right"></i></a></li>
+      <li><a href="contact.html" class="mobile-nav-link"><span>Contact</span> <i class="fas fa-chevron-right"></i></a></li>
+    </ul>
+    <div class="mobile-nav-actions">
+      <a href="login.html" class="btn btn-accent btn-lg w-100"><i class="fas fa-user"></i> Login to Portal</a>
+      <a href="signup.html" class="btn btn-outline-mint btn-lg w-100">Create Free Account</a>
+    </div>
+  </div>
+
+  <main>
+    <!-- ==========================================================================
+         SECTION 1: SOLUTIONS HERO
+         Hero: Financial Tools Built Around Your Business
+         ========================================================================== -->
+    <section class="inner-hero" id="sol-hero">
+      <div class="hero-glow-sphere"></div>
+      <div class="container inner-hero-content">
+        <div class="section-badge"><i class="fas fa-cube"></i> Tailored Financial Tooling</div>
+        <h1 class="inner-hero-title">
+          Financial Tools Built <br><span class="text-mint">Around Your Business.</span>
+        </h1>
+        <p class="inner-hero-desc">
+          Modular, highly configurable financial rails engineered to accelerate business velocity, eliminate payment bottlenecks, and automate compliance at any scale.
+        </p>
+
+        <!-- Animated Center-Aligned Cover Image -->
+        <div class="inner-hero-cover float-element">
+          <img src="Assets/cover2.webp" alt="STACKLY Financial Solutions Overview Cover" width="900" height="360">
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 2: DIGITAL PAYMENTS
+         ========================================================================== -->
+    <section class="section-padding" id="sol-payments">
+      <div class="container grid-2">
+        <div class="solution-card-detailed">
+          <div class="solution-card-header">
+            <div class="solution-icon-lg"><i class="fas fa-credit-card"></i></div>
+            <div>
+              <h3>01. Digital Payments</h3>
+              <span class="text-mint font-weight-bold">High-Throughput Checkout Rails</span>
+            </div>
+          </div>
+          <div class="solution-card-content">
+            <p>
+              Accept customer payments across 130+ regional currencies and domestic payment networks including Cards, UPI, Net Banking, and Instant ACH with intelligent routing.
+            </p>
+            <div class="solution-benefit-pills">
+              <span class="benefit-pill"><i class="fas fa-check text-mint"></i> 99.98% Authorization Success</span>
+              <span class="benefit-pill"><i class="fas fa-check text-mint"></i> Real-Time Fraud Radar</span>
+              <span class="benefit-pill"><i class="fas fa-check text-mint"></i> Zero Currency Spread</span>
+            </div>
+            <ul class="feature-list">
+              <li><i class="fas fa-check-circle"></i> Dynamic routing to avoid gateway downtime.</li>
+              <li><i class="fas fa-check-circle"></i> Tokenized vault for 1-click checkout.</li>
+            </ul>
+          </div>
+          <div class="solution-card-footer">
+            <a href="404.html" class="btn btn-primary btn-sm">Learn More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <div>
+          <img src="Assets/card.webp" alt="Digital payment card integration" class="rounded-lg shadow" width="560" height="400">
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 3: TRANSACTION MANAGEMENT
+         ========================================================================== -->
+    <section class="section-padding section-surface" id="sol-transactions">
+      <div class="container grid-2">
+        <div>
+          <img src="Assets/real-time-financial-insights.webp" alt="Transaction ledger and tracking visual" class="rounded-lg shadow" width="560" height="400">
+        </div>
+
+        <div class="solution-card-detailed">
+          <div class="solution-card-header">
+            <div class="solution-icon-lg"><i class="fas fa-receipt"></i></div>
+            <div>
+              <h3>02. Transaction Management</h3>
+              <span class="text-mint font-weight-bold">End-to-End Ledger Intelligence</span>
+            </div>
+          </div>
+          <div class="solution-card-content">
+            <p>
+              Complete oversight across your entire transaction lifecycle. Instant visibility into settlement batches, pending authorizations, chargeback resolution, and automated ledger balancing.
+            </p>
+            <div class="solution-benefit-pills">
+              <span class="benefit-pill"><i class="fas fa-check text-mint"></i> Automated Reconciliation</span>
+              <span class="benefit-pill"><i class="fas fa-check text-mint"></i> Sub-Second Webhooks</span>
+              <span class="benefit-pill"><i class="fas fa-check text-mint"></i> Dispute Management Shield</span>
+            </div>
+            <ul class="feature-list">
+              <li><i class="fas fa-check-circle"></i> Dual-entry ledger for zero accounting drift.</li>
+              <li><i class="fas fa-check-circle"></i> Granular export filters in CSV, JSON, and XML.</li>
+            </ul>
+          </div>
+          <div class="solution-card-footer">
+            <a href="404.html" class="btn btn-primary btn-sm">Learn More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 4: BILLING AND INVOICING
+         ========================================================================== -->
+    <section class="section-padding" id="sol-billing">
+      <div class="container grid-2">
+        <div class="solution-card-detailed">
+          <div class="solution-card-header">
+            <div class="solution-icon-lg"><i class="fas fa-file-invoice-dollar"></i></div>
+            <div>
+              <h3>03. Billing and Invoicing</h3>
+              <span class="text-mint font-weight-bold">Automated Subscription &amp; Receivables</span>
+            </div>
+          </div>
+          <div class="solution-card-content">
+            <p>
+              Streamline complex B2B billing models including tiered usage, recurring retainers, and milestone invoicing with customized multi-lingual PDF templates.
+            </p>
+            <div class="solution-benefit-pills">
+              <span class="benefit-pill"><i class="fas fa-check text-mint"></i> Automated Payment Reminders</span>
+              <span class="benefit-pill"><i class="fas fa-check text-mint"></i> GST &amp; Tax Compliance</span>
+              <span class="benefit-pill"><i class="fas fa-check text-mint"></i> Self-Reconciling Invoices</span>
+            </div>
+            <ul class="feature-list">
+              <li><i class="fas fa-check-circle"></i> Embedded payment links with dynamic QR.</li>
+              <li><i class="fas fa-check-circle"></i> Automated invoice dunning to recover lost revenue.</li>
+            </ul>
+          </div>
+          <div class="solution-card-footer">
+            <a href="404.html" class="btn btn-primary btn-sm">Learn More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <div>
+          <img src="Assets/billing-invoicing.webp" alt="Billing and invoice management interface" class="rounded-lg shadow" width="560" height="400">
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 5: CASH-FLOW VISIBILITY
+         ========================================================================== -->
+    <section class="section-padding section-surface" id="sol-cashflow">
+      <div class="container grid-2">
+        <div>
+          <img src="Assets/financial-performance.webp" alt="Cash flow visibility chart and indicators" class="rounded-lg shadow" width="560" height="400">
+        </div>
+
+        <div class="solution-card-detailed">
+          <div class="solution-card-header">
+            <div class="solution-icon-lg"><i class="fas fa-eye"></i></div>
+            <div>
+              <h3>04. Cash-Flow Visibility</h3>
+              <span class="text-mint font-weight-bold">Predictive Treasury Monitoring</span>
+            </div>
+          </div>
+          <div class="solution-card-content">
+            <p>
+              Anticipate cash shortages and optimize working capital with predictive liquidity models. Real-time alerts warn finance leaders before runway or burn rate breaches safe thresholds.
+            </p>
+            <div class="solution-benefit-pills">
+              <span class="benefit-pill"><i class="fas fa-check text-mint"></i> 90-Day Runway Forecasts</span>
+              <span class="benefit-pill"><i class="fas fa-check text-mint"></i> Multi-Bank Aggregation</span>
+              <span class="benefit-pill"><i class="fas fa-check text-mint"></i> Working Capital Alerts</span>
+            </div>
+            <ul class="feature-list">
+              <li><i class="fas fa-check-circle"></i> Live burn-rate and revenue runway calculators.</li>
+              <li><i class="fas fa-check-circle"></i> Automated weekly executive financial digests.</li>
+            </ul>
+          </div>
+          <div class="solution-card-footer">
+            <a href="404.html" class="btn btn-primary btn-sm">Learn More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 6: FINANCIAL ANALYTICS
+         ========================================================================== -->
+    <section class="section-padding" id="sol-analytics">
+      <div class="container grid-2">
+        <div class="solution-card-detailed">
+          <div class="solution-card-header">
+            <div class="solution-icon-lg"><i class="fas fa-chart-pie"></i></div>
+            <div>
+              <h3>05. Financial Analytics</h3>
+              <span class="text-mint font-weight-bold">Deep Revenue &amp; Unit Economics</span>
+            </div>
+          </div>
+          <div class="solution-card-content">
+            <p>
+              Dissect gross margins, cohort retention, and customer lifetime value (LTV) with pre-built financial intelligence models customized for subscription and transactional models.
+            </p>
+            <div class="solution-benefit-pills">
+              <span class="benefit-pill"><i class="fas fa-check text-mint"></i> Cohort Analysis</span>
+              <span class="benefit-pill"><i class="fas fa-check text-mint"></i> Unit Economics Drilldown</span>
+              <span class="benefit-pill"><i class="fas fa-check text-mint"></i> Churn &amp; Expansion Metrics</span>
+            </div>
+            <ul class="feature-list">
+              <li><i class="fas fa-check-circle"></i> Instant board-ready slide exports.</li>
+              <li><i class="fas fa-check-circle"></i> Direct sync into Snowflake, BigQuery, and Excel.</li>
+            </ul>
+          </div>
+          <div class="solution-card-footer">
+            <a href="404.html" class="btn btn-primary btn-sm">Learn More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <div>
+          <img src="Assets/connected-financial-experience.webp" alt="Financial analytics dashboard preview" class="rounded-lg shadow" width="560" height="400">
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 7: SECURITY AND ACCESS CONTROLS
+         ========================================================================== -->
+    <section class="section-padding section-dark" id="sol-security">
+      <div class="container grid-2">
+        <div>
+          <img src="Assets/security-trust.webp" alt="Security controls and compliance preview" class="rounded-lg" width="560" height="400">
+        </div>
+
+        <div class="solution-card-detailed card-dark">
+          <div class="solution-card-header">
+            <div class="solution-icon-lg"><i class="fas fa-user-shield"></i></div>
+            <div>
+              <h3 style="color: var(--white);">06. Security &amp; Access Controls</h3>
+              <span class="text-mint font-weight-bold">Enterprise Role-Based Governance</span>
+            </div>
+          </div>
+          <div class="solution-card-content">
+            <p style="color: var(--white-text-muted);">
+              Ensure zero unauthorized disbursements with multi-party approval policies, IP allowlisting, immutable audit logs, and hardware key (FIDO2) authorization.
+            </p>
+            <div class="solution-benefit-pills">
+              <span class="benefit-pill" style="background: rgba(245, 247, 250, 0.1); color: var(--white); border-color: rgba(245, 247, 250, 0.2);"><i class="fas fa-check text-mint"></i> Dual Authorization Limits</span>
+              <span class="benefit-pill" style="background: rgba(245, 247, 250, 0.1); color: var(--white); border-color: rgba(245, 247, 250, 0.2);"><i class="fas fa-check text-mint"></i> Immutable Event Logs</span>
+              <span class="benefit-pill" style="background: rgba(245, 247, 250, 0.1); color: var(--white); border-color: rgba(245, 247, 250, 0.2);"><i class="fas fa-check text-mint"></i> SSO &amp; SAML 2.0</span>
+            </div>
+            <ul class="feature-list">
+              <li><i class="fas fa-check-circle"></i> Granular read/write permissions per department.</li>
+              <li><i class="fas fa-check-circle"></i> Automated session revocation on anomaly detection.</li>
+            </ul>
+          </div>
+          <div class="solution-card-footer" style="border-color: var(--navy-border-dark);">
+            <a href="404.html" class="btn btn-outline-mint btn-sm">Learn More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 8: CONTACT SALES CTA
+         ========================================================================== -->
+    <section class="section-padding text-center" id="sol-contact-cta">
+      <div class="container" style="max-width: 780px;">
+        <div class="section-badge"><i class="fas fa-comments"></i> Partner With STACKLY</div>
+        <h2 style="margin-bottom: 1.2rem;">Ready to Transform Your Financial Infrastructure?</h2>
+        <p style="font-size: 1.15rem; margin-bottom: 2.2rem;">
+          Our solution architects work with you to tailor custom payment routing, billing schedules, and ledger integrations for your business.
+        </p>
+        <div style="display: flex; justify-content: center; gap: 1.2rem; flex-wrap: wrap;">
+          <a href="contact.html" class="btn btn-accent btn-lg">
+            Schedule a Solution Call <i class="fas fa-arrow-right"></i>
+          </a>
+          <a href="signup.html" class="btn btn-outline btn-lg">
+            Create Developer Account
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       FOOTER (Standard across pages)
+       ========================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="index.html" aria-label="STACKLY FinTech Home">
+            <img src="Assets/Brand-logo.webp" alt="STACKLY FinTech Brand" width="160" height="44">
+          </a>
+          <p>
+            Next-generation financial infrastructure providing frictionless digital payments, invoice automation, and real-time cash analytics.
+          </p>
+          <div class="footer-socials">
+            <a href="404.html" class="social-link" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+            <a href="404.html" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="404.html" class="social-link" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="404.html" class="social-link" aria-label="Discord"><i class="fab fa-discord"></i></a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="index.html" class="footer-link">Home</a></li>
+            <li><a href="solutions.html" class="footer-link">Solutions</a></li>
+            <li><a href="products.html" class="footer-link">Products</a></li>
+            <li><a href="about.html" class="footer-link">About</a></li>
+            <li><a href="contact.html" class="footer-link">Contact</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Platforms &amp; Rails</h4>
+          <ul class="footer-links">
+            <li><a href="404.html" class="footer-link">Digital Payments</a></li>
+            <li><a href="404.html" class="footer-link">Billing Automation</a></li>
+            <li><a href="404.html" class="footer-link">Cash-Flow Insights</a></li>
+            <li><a href="404.html" class="footer-link">Virtual Accounts</a></li>
+            <li><a href="404.html" class="footer-link">Developer API Docs</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Legal &amp; Trust</h4>
+          <ul class="footer-links">
+            <li><a href="404.html" class="footer-link">Help &amp; Support</a></li>
+            <li><a href="404.html" class="footer-link">Privacy Policy</a></li>
+            <li><a href="404.html" class="footer-link">Terms of Service</a></li>
+            <li><a href="404.html" class="footer-link">Security Information</a></li>
+            <li><a href="404.html" class="footer-link">Compliance Declarations</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 STACKLY FinTech Solutions. All rights reserved.</div>
+        <div class="footer-legal-note">
+          Notice: This application is a visual front-end prototype designed for interface demonstration. Simulated transaction values, mock account summaries, and sample invoices do not constitute live financial transactions.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/solutions.js"></script>
+</body>
+</html>

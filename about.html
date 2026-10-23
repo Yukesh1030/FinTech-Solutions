@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="About STACKLY FinTech Solutions - Building Better Financial Experiences. Discover our story, mission, design principles, and team.">
+  <title>About | STACKLY FinTech Solutions</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/webp" href="Assets/Brand-logo.webp">
+
+  <!-- Google Fonts & Font Awesome Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Core CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- ==========================================================================
+       HEADER & NAVBAR
+       ========================================================================== -->
+  <header class="site-header" id="siteHeader">
+    <div class="container navbar">
+      <a href="index.html" class="navbar-brand" aria-label="STACKLY FinTech Home">
+        <img src="Assets/Brand-logo.webp" alt="STACKLY FinTech Logo" width="150" height="42">
+      </a>
+
+      <nav class="nav-container" aria-label="Main Navigation">
+        <ul class="nav-menu">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="solutions.html" class="nav-link">Solutions</a></li>
+          <li><a href="products.html" class="nav-link">Products</a></li>
+          <li><a href="about.html" class="nav-link active">About</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="login.html" class="btn btn-primary btn-sm" id="navLoginBtn">
+          <i class="fas fa-lock"></i> Login
+        </a>
+        <button type="button" class="hamburger-btn" aria-label="Toggle navigation menu" aria-expanded="false">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div class="mobile-nav" id="mobileNav" role="dialog" aria-modal="true" aria-label="Mobile Navigation">
+    <div class="mobile-nav-header">
+      <div class="mobile-nav-brand">
+        <img src="Assets/Brand-logo.webp" alt="STACKLY FinTech">
+      </div>
+      <button type="button" class="mobile-close-btn" aria-label="Close menu">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <ul class="mobile-nav-links">
+      <li><a href="index.html" class="mobile-nav-link"><span>Home</span> <i class="fas fa-chevron-right"></i></a></li>
+      <li><a href="solutions.html" class="mobile-nav-link"><span>Solutions</span> <i class="fas fa-chevron-right"></i></a></li>
+      <li><a href="products.html" class="mobile-nav-link"><span>Products</span> <i class="fas fa-chevron-right"></i></a></li>
+      <li><a href="about.html" class="mobile-nav-link active"><span>About</span> <i class="fas fa-chevron-right"></i></a></li>
+      <li><a href="contact.html" class="mobile-nav-link"><span>Contact</span> <i class="fas fa-chevron-right"></i></a></li>
+    </ul>
+    <div class="mobile-nav-actions">
+      <a href="login.html" class="btn btn-accent btn-lg w-100"><i class="fas fa-user"></i> Login to Portal</a>
+      <a href="signup.html" class="btn btn-outline-mint btn-lg w-100">Create Free Account</a>
+    </div>
+  </div>
+
+  <main>
+    <!-- ==========================================================================
+         SECTION 1: ABOUT HERO
+         Hero: Building Better Financial Experiences.
+         ========================================================================== -->
+    <section class="inner-hero" id="about-hero">
+      <div class="hero-glow-sphere"></div>
+      <div class="container inner-hero-content">
+        <div class="section-badge"><i class="fas fa-landmark"></i> About STACKLY FinTech</div>
+        <h1 class="inner-hero-title">
+          Building Better <br><span class="text-mint">Financial Experiences.</span>
+        </h1>
+        <p class="inner-hero-desc">
+          We believe financial technology should be invisible, instantaneous, and radically transparent. Here is why we build and who we are.
+        </p>
+
+        <!-- Animated Center-Aligned Cover Image -->
+        <div class="inner-hero-cover float-element">
+          <img src="Assets/customer-stories.webp" alt="STACKLY Company and Team Cover" width="900" height="360">
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 2: OUR STORY
+         ========================================================================== -->
+    <section class="section-padding" id="about-story">
+      <div class="container grid-2">
+        <div>
+          <div class="section-badge"><i class="fas fa-book-open"></i> How We Started</div>
+          <h2>Born to Eliminate Commercial Financial Friction</h2>
+          <p>
+            STACKLY was founded by financial engineers and distributed systems architects who experienced first-hand how legacy banking bottlenecks stifle modern business growth.
+          </p>
+          <p style="margin-top: 1rem;">
+            From days-long settlement cycles to opaque transaction rejections and manual invoice reconciliation, financial teams were drowning in administrative overhead. We set out to build a unified financial operating system that moves money at internet speed.
+          </p>
+          <div style="margin-top: 2rem;">
+            <a href="404.html" class="btn btn-primary">Read Founder Manifesto <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <div>
+          <img src="Assets/user.webp" alt="Founder and team visual" class="rounded-lg shadow" width="560" height="400">
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 3: MISSION AND VISION
+         ========================================================================== -->
+    <section class="section-padding section-surface" id="about-mission">
+      <div class="container grid-2">
+        <div class="card">
+          <div class="card-icon"><i class="fas fa-compass"></i></div>
+          <h3>Our Mission</h3>
+          <p>
+            To empower enterprises and builders with transparent, high-throughput financial rails that turn complex commercial treasury workflows into simple, real-time code.
+          </p>
+          <ul class="feature-list">
+            <li><i class="fas fa-check-circle"></i> Zero hidden spreads or arbitrary holding periods.</li>
+            <li><i class="fas fa-check-circle"></i> 100% API availability and predictable SLAs.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-icon"><i class="fas fa-eye"></i></div>
+          <h3>Our Vision</h3>
+          <p>
+            A frictionless global economy where any business can instantly dispatch, receive, and account for value across any currency, rail, or platform with complete cryptographic certainty.
+          </p>
+          <ul class="feature-list">
+            <li><i class="fas fa-check-circle"></i> Universal cross-border liquidity without delays.</li>
+            <li><i class="fas fa-check-circle"></i> Continuous automated regulatory compliance.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 4: OUR APPROACH TO FINANCIAL TECHNOLOGY
+         ========================================================================== -->
+    <section class="section-padding" id="about-approach">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-badge"><i class="fas fa-code-branch"></i> Engineering Philosophy</div>
+          <h2>Our Approach to Financial Technology</h2>
+          <p>Three core pillars guide our architecture, ensuring reliability and institutional trust.</p>
+        </div>
+
+        <div class="grid-3">
+          <div class="card">
+            <div class="card-icon"><i class="fas fa-bolt"></i></div>
+            <h3>Zero-Latency Architecture</h3>
+            <p>Every transaction is processed through ultra-low latency memory buses and event streams, achieving sub-second authorisations worldwide.</p>
+          </div>
+
+          <div class="card">
+            <div class="card-icon"><i class="fas fa-shield-virus"></i></div>
+            <h3>Extreme Defense-in-Depth</h3>
+            <p>We assume breach conditions at every tier. Data is fragmented, encrypted at rest with hardware HSMs, and access is audited continuously.</p>
+          </div>
+
+          <div class="card">
+            <div class="card-icon"><i class="fas fa-user-check"></i></div>
+            <h3>Human-First Clarity</h3>
+            <p>Financial software shouldn't require a finance PhD. We design clean, calm interfaces that deliver instant comprehension without cognitive clutter.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 5: PRODUCT DESIGN PRINCIPLES
+         ========================================================================== -->
+    <section class="section-padding section-surface" id="about-principles">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-badge"><i class="fas fa-pen-nib"></i> Design Standards</div>
+          <h2>Product Design Principles</h2>
+          <p>How we craft interfaces that evoke confidence, focus, and velocity.</p>
+        </div>
+
+        <div class="grid-4">
+          <div class="card text-center">
+            <div class="card-icon" style="margin: 0 auto 1.2rem;"><i class="fas fa-magnifying-glass"></i></div>
+            <h4>Radical Clarity</h4>
+            <p>Every fee, state change, and timestamp is clearly highlighted. No dark patterns.</p>
+          </div>
+
+          <div class="card text-center">
+            <div class="card-icon" style="margin: 0 auto 1.2rem;"><i class="fas fa-gauge-high"></i></div>
+            <h4>Unrelenting Velocity</h4>
+            <p>Every interaction occurs within 100 milliseconds. Speed is our chief design feature.</p>
+          </div>
+
+          <div class="card text-center">
+            <div class="card-icon" style="margin: 0 auto 1.2rem;"><i class="fas fa-lock"></i></div>
+            <h4>Failsafe Security</h4>
+            <p>Dangerous operations require explicit multi-factor verification with clear audit logs.</p>
+          </div>
+
+          <div class="card text-center">
+            <div class="card-icon" style="margin: 0 auto 1.2rem;"><i class="fas fa-expand"></i></div>
+            <h4>Limitless Scalability</h4>
+            <p>Interfaces adapt seamlessly whether you're reviewing 10 or 100,000 transactions.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 6: SECURITY AND TRUST COMMITMENTS
+         ========================================================================== -->
+    <section class="section-padding section-dark" id="about-trust">
+      <div class="container grid-2">
+        <div>
+          <div class="section-badge"><i class="fas fa-shield-halved"></i> Trust Commitments</div>
+          <h2>Verifiable Data Sovereignty &amp; Protection</h2>
+          <p>
+            We hold ourselves to rigorous compliance and ethical standards. We never sell customer transaction data, monetize order flow, or compromise client confidentiality.
+          </p>
+          <ul class="feature-list">
+            <li><i class="fas fa-shield-check"></i> AES-256 military-grade encryption for all database records.</li>
+            <li><i class="fas fa-shield-check"></i> Continuous penetration testing by independent CREST auditors.</li>
+            <li><i class="fas fa-shield-check"></i> Transparent incident reporting with public uptime dashboards.</li>
+          </ul>
+          <div style="margin-top: 2rem;">
+            <a href="404.html" class="btn btn-outline-mint">View Trust &amp; Compliance Portal</a>
+          </div>
+        </div>
+
+        <div>
+          <img src="Assets/security-trust.webp" alt="Security commitments visualization" class="rounded-lg" width="560" height="400">
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 7: TEAM AND COMPANY INFORMATION
+         ========================================================================== -->
+    <section class="section-padding" id="about-team">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-badge"><i class="fas fa-users-gear"></i> Leadership</div>
+          <h2>Leadership &amp; Global Advisory</h2>
+          <p>Experienced technologists and operators dedicated to building modern financial infrastructure.</p>
+        </div>
+
+        <div class="grid-3">
+          <div class="card text-center">
+            <div class="user-avatar-circle" style="width: 72px; height: 72px; font-size: 1.5rem; margin: 0 auto 1.2rem;">YG</div>
+            <h3>Yukesh G</h3>
+            <p class="text-mint font-weight-bold" style="font-size: 0.85rem; margin-bottom: 0.8rem;">Founder &amp; Chief Architect</p>
+            <p style="font-size: 0.9rem;">Passionate about zero-friction fintech architecture, high-performance distributed systems, and elegant user experience design.</p>
+            <div style="margin-top: 1rem; display: flex; justify-content: center; gap: 0.8rem;">
+              <a href="404.html" class="social-link" style="background: var(--white-surface); color: var(--navy);" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+              <a href="404.html" class="social-link" style="background: var(--white-surface); color: var(--navy);" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            </div>
+          </div>
+
+          <div class="card text-center">
+            <div class="user-avatar-circle" style="width: 72px; height: 72px; font-size: 1.5rem; margin: 0 auto 1.2rem;">SR</div>
+            <h3>Siddharth Rao</h3>
+            <p class="text-mint font-weight-bold" style="font-size: 0.85rem; margin-bottom: 0.8rem;">VP of Treasury &amp; Banking Rails</p>
+            <p style="font-size: 0.9rem;">Former institutional banking executive specializing in real-time gross settlement systems and regulatory compliance.</p>
+            <div style="margin-top: 1rem; display: flex; justify-content: center; gap: 0.8rem;">
+              <a href="404.html" class="social-link" style="background: var(--white-surface); color: var(--navy);" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+              <a href="404.html" class="social-link" style="background: var(--white-surface); color: var(--navy);" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+            </div>
+          </div>
+
+          <div class="card text-center">
+            <div class="user-avatar-circle" style="width: 72px; height: 72px; font-size: 1.5rem; margin: 0 auto 1.2rem;">AN</div>
+            <h3>Ananya Nair</h3>
+            <p class="text-mint font-weight-bold" style="font-size: 0.85rem; margin-bottom: 0.8rem;">Head of Product &amp; Design</p>
+            <p style="font-size: 0.9rem;">Dedicated to human-centered design principles that simplify complex financial interactions and invoice automations.</p>
+            <div style="margin-top: 1rem; display: flex; justify-content: center; gap: 0.8rem;">
+              <a href="404.html" class="social-link" style="background: var(--white-surface); color: var(--navy);" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+              <a href="404.html" class="social-link" style="background: var(--white-surface); color: var(--navy);" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION 8: CONTACT CTA
+         ========================================================================== -->
+    <section class="section-padding section-surface text-center" id="about-cta">
+      <div class="container" style="max-width: 780px;">
+        <div class="section-badge"><i class="fas fa-handshake"></i> Join Our Journey</div>
+        <h2 style="margin-bottom: 1.2rem;">Join Us in Reshaping Modern Finance</h2>
+        <p style="font-size: 1.15rem; margin-bottom: 2.2rem;">
+          Whether you want to explore career opportunities, partner with our banking ecosystem, or integrate our solutions, we'd love to hear from you.
+        </p>
+        <div style="display: flex; justify-content: center; gap: 1.2rem; flex-wrap: wrap;">
+          <a href="contact.html" class="btn btn-accent btn-lg">
+            Get in Touch With Us <i class="fas fa-arrow-right"></i>
+          </a>
+          <a href="solutions.html" class="btn btn-outline btn-lg">
+            Explore Solutions
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="index.html" aria-label="STACKLY FinTech Home">
+            <img src="Assets/Brand-logo.webp" alt="STACKLY FinTech Brand" width="160" height="44">
+          </a>
+          <p>
+            Next-generation financial infrastructure providing frictionless digital payments, invoice automation, and real-time cash analytics.
+          </p>
+          <div class="footer-socials">
+            <a href="404.html" class="social-link" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+            <a href="404.html" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="404.html" class="social-link" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="404.html" class="social-link" aria-label="Discord"><i class="fab fa-discord"></i></a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="index.html" class="footer-link">Home</a></li>
+            <li><a href="solutions.html" class="footer-link">Solutions</a></li>
+            <li><a href="products.html" class="footer-link">Products</a></li>
+            <li><a href="about.html" class="footer-link">About</a></li>
+            <li><a href="contact.html" class="footer-link">Contact</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Platforms &amp; Rails</h4>
+          <ul class="footer-links">
+            <li><a href="404.html" class="footer-link">Digital Payments</a></li>
+            <li><a href="404.html" class="footer-link">Billing Automation</a></li>
+            <li><a href="404.html" class="footer-link">Cash-Flow Insights</a></li>
+            <li><a href="404.html" class="footer-link">Virtual Accounts</a></li>
+            <li><a href="404.html" class="footer-link">Developer API Docs</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Legal &amp; Trust</h4>
+          <ul class="footer-links">
+            <li><a href="404.html" class="footer-link">Help &amp; Support</a></li>
+            <li><a href="404.html" class="footer-link">Privacy Policy</a></li>
+            <li><a href="404.html" class="footer-link">Terms of Service</a></li>
+            <li><a href="404.html" class="footer-link">Security Information</a></li>
+            <li><a href="404.html" class="footer-link">Compliance Declarations</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 STACKLY FinTech Solutions. All rights reserved.</div>
+        <div class="footer-legal-note">
+          Notice: This application is a visual front-end prototype designed for interface demonstration. Simulated transaction values, mock account summaries, and sample invoices do not constitute live financial transactions.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/animations.js"></script>
+</body>
+</html>

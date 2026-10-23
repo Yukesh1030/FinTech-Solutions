@@ -1,0 +1,135 @@
+/* ==========================================================================
+   STACKLY FinTech - Products Page Styles (products.css)
+   Interactive UI Prototypes & Product Showcases
+   ========================================================================== */
+
+.product-demo-card {
+  background: var(--white-pure);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--navy-border);
+  box-shadow: var(--shadow-md);
+  padding: 2.2rem;
+  overflow: hidden;
+}
+
+.product-interactive-tabs {
+  display: flex;
+  gap: 0.5rem;
+  border-bottom: 1px solid var(--navy-border);
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+  overflow-x: auto;
+}
+
+.product-tab-btn {
+  background: none;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  font-weight: 600;
+  font-size: 0.92rem;
+  border-radius: var(--radius-sm);
+  color: var(--navy-text-muted);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: var(--transition);
+}
+
+.product-tab-btn:hover {
+  color: var(--navy);
+  background: var(--white-surface);
+}
+
+.product-tab-btn.active {
+  background: var(--navy);
+  color: var(--white);
+}
+
+.product-tab-pane {
+  display: none;
+  animation: fadeIn 0.4s ease;
+}
+
+.product-tab-pane.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Payment Simulator Card */
+.payment-simulator-box {
+  background: var(--white-surface);
+  border-radius: var(--radius-md);
+  padding: 1.8rem;
+  border: 1px dashed var(--navy-border);
+}
+
+.simulator-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.simulator-result-box {
+  background: var(--white-pure);
+  border-radius: var(--radius-sm);
+  padding: 1.2rem;
+  border-left: 4px solid var(--mint);
+  margin-top: 1.2rem;
+  display: none;
+}
+
+.simulator-result-box.show {
+  display: block;
+}
+
+/* Integrations Grid */
+.integrations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.integration-card {
+  background: var(--white-pure);
+  border: 1px solid var(--navy-border);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  text-align: center;
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.integration-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--mint);
+  box-shadow: var(--shadow-sm);
+}
+
+.integration-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-sm);
+  background: var(--white-surface);
+  color: var(--navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+}
+
+.integration-card h4 {
+  font-size: 1rem;
+}
+
+.integration-card span {
+  font-size: 0.8rem;
+  color: var(--navy-text-muted);
+}

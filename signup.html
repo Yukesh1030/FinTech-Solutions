@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Create an account with STACKLY FinTech Solutions. Join today to streamline financial operations.">
+  <title>Create an Account | STACKLY FinTech Solutions</title>
+  
+  <link rel="icon" type="image/webp" href="Assets/Brand-logo.webp">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+  <style>
+    .auth-page-bg {
+      background: linear-gradient(115deg, #f5f7fa 0%, #f5f7fa 45%, #eaedf2 45.1%, #eaedf2 60%, #edf9f5 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+  </style>
+</head>
+<body class="auth-page-bg">
+
+  <div class="auth-wrapper">
+    <!-- Top Header: Back to Home & Brand Logo -->
+    <header class="auth-header-bar">
+      <a href="index.html" class="auth-back-btn" id="btnBackToHomeSignup">
+        <i class="fas fa-arrow-left"></i> Back to Home
+      </a>
+      <div class="auth-brand">
+        <a href="index.html" aria-label="STACKLY FinTech Home">
+          <img src="Assets/Brand-logo.webp" alt="STACKLY FinTech" width="140" height="38">
+        </a>
+      </div>
+    </header>
+
+    <!-- Center Card -->
+    <main class="auth-card-container">
+      <div class="auth-card" id="signupCard">
+        <div class="auth-card-head">
+          <h2>Create an Account</h2>
+          <p>Join STACKLY today</p>
+        </div>
+
+        <form id="signupForm" class="auth-form" novalidate>
+          <!-- Sign Up As Dropdown -->
+          <div class="form-group">
+            <label class="form-label" for="signupAs">Sign Up As</label>
+            <div class="input-icon-wrap">
+              <i class="fas fa-user field-icon"></i>
+              <select id="signupAs" class="auth-select" required aria-label="Sign Up As Role">
+                <option value="Client" selected>Client</option>
+                <option value="Admin">Admin</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Full Name -->
+          <div class="form-group">
+            <label class="form-label" for="signupName">Full Name</label>
+            <div class="input-icon-wrap">
+              <i class="far fa-user field-icon"></i>
+              <input 
+                type="text" 
+                id="signupName" 
+                class="auth-input" 
+                placeholder="John Doe" 
+                required 
+                autocomplete="name"
+              >
+            </div>
+            <div class="input-error-msg">Please enter your full name</div>
+          </div>
+
+          <!-- Email Address -->
+          <div class="form-group">
+            <label class="form-label" for="signupEmail">Email Address</label>
+            <div class="input-icon-wrap">
+              <i class="far fa-envelope field-icon"></i>
+              <input 
+                type="email" 
+                id="signupEmail" 
+                class="auth-input" 
+                placeholder="user@example.com" 
+                required 
+                autocomplete="email"
+              >
+            </div>
+            <div class="input-error-msg">Please enter a valid email address</div>
+          </div>
+
+          <!-- Password -->
+          <div class="form-group">
+            <label class="form-label" for="signupPassword">Password</label>
+            <div class="input-icon-wrap">
+              <i class="fas fa-lock field-icon"></i>
+              <input 
+                type="password" 
+                id="signupPassword" 
+                class="auth-input" 
+                placeholder="••••••••" 
+                required 
+                autocomplete="new-password"
+              >
+              <button type="button" class="toggle-password" aria-label="Toggle password visibility">
+                <i class="far fa-eye-slash"></i>
+              </button>
+            </div>
+            <div class="input-error-msg">Password must be at least 6 characters</div>
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" class="auth-submit-btn" id="btnSignupSubmit">
+            Sign Up
+          </button>
+        </form>
+
+        <div class="auth-footer-text">
+          Already have an account? <a href="login.html">Login here</a>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- GSAP Animation Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>

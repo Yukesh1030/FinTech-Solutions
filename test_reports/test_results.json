@@ -1,0 +1,610 @@
+{
+  "assetChecks": [
+    {
+      "name": "Image Size & Format: billing-invoicing.webp",
+      "passed": true,
+      "details": "84.37 KB (Target: 70 - 90 KB)"
+    },
+    {
+      "name": "Image Size & Format: Brand-logo.webp",
+      "passed": true,
+      "details": "72.87 KB (Target: 70 - 90 KB)"
+    },
+    {
+      "name": "Image Size & Format: card.webp",
+      "passed": true,
+      "details": "82.94 KB (Target: 70 - 90 KB)"
+    },
+    {
+      "name": "Image Size & Format: connected-financial-experience.webp",
+      "passed": true,
+      "details": "82.47 KB (Target: 70 - 90 KB)"
+    },
+    {
+      "name": "Image Size & Format: cover.webp",
+      "passed": true,
+      "details": "88.05 KB (Target: 70 - 90 KB)"
+    },
+    {
+      "name": "Image Size & Format: cover2.webp",
+      "passed": true,
+      "details": "76.54 KB (Target: 70 - 90 KB)"
+    },
+    {
+      "name": "Image Size & Format: customer-stories.webp",
+      "passed": true,
+      "details": "88.03 KB (Target: 70 - 90 KB)"
+    },
+    {
+      "name": "Image Size & Format: financial-performance.webp",
+      "passed": true,
+      "details": "78.22 KB (Target: 70 - 90 KB)"
+    },
+    {
+      "name": "Image Size & Format: index-bg-cover.webp",
+      "passed": true,
+      "details": "86.68 KB (Target: 70 - 90 KB)"
+    },
+    {
+      "name": "Image Size & Format: real-time-financial-insights.webp",
+      "passed": true,
+      "details": "80.82 KB (Target: 70 - 90 KB)"
+    },
+    {
+      "name": "Image Size & Format: security-trust.webp",
+      "passed": true,
+      "details": "86.78 KB (Target: 70 - 90 KB)"
+    },
+    {
+      "name": "Image Size & Format: solutions-every-business.webp",
+      "passed": true,
+      "details": "84.37 KB (Target: 70 - 90 KB)"
+    },
+    {
+      "name": "Image Size & Format: user.webp",
+      "passed": true,
+      "details": "71.94 KB (Target: 70 - 90 KB)"
+    }
+  ],
+  "pageTests": [
+    {
+      "name": "Root file existence: index.html",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Root file existence: solutions.html",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Root file existence: products.html",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Root file existence: about.html",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Root file existence: contact.html",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Root file existence: login.html",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Root file existence: signup.html",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Root file existence: 404.html",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Root file existence: AdminDashboard.html",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Root file existence: ClientDashboard.html",
+      "passed": true,
+      "details": ""
+    }
+  ],
+  "functionalTests": [
+    {
+      "name": "Mobile Hamburger opens Drawer Menu",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Mobile Close button dismisses Drawer Menu",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "404 Page Headline Validation",
+      "passed": true,
+      "details": "THIS TRANSACTION COULDN'T BE FOUND."
+    },
+    {
+      "name": "404 Page \"Back to Home\" Link",
+      "passed": true,
+      "details": "index.html"
+    },
+    {
+      "name": "Login Password visibility toggle switches to text",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Login as \"Admin\" redirects to AdminDashboard.html",
+      "passed": true,
+      "details": "http://localhost:3000/AdminDashboard.html"
+    },
+    {
+      "name": "Login as \"Client\" redirects to ClientDashboard.html",
+      "passed": true,
+      "details": "http://localhost:3000/ClientDashboard.html"
+    },
+    {
+      "name": "Admin Dashboard KPI 1: TOTAL TRANSACTIONS",
+      "passed": true,
+      "details": "2,486"
+    },
+    {
+      "name": "Admin Dashboard KPI 2: PENDING PAYMENTS",
+      "passed": true,
+      "details": "34"
+    },
+    {
+      "name": "Admin Dashboard KPI 3: PROCESSED VOLUME",
+      "passed": true,
+      "details": "₹12.8L"
+    },
+    {
+      "name": "Admin Dashboard \"Refresh Data\" prepends dynamic row",
+      "passed": true,
+      "details": "Rows: 5 -> 6"
+    },
+    {
+      "name": "Client Dashboard KPI 1: ACCOUNT OVERVIEW",
+      "passed": true,
+      "details": "₹84,500"
+    },
+    {
+      "name": "Client Dashboard KPI 2: PENDING INVOICES",
+      "passed": true,
+      "details": "3"
+    },
+    {
+      "name": "Client Dashboard KPI 3: THIS MONTH",
+      "passed": true,
+      "details": "₹26,400"
+    },
+    {
+      "name": "Contact Page Features 2 Branch Offices (Bengaluru & Hyderabad)",
+      "passed": true,
+      "details": "Count: 2"
+    },
+    {
+      "name": "Contact Form blocks empty submit with inline errors",
+      "passed": true,
+      "details": ""
+    }
+  ],
+  "responsiveChecks": [
+    {
+      "name": "index.html @ 375px (iPhone SE)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "index.html @ 390px (iPhone 13/14)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "index.html @ 414px (iPhone Plus)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "index.html @ 768px (iPad Portrait)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "index.html @ 1024px (iPad Landscape)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "index.html @ 1280px (Laptop)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "index.html @ 1440px (Desktop HD)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "index.html @ 1920px (Full HD 1080p)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "solutions.html @ 375px (iPhone SE)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "solutions.html @ 390px (iPhone 13/14)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "solutions.html @ 414px (iPhone Plus)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "solutions.html @ 768px (iPad Portrait)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "solutions.html @ 1024px (iPad Landscape)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "solutions.html @ 1280px (Laptop)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "solutions.html @ 1440px (Desktop HD)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "solutions.html @ 1920px (Full HD 1080p)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "products.html @ 375px (iPhone SE)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "products.html @ 390px (iPhone 13/14)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "products.html @ 414px (iPhone Plus)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "products.html @ 768px (iPad Portrait)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "products.html @ 1024px (iPad Landscape)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "products.html @ 1280px (Laptop)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "products.html @ 1440px (Desktop HD)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "products.html @ 1920px (Full HD 1080p)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "about.html @ 375px (iPhone SE)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "about.html @ 390px (iPhone 13/14)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "about.html @ 414px (iPhone Plus)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "about.html @ 768px (iPad Portrait)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "about.html @ 1024px (iPad Landscape)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "about.html @ 1280px (Laptop)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "about.html @ 1440px (Desktop HD)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "about.html @ 1920px (Full HD 1080p)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "contact.html @ 375px (iPhone SE)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "contact.html @ 390px (iPhone 13/14)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "contact.html @ 414px (iPhone Plus)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "contact.html @ 768px (iPad Portrait)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "contact.html @ 1024px (iPad Landscape)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "contact.html @ 1280px (Laptop)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "contact.html @ 1440px (Desktop HD)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "contact.html @ 1920px (Full HD 1080p)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "login.html @ 375px (iPhone SE)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "login.html @ 390px (iPhone 13/14)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "login.html @ 414px (iPhone Plus)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "login.html @ 768px (iPad Portrait)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "login.html @ 1024px (iPad Landscape)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "login.html @ 1280px (Laptop)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "login.html @ 1440px (Desktop HD)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "login.html @ 1920px (Full HD 1080p)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "signup.html @ 375px (iPhone SE)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "signup.html @ 390px (iPhone 13/14)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "signup.html @ 414px (iPhone Plus)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "signup.html @ 768px (iPad Portrait)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "signup.html @ 1024px (iPad Landscape)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "signup.html @ 1280px (Laptop)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "signup.html @ 1440px (Desktop HD)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "signup.html @ 1920px (Full HD 1080p)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "404.html @ 375px (iPhone SE)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "404.html @ 390px (iPhone 13/14)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "404.html @ 414px (iPhone Plus)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "404.html @ 768px (iPad Portrait)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "404.html @ 1024px (iPad Landscape)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "404.html @ 1280px (Laptop)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "404.html @ 1440px (Desktop HD)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "404.html @ 1920px (Full HD 1080p)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "AdminDashboard.html @ 375px (iPhone SE)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "AdminDashboard.html @ 390px (iPhone 13/14)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "AdminDashboard.html @ 414px (iPhone Plus)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "AdminDashboard.html @ 768px (iPad Portrait)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "AdminDashboard.html @ 1024px (iPad Landscape)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "AdminDashboard.html @ 1280px (Laptop)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "AdminDashboard.html @ 1440px (Desktop HD)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "AdminDashboard.html @ 1920px (Full HD 1080p)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "ClientDashboard.html @ 375px (iPhone SE)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "ClientDashboard.html @ 390px (iPhone 13/14)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "ClientDashboard.html @ 414px (iPhone Plus)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "ClientDashboard.html @ 768px (iPad Portrait)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "ClientDashboard.html @ 1024px (iPad Landscape)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "ClientDashboard.html @ 1280px (Laptop)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "ClientDashboard.html @ 1440px (Desktop HD)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    },
+    {
+      "name": "ClientDashboard.html @ 1920px (Full HD 1080p)",
+      "passed": true,
+      "details": "Zero horizontal overflow"
+    }
+  ],
+  "summary": {
+    "total": 119,
+    "passed": 119,
+    "failed": 0
+  }
+}

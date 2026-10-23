@@ -1,0 +1,169 @@
+/* ==========================================================================
+   STACKLY FinTech - Animation System (animations.css)
+   GSAP Classes, ScrollTrigger Hooks, Keyframes, Reduced-Motion
+   ========================================================================== */
+
+/* Keyframe Animations */
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(1deg);
+  }
+}
+
+@keyframes floatReverse {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(10px) rotate(-1deg);
+  }
+}
+
+@keyframes pulseMint {
+  0% {
+    box-shadow: 0 0 0 0 rgba(66, 214, 176, 0.45);
+  }
+  70% {
+    box-shadow: 0 0 0 16px rgba(66, 214, 176, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(66, 214, 176, 0);
+  }
+}
+
+@keyframes shimmerGlow {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes drawLine {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Floating Animation Classes */
+.float-element {
+  animation: floatSlow 6s ease-in-out infinite;
+}
+
+.float-element-delayed {
+  animation: floatReverse 7s ease-in-out 1.5s infinite;
+}
+
+.pulse-mint-badge {
+  animation: pulseMint 2.5s infinite;
+}
+
+/* SVG Line Drawing */
+.animated-svg-path {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: drawLine 2.5s ease-out forwards;
+}
+
+/* GSAP Reveal Helpers (Initial States for ScrollTrigger) */
+.gsap-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  will-change: transform, opacity;
+}
+
+.gsap-reveal-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  will-change: transform, opacity;
+}
+
+.gsap-reveal-right {
+  opacity: 0;
+  transform: translateX(40px);
+  will-change: transform, opacity;
+}
+
+.gsap-scale-up {
+  opacity: 0;
+  transform: scale(0.92);
+  will-change: transform, opacity;
+}
+
+.gsap-card-stagger {
+  opacity: 0;
+  transform: translateY(25px);
+  will-change: transform, opacity;
+}
+
+/* Text Mask Reveal */
+.text-mask-wrapper {
+  overflow: hidden;
+  display: inline-block;
+}
+
+.text-mask-content {
+  display: inline-block;
+  transform: translateY(100%);
+}
+
+/* Counter numbers */
+.counter-value {
+  display: inline-block;
+  font-family: var(--font-heading);
+}
+
+/* Shimmer Loading or Active Accents */
+.mint-shimmer {
+  background: linear-gradient(90deg, transparent 0%, rgba(66, 214, 176, 0.2) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: shimmerGlow 3s infinite linear;
+}
+
+/* Parallax Background Decor */
+.hero-glow-sphere {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(66, 214, 176, 0.16) 0%, rgba(66, 214, 176, 0) 70%);
+  top: -100px;
+  right: -100px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hero-glow-sphere.secondary {
+  width: 400px;
+  height: 400px;
+  top: auto;
+  bottom: -150px;
+  left: -100px;
+  background: radial-gradient(circle, rgba(16, 29, 50, 0.08) 0%, rgba(16, 29, 50, 0) 70%);
+}
+
+/* Accessibility: Respect Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .gsap-reveal,
+  .gsap-reveal-left,
+  .gsap-reveal-right,
+  .gsap-scale-up,
+  .gsap-card-stagger {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .float-element,
+  .float-element-delayed {
+    animation: none !important;
+  }
+}

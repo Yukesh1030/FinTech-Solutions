@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="STACKLY FinTech Client Dashboard - Manage account balances, view pending invoices, analyze monthly cash flow, and download statements.">
+  <title>Client Portal | STACKLY FinTech Solutions</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/webp" href="Assets/Brand-logo.webp">
+
+  <!-- Google Fonts & Font Awesome Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body class="dashboard-body">
+
+  <div class="dashboard-wrapper">
+    <!-- Mobile Sidebar Backdrop Overlay -->
+    <div class="dashboard-sidebar-overlay"></div>
+
+    <!-- ==========================================================================
+         SIDEBAR: Dark Sidebar with 5 Main Menus
+         ========================================================================== -->
+    <aside class="dashboard-sidebar">
+      <div class="sidebar-header">
+        <a href="index.html" class="sidebar-brand" aria-label="Go to STACKLY Home">
+          <img src="Assets/Brand-logo.webp" alt="STACKLY FinTech Logo" width="130" height="36">
+        </a>
+        <span class="sidebar-badge" style="background: rgba(66, 214, 176, 0.15); color: var(--mint);">Client</span>
+      </div>
+
+      <!-- 5 Main Menus -->
+      <ul class="sidebar-menu">
+        <li class="sidebar-menu-item active" data-menu="dashboard">
+          <a href="#dashboard"><i class="fas fa-wallet"></i> <span>Dashboard</span></a>
+        </li>
+        <li class="sidebar-menu-item" data-menu="transactions">
+          <a href="#transactions"><i class="fas fa-list-ul"></i> <span>Transactions</span></a>
+        </li>
+        <li class="sidebar-menu-item" data-menu="invoices">
+          <a href="#invoices"><i class="fas fa-file-invoice-dollar"></i> <span>Invoices &amp; Payments</span></a>
+        </li>
+        <li class="sidebar-menu-item" data-menu="reports">
+          <a href="#reports"><i class="fas fa-chart-line"></i> <span>Reports &amp; Insights</span></a>
+        </li>
+        <li class="sidebar-menu-item" data-menu="settings">
+          <a href="#settings"><i class="fas fa-user-gear"></i> <span>Profile &amp; Settings</span></a>
+        </li>
+      </ul>
+
+      <div class="sidebar-footer">
+        <div class="user-mini-profile">
+          <div class="user-avatar-circle" style="background: var(--mint); color: var(--navy);">CL</div>
+          <div class="user-meta">
+            <span id="clientUserEmail">client@stackly.finance</span>
+            <small>Client Account</small>
+          </div>
+        </div>
+        <a href="login.html" class="logout-icon-btn" title="Sign out" aria-label="Sign out">
+          <i class="fas fa-right-from-bracket"></i>
+        </a>
+      </div>
+    </aside>
+
+    <!-- ==========================================================================
+         MAIN CONTENT AREA
+         ========================================================================== -->
+    <div class="dashboard-main">
+      <!-- Topbar Header -->
+      <header class="dashboard-topbar">
+        <div class="topbar-left">
+          <button type="button" class="dashboard-topbar-toggle" aria-label="Toggle menu">
+            <i class="fas fa-bars"></i>
+          </button>
+          <h1 class="dashboard-title-heading">Client Portal</h1>
+        </div>
+
+        <div class="topbar-right">
+          <button type="button" class="btn-refresh btn-refresh-client" aria-label="Refresh client demo data">
+            <i class="fas fa-rotate"></i> <span>Refresh Overview</span>
+          </button>
+
+          <button type="button" class="btn btn-sm btn-outline btn-download-statement">
+            <i class="fas fa-download"></i> <span class="hide-mobile">Statement (CSV)</span>
+          </button>
+
+          <a href="404.html" class="topbar-notify-btn" aria-label="Notifications">
+            <i class="far fa-bell"></i>
+            <span class="notify-badge">2</span>
+          </a>
+
+          <a href="index.html" class="btn btn-outline btn-sm" title="Back to Public Site">
+            <i class="fas fa-globe"></i> <span class="hide-mobile">Public Site</span>
+          </a>
+        </div>
+      </header>
+
+      <!-- Dashboard Body Content -->
+      <main class="dashboard-content">
+        <!-- Illustrative Notice -->
+        <div class="illustrative-notice" style="margin-top: 0;">
+          <i class="fas fa-info-circle text-mint"></i> Sample values for interface design. An account overview is not a bank balance or a promise of available funds. Real transactions are not initiated through this prototype.
+        </div>
+
+        <!-- ==========================================================================
+             VIEW: DASHBOARD (Default)
+             ========================================================================== -->
+        <div class="dashboard-view-section" id="view-dashboard">
+          <!-- 3 KPI Cards -->
+          <div class="dashboard-kpi-grid">
+            <!-- KPI 1: ACCOUNT OVERVIEW -->
+            <div class="kpi-card-metric">
+              <div class="kpi-info-block">
+                <span>Account Overview</span>
+                <h3 id="kpiAccountOverview">₹84,500</h3>
+                <div class="kpi-trend positive">
+                  <i class="fas fa-arrow-up"></i> +4.2% available liquidity
+                </div>
+              </div>
+              <div class="kpi-icon-bubble">
+                <i class="fas fa-building-columns text-mint"></i>
+              </div>
+            </div>
+
+            <!-- KPI 2: PENDING INVOICES -->
+            <div class="kpi-card-metric">
+              <div class="kpi-info-block">
+                <span>Pending Invoices</span>
+                <h3 id="kpiPendingInvoices">3</h3>
+                <div class="kpi-trend neutral">
+                  <i class="fas fa-clock"></i> Next due in 4 days
+                </div>
+              </div>
+              <div class="kpi-icon-bubble">
+                <i class="fas fa-file-invoice text-mint"></i>
+              </div>
+            </div>
+
+            <!-- KPI 3: THIS MONTH -->
+            <div class="kpi-card-metric">
+              <div class="kpi-info-block">
+                <span>This Month Inflow</span>
+                <h3 id="kpiThisMonth">₹26,400</h3>
+                <div class="kpi-trend positive">
+                  <i class="fas fa-arrow-trend-up"></i> +18.2% vs previous month
+                </div>
+              </div>
+              <div class="kpi-icon-bubble">
+                <i class="fas fa-arrow-down-left text-mint"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Monthly Cash-Flow Chart Panel -->
+          <div class="dashboard-panel" style="margin-top: 1.5rem;">
+            <div class="panel-header">
+              <div>
+                <h2 class="panel-title">Monthly Cash-Flow Trajectory</h2>
+                <p style="font-size: 0.85rem; margin: 0;">Deposits vs Disbursements over past 6 months (Simulated)</p>
+              </div>
+              <div class="panel-actions">
+                <button type="button" class="btn btn-sm btn-outline btn-download-statement">
+                  <i class="fas fa-file-arrow-down"></i> Export Report
+                </button>
+              </div>
+            </div>
+            <div style="height: 280px; position: relative;">
+              <canvas id="clientCashFlowCanvas"></canvas>
+            </div>
+          </div>
+
+          <!-- Two Column Secondary Panels: Pending Invoices & Expense Breakdown -->
+          <div class="dashboard-two-col" style="margin-top: 1.5rem;">
+            <!-- Left: Pending Invoices with Pay Now and View Invoice Actions -->
+            <div class="dashboard-panel">
+              <div class="panel-header">
+                <div>
+                  <h2 class="panel-title">Pending Invoices</h2>
+                  <p style="font-size: 0.85rem; margin: 0;">Actionable commercial payables requiring approval</p>
+                </div>
+              </div>
+
+              <div class="table-responsive">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Invoice ID</th>
+                      <th>Description</th>
+                      <th>Amount</th>
+                      <th>Due Date</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>INV-8419</strong></td>
+                      <td>AWS Cloud Infrastructure Hosting</td>
+                      <td><strong>₹14,500</strong></td>
+                      <td>Oct 28, 2026</td>
+                      <td>
+                        <button class="btn btn-sm btn-accent" onclick="payInvoice('INV-8419', 14500)">Pay Now</button>
+                        <button class="btn btn-sm btn-outline" onclick="viewClientInvoice('INV-8419', 'AWS Cloud Infrastructure Hosting', 14500, 'Oct 28, 2026')">View</button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><strong>INV-8420</strong></td>
+                      <td>SaaS CRM Enterprise License</td>
+                      <td><strong>₹7,200</strong></td>
+                      <td>Nov 02, 2026</td>
+                      <td>
+                        <button class="btn btn-sm btn-accent" onclick="payInvoice('INV-8420', 7200)">Pay Now</button>
+                        <button class="btn btn-sm btn-outline" onclick="viewClientInvoice('INV-8420', 'SaaS CRM Enterprise License', 7200, 'Nov 02, 2026')">View</button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><strong>INV-8421</strong></td>
+                      <td>External Security Audit Retainer</td>
+                      <td><strong>₹4,700</strong></td>
+                      <td>Nov 10, 2026</td>
+                      <td>
+                        <button class="btn btn-sm btn-accent" onclick="payInvoice('INV-8421', 4700)">Pay Now</button>
+                        <button class="btn btn-sm btn-outline" onclick="viewClientInvoice('INV-8421', 'External Security Audit Retainer', 4700, 'Nov 10, 2026')">View</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Right: Expense Categories Breakdown -->
+            <div class="dashboard-panel">
+              <div class="panel-header">
+                <h2 class="panel-title">Expense Categories</h2>
+              </div>
+              <p style="font-size: 0.85rem; color: var(--navy-text-muted); margin-bottom: 1.2rem;">
+                Breakdown of current operational outflow by ledger tag:
+              </p>
+
+              <div style="display: flex; flex-direction: column; gap: 1rem;">
+                <div>
+                  <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.3rem;">
+                    <span>Software &amp; Cloud Tools</span>
+                    <span>₹14,500 (55%)</span>
+                  </div>
+                  <div style="height: 7px; border-radius: 4px; background: #e2e8f0; overflow: hidden;">
+                    <div style="width: 55%; height: 100%; background: var(--navy);"></div>
+                  </div>
+                </div>
+
+                <div>
+                  <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.3rem;">
+                    <span>Contractor &amp; Vendor Services</span>
+                    <span>₹7,200 (27%)</span>
+                  </div>
+                  <div style="height: 7px; border-radius: 4px; background: #e2e8f0; overflow: hidden;">
+                    <div style="width: 27%; height: 100%; background: var(--mint);"></div>
+                  </div>
+                </div>
+
+                <div>
+                  <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.3rem;">
+                    <span>Legal &amp; Compliance Fees</span>
+                    <span>₹4,700 (18%)</span>
+                  </div>
+                  <div style="height: 7px; border-radius: 4px; background: #e2e8f0; overflow: hidden;">
+                    <div style="width: 18%; height: 100%; background: var(--navy-light);"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div style="margin-top: 1.8rem; border-top: 1px solid var(--navy-border); padding-top: 1rem;">
+                <button type="button" class="btn btn-sm btn-outline w-100 btn-download-statement">
+                  <i class="fas fa-file-csv"></i> Download Statement (CSV)
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==========================================================================
+             VIEW: TRANSACTIONS
+             ========================================================================== -->
+        <div class="dashboard-view-section" id="view-transactions" style="display: none;">
+          <div class="dashboard-panel">
+            <div class="panel-header">
+              <div>
+                <h2 class="panel-title">Client Transaction History</h2>
+                <p style="font-size: 0.85rem; margin: 0;">Completed inflows and authorized outflows</p>
+              </div>
+              <div class="panel-actions">
+                <button type="button" class="btn btn-sm btn-outline btn-download-statement"><i class="fas fa-download"></i> Export History</button>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Reference</th>
+                    <th>Date</th>
+                    <th>Description</th>
+                    <th>Type</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>TXN-9081</strong></td>
+                    <td>Oct 22, 2026</td>
+                    <td>Cloud Infrastructure Payment</td>
+                    <td>Debit</td>
+                    <td><strong>₹4,500</strong></td>
+                    <td><span class="status-badge completed">Settled</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>TXN-9080</strong></td>
+                    <td>Oct 20, 2026</td>
+                    <td>Client Retainer Inflow</td>
+                    <td>Credit</td>
+                    <td><strong class="text-mint">+₹38,000</strong></td>
+                    <td><span class="status-badge completed">Settled</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>TXN-9079</strong></td>
+                    <td>Oct 18, 2026</td>
+                    <td>SaaS Subscription Annual</td>
+                    <td>Debit</td>
+                    <td><strong>₹12,000</strong></td>
+                    <td><span class="status-badge completed">Settled</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==========================================================================
+             VIEW: INVOICES & PAYMENTS
+             ========================================================================== -->
+        <div class="dashboard-view-section" id="view-invoices" style="display: none;">
+          <div class="dashboard-panel">
+            <div class="panel-header">
+              <div>
+                <h2 class="panel-title">Invoices &amp; Billing Records</h2>
+                <p style="font-size: 0.85rem; margin: 0;">Invoices generated for your organization and outstanding dues</p>
+              </div>
+            </div>
+            <div class="grid-3">
+              <div class="card" style="padding: 1.5rem;">
+                <span class="status-badge pending" style="margin-bottom: 0.5rem;">Due Soon</span>
+                <h4>INV-8419 - Cloud Hosting</h4>
+                <p style="font-size: 1.25rem; font-weight: 700; color: var(--navy); margin: 0.5rem 0;">₹14,500</p>
+                <button class="btn btn-sm btn-accent w-100" onclick="payInvoice('INV-8419', 14500)">Pay Invoice</button>
+              </div>
+              <div class="card" style="padding: 1.5rem;">
+                <span class="status-badge completed" style="margin-bottom: 0.5rem;">Settled</span>
+                <h4>INV-8102 - Retainer Sep 2026</h4>
+                <p style="font-size: 1.25rem; font-weight: 700; color: var(--navy); margin: 0.5rem 0;">₹38,000</p>
+                <button class="btn btn-sm btn-outline w-100" onclick="viewClientInvoice('INV-8102', 'Retainer Sep 2026', 38000, 'Paid')">Receipt</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==========================================================================
+             VIEW: REPORTS & INSIGHTS
+             ========================================================================== -->
+        <div class="dashboard-view-section" id="view-reports" style="display: none;">
+          <div class="dashboard-panel">
+            <div class="panel-header">
+              <div>
+                <h2 class="panel-title">Downloadable Sample Statements</h2>
+                <p style="font-size: 0.85rem; margin: 0;">Export financial spreadsheets and receipts for tax and accounting audits</p>
+              </div>
+            </div>
+            <div class="grid-3">
+              <div class="card" style="padding: 1.5rem;">
+                <h4>October 2026 Statement</h4>
+                <p style="font-size: 0.85rem;">Consolidated debits and credits ledger in CSV.</p>
+                <button class="btn btn-sm btn-outline btn-download-statement"><i class="fas fa-download"></i> Download CSV</button>
+              </div>
+              <div class="card" style="padding: 1.5rem;">
+                <h4>Annual Tax Deduction Slip</h4>
+                <p style="font-size: 0.85rem;">GST &amp; TDS tax deduction summary.</p>
+                <button class="btn btn-sm btn-outline btn-download-statement"><i class="fas fa-download"></i> Download CSV</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==========================================================================
+             VIEW: PROFILE & SETTINGS
+             ========================================================================== -->
+        <div class="dashboard-view-section" id="view-settings" style="display: none;">
+          <div class="dashboard-panel" style="max-width: 600px;">
+            <div class="panel-header">
+              <h2 class="panel-title">Profile &amp; Notification Preferences</h2>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 1.2rem;">
+              <div>
+                <label class="form-label">Client Name</label>
+                <input type="text" class="auth-input" value="Apex Global Technologies Ltd." style="padding-left: 1rem;">
+              </div>
+              <div>
+                <label class="form-label">Primary Email for Invoices</label>
+                <input type="email" class="auth-input" value="finance@apextech.com" style="padding-left: 1rem;">
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 0.5rem;">
+                <span>Email me upon invoice creation</span>
+                <input type="checkbox" checked style="width: 20px; height: 20px; accent-color: var(--navy);">
+              </div>
+              <button class="btn btn-primary" onclick="showToast('Profile preferences updated.')">Save Changes</button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Pay Now Modal Simulation -->
+  <div class="modal-overlay" id="payInvoiceModal" role="dialog" aria-modal="true" aria-label="Pay Invoice">
+    <div class="modal-box">
+      <button type="button" class="modal-close-btn" aria-label="Close modal"><i class="fas fa-times"></i></button>
+      <h3 style="margin-bottom: 0.8rem; font-size: 1.35rem; color: var(--navy);">Settle Commercial Invoice</h3>
+      <p style="font-size: 0.9rem; color: var(--navy-text-muted); margin-bottom: 1.2rem;">
+        Simulate an instant invoice clearance from your account overview.
+      </p>
+      <div style="background: var(--white-surface); border-radius: var(--radius-sm); padding: 1.2rem; margin-bottom: 1.5rem; line-height: 1.8; font-size: 0.9rem;">
+        <div>Invoice Reference: <strong id="payModalInvId">INV-8419</strong></div>
+        <div>Settlement Total: <strong id="payModalAmount" class="text-navy">₹14,500</strong></div>
+        <div>Debit Channel: <span>Corporate Treasury Pool (Simulated)</span></div>
+      </div>
+      <div style="display: flex; gap: 1rem;">
+        <button type="button" class="btn btn-outline modal-close-trigger w-50">Cancel</button>
+        <button type="button" class="btn btn-accent w-50" id="btnConfirmPayment">Confirm Payment</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Client Invoice View Modal -->
+  <div class="modal-overlay" id="clientInvoiceModal" role="dialog" aria-modal="true" aria-label="View Invoice Details">
+    <div class="modal-box">
+      <button type="button" class="modal-close-btn" aria-label="Close modal"><i class="fas fa-times"></i></button>
+      <h3 style="margin-bottom: 0.5rem; font-size: 1.35rem; color: var(--navy);">Invoice Details</h3>
+      <p style="font-size: 0.85rem; color: var(--navy-text-muted); margin-bottom: 1.2rem;">Commercial Billed Statement Demonstration</p>
+      <div style="background: var(--white-surface); border-radius: var(--radius-sm); padding: 1.2rem; margin-bottom: 1.5rem; line-height: 1.8; font-size: 0.9rem;">
+        <div>Invoice ID: <strong id="clientModalInvId">INV-8419</strong></div>
+        <div>Service: <span id="clientModalDesc">AWS Cloud Infrastructure</span></div>
+        <div>Total Due: <strong id="clientModalAmount" class="text-navy">₹14,500</strong></div>
+        <div>Due Date: <span id="clientModalDue">Oct 28, 2026</span></div>
+      </div>
+      <button type="button" class="btn btn-primary modal-close-trigger w-100">Close</button>
+    </div>
+  </div>
+
+  <!-- External CDNs & Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/client-dashboard.js"></script>
+</body>
+</html>
