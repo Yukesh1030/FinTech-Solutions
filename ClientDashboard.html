@@ -35,7 +35,12 @@
         <a href="index.html" class="sidebar-brand" aria-label="Go to STACKLY Home">
           <img src="Assets/Brand-logo.webp" alt="STACKLY FinTech Logo" width="130" height="36">
         </a>
-        <span class="sidebar-badge" style="background: rgba(66, 214, 176, 0.15); color: var(--mint);">Client</span>
+        <div style="display: flex; align-items: center; gap: 0.6rem;">
+          <span class="sidebar-badge" style="background: rgba(66, 214, 176, 0.15); color: var(--mint);">Client</span>
+          <button type="button" class="sidebar-close-btn" aria-label="Close sidebar menu">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
       </div>
 
       <!-- 5 Main Menus -->
@@ -85,8 +90,8 @@
         </div>
 
         <div class="topbar-right">
-          <button type="button" class="btn-refresh btn-refresh-client" aria-label="Refresh client demo data">
-            <i class="fas fa-rotate"></i> <span>Refresh Overview</span>
+          <button type="button" class="btn-refresh btn-refresh-client" aria-label="Refresh client demo data" title="Refresh Overview">
+            <i class="fas fa-rotate"></i> <span class="hide-mobile">Refresh Overview</span>
           </button>
 
           <button type="button" class="btn btn-sm btn-outline btn-download-statement">
@@ -234,6 +239,9 @@
                   </tbody>
                 </table>
               </div>
+              <div class="table-scroll-hint">
+                <i class="fas fa-arrows-left-right"></i> Scroll table horizontally to view full invoice actions
+              </div>
             </div>
 
             <!-- Right: Expense Categories Breakdown -->
@@ -339,6 +347,9 @@
                   </tr>
                 </tbody>
               </table>
+            </div>
+            <div class="table-scroll-hint">
+              <i class="fas fa-arrows-left-right"></i> Scroll table horizontally to view details &amp; status
             </div>
           </div>
         </div>

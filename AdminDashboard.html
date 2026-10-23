@@ -35,7 +35,12 @@
         <a href="index.html" class="sidebar-brand" aria-label="Go to STACKLY Home">
           <img src="Assets/Brand-logo.webp" alt="STACKLY FinTech Logo" width="130" height="36">
         </a>
-        <span class="sidebar-badge">Admin</span>
+        <div style="display: flex; align-items: center; gap: 0.6rem;">
+          <span class="sidebar-badge">Admin</span>
+          <button type="button" class="sidebar-close-btn" aria-label="Close sidebar menu">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
       </div>
 
       <!-- 5 Main Menus -->
@@ -85,8 +90,8 @@
         </div>
 
         <div class="topbar-right">
-          <button type="button" class="btn-refresh btn-refresh-admin" aria-label="Refresh demo data">
-            <i class="fas fa-rotate"></i> <span>Refresh Data</span>
+          <button type="button" class="btn-refresh btn-refresh-admin" aria-label="Refresh demo data" title="Refresh Data">
+            <i class="fas fa-rotate"></i> <span class="hide-mobile">Refresh Data</span>
           </button>
 
           <a href="404.html" class="topbar-notify-btn" aria-label="Notifications">
@@ -248,6 +253,9 @@
                     </tr>
                   </tbody>
                 </table>
+              </div>
+              <div class="table-scroll-hint">
+                <i class="fas fa-arrows-left-right"></i> Scroll table horizontally to view full transaction records
               </div>
             </div>
 

@@ -29,6 +29,12 @@ function initClientSidebar() {
   const toggleBtn = document.querySelector('.dashboard-topbar-toggle');
   const sidebar = document.querySelector('.dashboard-sidebar');
   const overlay = document.querySelector('.dashboard-sidebar-overlay');
+  const closeBtn = document.querySelector('.sidebar-close-btn');
+
+  const closeSidebar = () => {
+    if (sidebar) sidebar.classList.remove('active');
+    if (overlay) overlay.classList.remove('active');
+  };
 
   if (toggleBtn && sidebar && overlay) {
     toggleBtn.addEventListener('click', () => {
@@ -36,10 +42,11 @@ function initClientSidebar() {
       overlay.classList.toggle('active');
     });
 
-    overlay.addEventListener('click', () => {
-      sidebar.classList.remove('active');
-      overlay.classList.remove('active');
-    });
+    overlay.addEventListener('click', closeSidebar);
+  }
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', closeSidebar);
   }
 }
 
