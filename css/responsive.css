@@ -204,19 +204,78 @@ img, video, canvas, svg, table {
     width: 90%;
   }
 
+  /* Footer Mobile Center Alignment */
+  .site-footer {
+    text-align: center;
+  }
+
   .footer-top {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 2.5rem;
+    text-align: center;
+    justify-items: center;
+  }
+
+  .footer-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-brand a {
+    display: inline-block;
+  }
+
+  .footer-brand img {
+    margin: 0 auto 1.2rem;
+  }
+
+  .footer-brand p {
+    text-align: center;
+    margin: 0 auto 1.5rem;
+    max-width: 440px;
+  }
+
+  .footer-socials {
+    justify-content: center;
+    margin: 0 auto;
+  }
+
+  .footer-title {
+    text-align: center;
+  }
+
+  .footer-links {
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-links li {
+    text-align: center;
+  }
+
+  .footer-link {
+    display: inline-block;
+    text-align: center;
+  }
+
+  .footer-link:hover {
+    padding-left: 0;
+    transform: translateY(-2px);
   }
 
   .footer-bottom {
     flex-direction: column;
+    align-items: center;
     text-align: center;
     gap: 1.2rem;
   }
 
   .footer-legal-note {
     text-align: center;
+    margin: 0 auto;
+    max-width: 600px;
   }
 
   .auth-card {
