@@ -1310,6 +1310,126 @@ button, input, select, textarea {
   display: block;
 }
 
+/* ==========================================================================
+   Modal Dialog System (Contact, Inquiries, Confirmations)
+   ========================================================================== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(16, 29, 50, 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 10000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-overlay.open {
+  display: flex;
+  opacity: 1;
+}
+
+.modal-box {
+  background: var(--white-pure);
+  border-radius: var(--radius-lg);
+  max-width: 500px;
+  width: 100%;
+  padding: 2.8rem 2.4rem 2.4rem;
+  box-shadow: 0 25px 60px rgba(16, 29, 50, 0.28), 0 0 1px rgba(16, 29, 50, 0.2);
+  border: 1px solid var(--navy-border);
+  position: relative;
+  text-align: center;
+  animation: modalEnter 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 72px;
+  height: 4px;
+  background: var(--mint);
+  border-radius: var(--radius-full);
+}
+
+@keyframes modalEnter {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.2rem;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--white-surface);
+  border: 1px solid var(--navy-border);
+  color: var(--navy-text-muted);
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  outline: none;
+}
+
+.modal-close-btn:hover {
+  background: var(--navy);
+  color: var(--white-pure);
+  border-color: var(--navy);
+  transform: rotate(90deg);
+}
+
+.modal-close-btn:focus-visible {
+  outline: 2px solid var(--mint);
+  outline-offset: 2px;
+}
+
+.modal-box .card-icon,
+.modal-success-icon {
+  width: 68px !important;
+  height: 68px !important;
+  border-radius: 50% !important;
+  background: rgba(66, 214, 176, 0.16) !important;
+  color: #0b7252 !important;
+  font-size: 1.8rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 auto 1.4rem !important;
+  box-shadow: 0 0 0 8px rgba(66, 214, 176, 0.12) !important;
+}
+
+.modal-box h3 {
+  font-size: 1.65rem;
+  font-family: var(--font-heading);
+  color: var(--navy);
+  margin-bottom: 0.8rem;
+  letter-spacing: -0.01em;
+}
+
+.modal-box p {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--navy-text-muted);
+  margin-bottom: 2rem;
+}
+
 /* Toast Notification */
 .toast-notice {
   position: fixed;
