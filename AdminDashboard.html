@@ -993,28 +993,247 @@
              VIEW: REPORTS & ANALYTICS
              ========================================================================== -->
         <div class="dashboard-view-section" id="view-reports" style="display: none;">
-          <div class="dashboard-panel">
-            <div class="panel-header">
-              <div>
-                <h2 class="panel-title">Operational Reports &amp; Financial Statements</h2>
-                <p style="font-size: 0.85rem; margin: 0;">Generate regulatory statements and net reconciliation sheets</p>
+          <!-- Subpage Header Banner -->
+          <div class="subpage-header-banner">
+            <div class="subpage-banner-info">
+              <h2 class="subpage-banner-title">
+                <i class="fas fa-chart-line text-mint"></i> Platform Financial Intelligence &amp; Regulatory Audits
+              </h2>
+              <p class="subpage-banner-subtitle">
+                System-wide MDR fee yields, dispute arbitration logs, statutory RBI compliance packets, and treasury liquidity.
+              </p>
+            </div>
+            <div class="subpage-banner-actions">
+              <select class="panel-select" id="adminReportPeriodSelect" aria-label="Report Period">
+                <option value="q4">Q4 2026 Fiscal</option>
+                <option value="mtd" selected>Month-to-Date (October)</option>
+                <option value="fy26">Fiscal Year 2026-27</option>
+              </select>
+              <button type="button" class="btn btn-sm btn-outline btn-download-statement">
+                <i class="fas fa-file-pdf"></i> Export Executive Dossier
+              </button>
+            </div>
+          </div>
+
+          <!-- KPI Mini Grid -->
+          <div class="kpi-mini-grid">
+            <div class="kpi-mini-card accent-mint">
+              <div class="kpi-mini-top">
+                <span class="kpi-mini-title">Net Platform MDR Yield</span>
+                <div class="kpi-mini-icon mint-bg"><i class="fas fa-percent"></i></div>
+              </div>
+              <div class="kpi-mini-value">1.42%</div>
+              <div class="kpi-mini-subtext positive">
+                <i class="fas fa-arrow-trend-up"></i> +0.08% via smart routing
               </div>
             </div>
-            <div class="grid-3">
-              <div class="card" style="padding: 1.5rem;">
-                <h4>Daily Settlement Summary</h4>
-                <p style="font-size: 0.85rem;">Consolidated gross settlements and gateway fees for Oct 22, 2026.</p>
-                <button type="button" class="btn btn-sm btn-outline btn-download-statement"><i class="fas fa-file-csv"></i> Download CSV</button>
+
+            <div class="kpi-mini-card accent-navy">
+              <div class="kpi-mini-top">
+                <span class="kpi-mini-title">Dispute &amp; Chargeback Rate</span>
+                <div class="kpi-mini-icon navy-bg"><i class="fas fa-scale-balanced"></i></div>
               </div>
-              <div class="card" style="padding: 1.5rem;">
-                <h4>GST &amp; Tax Reconciler</h4>
-                <p style="font-size: 0.85rem;">Input tax credits and output tax liability by state jurisdiction.</p>
-                <button type="button" class="btn btn-sm btn-outline btn-download-statement"><i class="fas fa-file-csv"></i> Download CSV</button>
+              <div class="kpi-mini-value">0.02%</div>
+              <div class="kpi-mini-subtext positive">
+                <i class="fas fa-shield"></i> Far below 0.65% network cap
               </div>
-              <div class="card" style="padding: 1.5rem;">
-                <h4>Dispute &amp; Chargeback Log</h4>
-                <p style="font-size: 0.85rem;">Complete audit report on resolved and active financial arbitrations.</p>
-                <button type="button" class="btn btn-sm btn-outline btn-download-statement"><i class="fas fa-file-csv"></i> Download CSV</button>
+            </div>
+
+            <div class="kpi-mini-card accent-blue">
+              <div class="kpi-mini-top">
+                <span class="kpi-mini-title">Escrow Liquidity Coverage</span>
+                <div class="kpi-mini-icon blue-bg"><i class="fas fa-building-shield"></i></div>
+              </div>
+              <div class="kpi-mini-value">104.8%</div>
+              <div class="kpi-mini-subtext">
+                <i class="fas fa-lock"></i> 100% collateralized in RBI banks
+              </div>
+            </div>
+          </div>
+
+          <!-- Two-Column Revenue Mix & Sentinel Rules -->
+          <div class="dashboard-two-col">
+            <!-- Left: Platform Revenue Breakdown by Rail -->
+            <div class="dashboard-panel">
+              <div class="panel-header">
+                <div>
+                  <h3 class="panel-title">Revenue by Product Channel</h3>
+                  <p style="font-size: 0.85rem; margin: 0; color: var(--navy-text-muted);">Interchange and service revenue attribution</p>
+                </div>
+              </div>
+
+              <div class="progress-rail-list">
+                <div class="progress-rail-item">
+                  <div class="progress-rail-label">
+                    <span><i class="fas fa-credit-card text-navy"></i> Payment Gateway Surcharges</span>
+                    <span>₹18,400 (46%)</span>
+                  </div>
+                  <div class="progress-rail-track">
+                    <div class="progress-rail-fill" style="width: 46%; background: var(--navy);"></div>
+                  </div>
+                </div>
+
+                <div class="progress-rail-item">
+                  <div class="progress-rail-label">
+                    <span><i class="fas fa-vault text-mint"></i> Virtual Accounts &amp; Escrow Fees</span>
+                    <span>₹11,200 (28%)</span>
+                  </div>
+                  <div class="progress-rail-track">
+                    <div class="progress-rail-fill" style="width: 28%; background: var(--mint);"></div>
+                  </div>
+                </div>
+
+                <div class="progress-rail-item">
+                  <div class="progress-rail-label">
+                    <span><i class="fas fa-bolt text-amber"></i> Instant Payout API Webhook Charges</span>
+                    <span>₹6,400 (16%)</span>
+                  </div>
+                  <div class="progress-rail-track">
+                    <div class="progress-rail-fill" style="width: 16%; background: #f59e0b;"></div>
+                  </div>
+                </div>
+
+                <div class="progress-rail-item">
+                  <div class="progress-rail-label">
+                    <span><i class="fas fa-globe text-blue"></i> Cross-Border Remittance FX Margins</span>
+                    <span>₹4,000 (10%)</span>
+                  </div>
+                  <div class="progress-rail-track">
+                    <div class="progress-rail-fill" style="width: 10%; background: #3b82f6;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Sentinel Risk Notes -->
+            <div class="dashboard-panel">
+              <div class="panel-header">
+                <div>
+                  <h3 class="panel-title">Sentinel Anomaly Detection</h3>
+                  <p style="font-size: 0.85rem; margin: 0; color: var(--navy-text-muted);">Autonomous risk sentinel evaluating live ledger</p>
+                </div>
+              </div>
+
+              <div style="display: flex; flex-direction: column; gap: 1rem;">
+                <div style="background: var(--white-surface); border-left: 3px solid var(--mint); padding: 1rem; border-radius: var(--radius-sm);">
+                  <div style="font-weight: 600; font-size: 0.9rem; color: var(--navy); margin-bottom: 0.2rem;">
+                    <i class="fas fa-shield-check text-mint"></i> Velocity Rules Engine Active
+                  </div>
+                  <p style="font-size: 0.82rem; color: var(--navy-text-muted); margin: 0; line-height: 1.5;">
+                    Evaluating 3 rules per transaction. 2 anomalous velocity attempts held in sandbox quarantine over the past 24 hours.
+                  </p>
+                </div>
+
+                <div style="background: var(--white-surface); border-left: 3px solid #3b82f6; padding: 1rem; border-radius: var(--radius-sm);">
+                  <div style="font-weight: 600; font-size: 0.9rem; color: var(--navy); margin-bottom: 0.2rem;">
+                    <i class="fas fa-file-shield text-blue"></i> Statutory Reserve Netting
+                  </div>
+                  <p style="font-size: 0.82rem; color: var(--navy-text-muted); margin: 0; line-height: 1.5;">
+                    Escrow balances verified by external trustee banks against Section 23A of Payment &amp; Settlement Systems Act.
+                  </p>
+                </div>
+
+                <div style="background: var(--white-surface); border-left: 3px solid #f59e0b; padding: 1rem; border-radius: var(--radius-sm);">
+                  <div style="font-weight: 600; font-size: 0.9rem; color: var(--navy); margin-bottom: 0.2rem;">
+                    <i class="fas fa-triangle-exclamation text-amber"></i> Zero Chargeback Arbitrations
+                  </div>
+                  <p style="font-size: 0.82rem; color: var(--navy-text-muted); margin: 0; line-height: 1.5;">
+                    Merchant dispute arbitrations resolved within 48h SLA under RBI Ombudsman fast-track resolution framework.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Regulatory Certified Dossiers -->
+          <div class="dashboard-panel" style="margin-top: 1.5rem;">
+            <div class="panel-header">
+              <div>
+                <h3 class="panel-title">Statutory Statements &amp; Regulatory Audit Slips</h3>
+                <p style="font-size: 0.85rem; margin: 0; color: var(--navy-text-muted);">
+                  Pre-compiled statutory packets for internal auditors and Reserve Bank of India examiners
+                </p>
+              </div>
+            </div>
+
+            <div class="grid-4">
+              <div class="card" style="padding: 1.4rem; display: flex; flex-direction: column;">
+                <div style="font-size: 1.4rem; color: var(--navy); margin-bottom: 0.6rem;"><i class="fas fa-file-invoice-dollar text-mint"></i></div>
+                <h4 style="font-size: 0.98rem; margin-bottom: 0.3rem;">Daily Settlement Summary</h4>
+                <p style="font-size: 0.8rem; color: var(--navy-text-muted); margin-bottom: 1rem;">Consolidated gross settlements and gateway fees for Oct 24, 2026.</p>
+                <button class="btn btn-sm btn-outline w-100 btn-download-statement" style="margin-top: auto;">
+                  <i class="fas fa-download"></i> Download CSV
+                </button>
+              </div>
+
+              <div class="card" style="padding: 1.4rem; display: flex; flex-direction: column;">
+                <div style="font-size: 1.4rem; color: #1a56db; margin-bottom: 0.6rem;"><i class="fas fa-file-contract"></i></div>
+                <h4 style="font-size: 0.98rem; margin-bottom: 0.3rem;">GST &amp; Tax Reconciler</h4>
+                <p style="font-size: 0.8rem; color: var(--navy-text-muted); margin-bottom: 1rem;">Input tax credits and output tax liability by state jurisdiction.</p>
+                <button class="btn btn-sm btn-outline w-100 btn-download-statement" style="margin-top: auto;">
+                  <i class="fas fa-download"></i> Download CSV
+                </button>
+              </div>
+
+              <div class="card" style="padding: 1.4rem; display: flex; flex-direction: column;">
+                <div style="font-size: 1.4rem; color: #b45309; margin-bottom: 0.6rem;"><i class="fas fa-scale-unbalanced"></i></div>
+                <h4 style="font-size: 0.98rem; margin-bottom: 0.3rem;">Dispute &amp; Chargeback Log</h4>
+                <p style="font-size: 0.8rem; color: var(--navy-text-muted); margin-bottom: 1rem;">Complete audit report on resolved and active financial arbitrations.</p>
+                <button class="btn btn-sm btn-outline w-100 btn-download-statement" style="margin-top: auto;">
+                  <i class="fas fa-download"></i> Download CSV
+                </button>
+              </div>
+
+              <div class="card" style="padding: 1.4rem; display: flex; flex-direction: column;">
+                <div style="font-size: 1.4rem; color: var(--mint); margin-bottom: 0.6rem;"><i class="fas fa-vault"></i></div>
+                <h4 style="font-size: 0.98rem; margin-bottom: 0.3rem;">RBI Escrow Netting Slip</h4>
+                <p style="font-size: 0.8rem; color: var(--navy-text-muted); margin-bottom: 1rem;">Daily trustee bank balance certifications and nodal ledger hashes.</p>
+                <button class="btn btn-sm btn-outline w-100 btn-download-statement" style="margin-top: auto;">
+                  <i class="fas fa-download"></i> Download CSV
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Automated Delivery Status -->
+          <div class="dashboard-panel" style="margin-top: 1.5rem;">
+            <div class="panel-header">
+              <div>
+                <h3 class="panel-title">Automated Treasury Reporting Dispatches</h3>
+                <p style="font-size: 0.85rem; margin: 0; color: var(--navy-text-muted);">Scheduled regulatory feeds dispatched automatically</p>
+              </div>
+              <div class="panel-actions">
+                <button type="button" class="btn btn-sm btn-accent" id="btnTriggerAdminAuditPack">
+                  <i class="fas fa-paper-plane"></i> Dispatch Treasury Packet Now
+                </button>
+              </div>
+            </div>
+
+            <div class="dashboard-two-col">
+              <div style="background: var(--white-surface); border: 1px solid var(--navy-border); border-radius: var(--radius-sm); padding: 1.2rem;">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
+                  <span style="font-weight: 600; font-size: 0.9rem; color: var(--navy);">
+                    <i class="fas fa-envelope text-mint"></i> Midnight Netting Dispatch
+                  </span>
+                  <span class="status-badge completed">Active</span>
+                </div>
+                <p style="font-size: 0.82rem; color: var(--navy-text-muted); margin-bottom: 0.5rem;">
+                  Daily consolidated clearing ledger emailed to <code>treasury-ops@stackly.finance</code> at 23:59 IST.
+                </p>
+                <small style="color: var(--navy-text-muted);"><i class="fas fa-clock"></i> Next dispatch: Today at 23:59 IST</small>
+              </div>
+
+              <div style="background: var(--white-surface); border: 1px solid var(--navy-border); border-radius: var(--radius-sm); padding: 1.2rem;">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
+                  <span style="font-weight: 600; font-size: 0.9rem; color: var(--navy);">
+                    <i class="fas fa-server text-blue"></i> Central Bank Compliance Feed
+                  </span>
+                  <span class="status-badge completed">200 OK</span>
+                </div>
+                <p style="font-size: 0.82rem; color: var(--navy-text-muted); margin-bottom: 0.5rem;">
+                  Direct automated reporting stream to RBI regulatory repository (Real-time telemetry).
+                </p>
+                <small style="color: var(--navy-text-muted);"><i class="fas fa-wifi"></i> Connection: Encrypted TLS 1.3 Node</small>
               </div>
             </div>
           </div>
