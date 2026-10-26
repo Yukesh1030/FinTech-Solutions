@@ -1,6 +1,6 @@
 /**
  * STACKLY FinTech - Admin Dashboard Logic (admin-dashboard.js)
- * 5 Menus, 3 KPI cards, Dynamic transaction filters, Volume chart, Refresh controls
+ * 5 Menus, Subpage Hash Routing, Real-Time Filters, Merchant Registry, Analytics, Settings
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -49,43 +49,76 @@ function initSidebarToggle() {
   }
 }
 
-// 5 Main Menus switching
-function initSidebarMenuSwitching() {
+/**
+ * Core View Switching with URL Hash Synchronization
+ */
+const adminViewTitleMap = {
+  dashboard: 'Admin Overview',
+  accounts: 'Accounts & Customers',
+  transactions: 'Transactions Ledger',
+  reports: 'Reports & Analytics',
+  settings: 'Settings'
+};
+
+function switchAdminView(targetMenu, updateHash = true) {
+  const validMenus = ['dashboard', 'accounts', 'transactions', 'reports', 'settings'];
+  const menuKey = validMenus.includes(targetMenu) ? targetMenu : 'dashboard';
+
   const menuItems = document.querySelectorAll('.dashboard-sidebar .sidebar-menu-item');
   const viewSections = document.querySelectorAll('.dashboard-view-section');
   const pageTitle = document.querySelector('.dashboard-title-heading');
 
+  // Update active state in sidebar
+  menuItems.forEach(item => {
+    if (item.getAttribute('data-menu') === menuKey) {
+      item.classList.add('active');
+    } else {
+      item.classList.remove('active');
+    }
+  });
+
+  // Update page heading
+  if (pageTitle && adminViewTitleMap[menuKey]) {
+    pageTitle.textContent = adminViewTitleMap[menuKey];
+  }
+
+  // Hide all sections and show target
+  viewSections.forEach(sec => (sec.style.display = 'none'));
+  const targetSec = document.getElementById('view-' + menuKey);
+  if (targetSec) {
+    targetSec.style.display = 'block';
+  } else {
+    const defaultSec = document.getElementById('view-dashboard');
+    if (defaultSec) defaultSec.style.display = 'block';
+  }
+
+  // Update URL Hash if requested
+  if (updateHash) {
+    if (window.history && window.history.pushState) {
+      window.history.pushState(null, '', '#' + menuKey);
+    } else {
+      window.location.hash = '#' + menuKey;
+    }
+  }
+
+  // Close mobile sidebar if open
+  const sidebar = document.querySelector('.dashboard-sidebar');
+  const overlay = document.querySelector('.dashboard-sidebar-overlay');
+  if (sidebar) sidebar.classList.remove('active');
+  if (overlay) overlay.classList.remove('active');
+
+  // Scroll to top
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function initSidebarMenuSwitching() {
+  const menuItems = document.querySelectorAll('.dashboard-sidebar .sidebar-menu-item');
   menuItems.forEach(item => {
     item.addEventListener('click', (e) => {
-      const link = item.querySelector('a');
       const targetMenu = item.getAttribute('data-menu');
       if (!targetMenu) return;
-
       e.preventDefault();
-      menuItems.forEach(i => i.classList.remove('active'));
-      item.classList.add('active');
-
-      if (pageTitle && link) {
-        const textNode = link.textContent.trim();
-        pageTitle.textContent = textNode;
-      }
-
-      // Hide all view sections, show target
-      viewSections.forEach(sec => sec.style.display = 'none');
-      const targetSec = document.getElementById('view-' + targetMenu);
-      if (targetSec) {
-        targetSec.style.display = 'block';
-      } else {
-        // Fallback default view
-        const defaultSec = document.getElementById('view-dashboard');
-        if (defaultSec) defaultSec.style.display = 'block';
-      }
-
-      // Close mobile sidebar if open
-      const sidebar = document.querySelector('.dashboard-sidebar');
-      const overlay = document.querySelector('.dashboard-sidebar-overlay');
-      if (sidebar) sidebar.classList.remove('active');
-      if (overlay) overlay.classList.remove('active');
+      switchAdminView(targetMenu, true);
     });
   });
 
@@ -93,28 +126,27 @@ function initSidebarMenuSwitching() {
   if (brandLogo) {
     brandLogo.addEventListener('click', (e) => {
       e.preventDefault();
-      menuItems.forEach(i => {
-        if (i.getAttribute('data-menu') === 'dashboard') {
-          i.classList.add('active');
-        } else {
-          i.classList.remove('active');
-        }
-      });
-      if (pageTitle) {
-        pageTitle.textContent = 'Admin Overview';
-      }
-      viewSections.forEach(sec => sec.style.display = 'none');
-      const defaultSec = document.getElementById('view-dashboard');
-      if (defaultSec) defaultSec.style.display = 'block';
-
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-
-      const sidebar = document.querySelector('.dashboard-sidebar');
-      const overlay = document.querySelector('.dashboard-sidebar-overlay');
-      if (sidebar) sidebar.classList.remove('active');
-      if (overlay) overlay.classList.remove('active');
+      switchAdminView('dashboard', true);
     });
   }
+}
+
+/**
+ * Hash Navigation for direct links (e.g. #accounts, #transactions, #reports, #settings)
+ */
+function initAdminHashRouting() {
+  const handleHashChange = () => {
+    const rawHash = window.location.hash.replace('#', '').trim().toLowerCase();
+    if (rawHash && ['dashboard', 'accounts', 'transactions', 'reports', 'settings'].includes(rawHash)) {
+      switchAdminView(rawHash, false);
+    }
+  };
+
+  // Run on initial load
+  handleHashChange();
+
+  // Listen for hash changes
+  window.addEventListener('hashchange', handleHashChange);
 }
 
 // Transaction Volume Chart
