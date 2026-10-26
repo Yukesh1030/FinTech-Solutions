@@ -316,3 +316,345 @@ window.viewTxnDetail = function(ref, type, amount, status) {
   modal.classList.add('open');
   document.body.style.overflow = 'hidden';
 };
+
+/**
+ * ============================================================================
+ * SUBPAGE 1: ACCOUNTS & CUSTOMERS FEATURES
+ * ============================================================================
+ */
+function initAccountsFeatures() {
+  const searchInput = document.getElementById('merchantSearchInput');
+  const kycFilter = document.getElementById('merchantKycFilter');
+  const statusFilter = document.getElementById('merchantStatusFilter');
+  const riskFilter = document.getElementById('merchantRiskFilter');
+  const resetBtn = document.getElementById('btnResetMerchantFilters');
+  const emptyResetBtn = document.getElementById('btnEmptyResetMerchants');
+  const emptyState = document.getElementById('merchantEmptyState');
+  const tableBody = document.getElementById('adminMerchantTableBody');
+
+  if (!tableBody) return;
+  const rows = tableBody.querySelectorAll('tr');
+
+  const applyMerchantFilters = () => {
+    const q = (searchInput ? searchInput.value : '').toLowerCase().trim();
+    const kycVal = kycFilter ? kycFilter.value : 'all';
+    const statusVal = statusFilter ? statusFilter.value : 'all';
+    const riskVal = riskFilter ? riskFilter.value : 'all';
+
+    let visibleCount = 0;
+
+    rows.forEach(row => {
+      const rowText = row.textContent.toLowerCase();
+      const rowKyc = row.getAttribute('data-kyc') || '';
+      const rowStatus = row.getAttribute('data-status') || '';
+      const rowRisk = row.getAttribute('data-risk') || '';
+
+      const matchesSearch = !q || rowText.includes(q);
+      const matchesKyc = kycVal === 'all' || rowKyc === kycVal;
+      const matchesStatus = statusVal === 'all' || rowStatus === statusVal;
+      const matchesRisk = riskVal === 'all' || rowRisk === riskVal;
+
+      if (matchesSearch && matchesKyc && matchesStatus && matchesRisk) {
+        row.style.display = '';
+        visibleCount++;
+      } else {
+        row.style.display = 'none';
+      }
+    });
+
+    if (emptyState) {
+      emptyState.style.display = visibleCount === 0 ? 'block' : 'none';
+    }
+  };
+
+  if (searchInput) searchInput.addEventListener('input', applyMerchantFilters);
+  if (kycFilter) kycFilter.addEventListener('change', applyMerchantFilters);
+  if (statusFilter) statusFilter.addEventListener('change', applyMerchantFilters);
+  if (riskFilter) riskFilter.addEventListener('change', applyMerchantFilters);
+
+  const resetAllMerchantFilters = () => {
+    if (searchInput) searchInput.value = '';
+    if (kycFilter) kycFilter.value = 'all';
+    if (statusFilter) statusFilter.value = 'all';
+    if (riskFilter) riskFilter.value = 'all';
+    applyMerchantFilters();
+    if (typeof showToast === 'function') {
+      showToast('Merchant roster filters reset.');
+    }
+  };
+
+  if (resetBtn) resetBtn.addEventListener('click', resetAllMerchantFilters);
+  if (emptyResetBtn) emptyResetBtn.addEventListener('click', resetAllMerchantFilters);
+
+  // Merchant inspection modal helper
+  window.inspectMerchant = function(id, name, kyc, iban, floatVal, status) {
+    const modal = document.getElementById('merchantInspectModal');
+    if (!modal) return;
+    document.getElementById('merchantModalId').textContent = id;
+    document.getElementById('merchantModalName').textContent = name;
+    document.getElementById('merchantModalKyc').textContent = kyc;
+    document.getElementById('merchantModalIban').textContent = iban;
+    document.getElementById('merchantModalFloat').textContent = floatVal;
+    const statusEl = document.getElementById('merchantModalStatus');
+    if (statusEl) {
+      statusEl.textContent = status;
+      statusEl.className = status === 'Active' ? 'status-badge completed' : 'status-badge pending';
+    }
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  };
+
+  const toggleStatusBtn = document.getElementById('btnToggleMerchantStatus');
+  if (toggleStatusBtn) {
+    toggleStatusBtn.addEventListener('click', () => {
+      const statusEl = document.getElementById('merchantModalStatus');
+      if (statusEl) {
+        const isCurrentActive = statusEl.textContent === 'Active';
+        statusEl.textContent = isCurrentActive ? 'Restricted' : 'Active';
+        statusEl.className = isCurrentActive ? 'status-badge pending' : 'status-badge completed';
+        if (typeof showToast === 'function') {
+          showToast(`Merchant account status toggled to: ${statusEl.textContent}`);
+        }
+      }
+    });
+  }
+
+  // Onboard Merchant trigger
+  const onboardBtn = document.getElementById('btnAdminOnboardMerchant');
+  if (onboardBtn) {
+    onboardBtn.addEventListener('click', () => {
+      if (typeof showToast === 'function') {
+        showToast('Initiating Enterprise Merchant Onboarding Wizard (Sandbox Mode)...');
+      }
+    });
+  }
+
+  // Run KYC Batch trigger
+  const kycBatchBtn = document.getElementById('btnRunKycBatch');
+  if (kycBatchBtn) {
+    kycBatchBtn.addEventListener('click', () => {
+      const icon = kycBatchBtn.querySelector('i');
+      if (icon) icon.classList.add('spinning');
+      kycBatchBtn.disabled = true;
+
+      setTimeout(() => {
+        if (icon) icon.classList.remove('spinning');
+        kycBatchBtn.disabled = false;
+        if (typeof showToast === 'function') {
+          showToast('KYC automated OCR queue processed: 5 approved, 2 held for verification.');
+        }
+      }, 700);
+    });
+  }
+}
+
+/**
+ * ============================================================================
+ * SUBPAGE 2: PLATFORM TRANSACTIONS CLEARING FEATURES
+ * ============================================================================
+ */
+function initAdminLedgerFeatures() {
+  const searchInput = document.getElementById('adminFullTxnSearch');
+  const railFilter = document.getElementById('adminRailFilter');
+  const statusFilter = document.getElementById('adminStatusFilter');
+  const volumeFilter = document.getElementById('adminVolumeFilter');
+  const resetBtn = document.getElementById('btnResetAdminTxnFilters');
+  const emptyResetBtn = document.getElementById('btnEmptyResetAdminTxns');
+  const emptyState = document.getElementById('adminTxnEmptyState');
+  const tableBody = document.getElementById('adminMasterTxnBody');
+
+  if (!tableBody) return;
+  const rows = tableBody.querySelectorAll('tr');
+
+  const applyMasterTxnFilters = () => {
+    const q = (searchInput ? searchInput.value : '').toLowerCase().trim();
+    const railVal = railFilter ? railFilter.value : 'all';
+    const statusVal = statusFilter ? statusFilter.value : 'all';
+    const volumeVal = volumeFilter ? volumeFilter.value : 'all';
+
+    let visibleCount = 0;
+
+    rows.forEach(row => {
+      const text = row.textContent.toLowerCase();
+      const rail = row.getAttribute('data-rail') || '';
+      const status = row.getAttribute('data-status') || '';
+      const vol = row.getAttribute('data-volume') || '';
+
+      const matchesSearch = !q || text.includes(q);
+      const matchesRail = railVal === 'all' || rail === railVal;
+      const matchesStatus = statusVal === 'all' || status === statusVal;
+      const matchesVol = volumeVal === 'all' || vol === volumeVal;
+
+      if (matchesSearch && matchesRail && matchesStatus && matchesVol) {
+        row.style.display = '';
+        visibleCount++;
+      } else {
+        row.style.display = 'none';
+      }
+    });
+
+    if (emptyState) {
+      emptyState.style.display = visibleCount === 0 ? 'block' : 'none';
+    }
+  };
+
+  if (searchInput) searchInput.addEventListener('input', applyMasterTxnFilters);
+  if (railFilter) railFilter.addEventListener('change', applyMasterTxnFilters);
+  if (statusFilter) statusFilter.addEventListener('change', applyMasterTxnFilters);
+  if (volumeFilter) volumeFilter.addEventListener('change', applyMasterTxnFilters);
+
+  const resetAllAdminTxnFilters = () => {
+    if (searchInput) searchInput.value = '';
+    if (railFilter) railFilter.value = 'all';
+    if (statusFilter) statusFilter.value = 'all';
+    if (volumeFilter) volumeFilter.value = 'all';
+    applyMasterTxnFilters();
+    if (typeof showToast === 'function') {
+      showToast('Clearing ledger filters reset.');
+    }
+  };
+
+  if (resetBtn) resetBtn.addEventListener('click', resetAllAdminTxnFilters);
+  if (emptyResetBtn) emptyResetBtn.addEventListener('click', resetAllAdminTxnFilters);
+
+  // Force Clearing Batch trigger
+  const forceClearBtn = document.getElementById('btnAdminForceClear');
+  if (forceClearBtn) {
+    forceClearBtn.addEventListener('click', () => {
+      forceClearBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Clearing Batch...';
+      forceClearBtn.disabled = true;
+
+      setTimeout(() => {
+        forceClearBtn.innerHTML = '<i class="fas fa-bolt"></i> Execute Clearing Batch';
+        forceClearBtn.disabled = false;
+        if (typeof showToast === 'function') {
+          showToast('Automated clearing cycle executed: 48 settlements batched to RBI nodal accounts.');
+        }
+      }, 750);
+    });
+  }
+
+  // Test switch heartbeats
+  const pingSwitchesBtn = document.getElementById('btnTestSwitchHeartbeats');
+  if (pingSwitchesBtn) {
+    pingSwitchesBtn.addEventListener('click', () => {
+      const icon = pingSwitchesBtn.querySelector('i');
+      if (icon) icon.classList.add('spinning');
+      pingSwitchesBtn.disabled = true;
+
+      setTimeout(() => {
+        if (icon) icon.classList.remove('spinning');
+        pingSwitchesBtn.disabled = false;
+        if (typeof showToast === 'function') {
+          showToast('Settlement switches healthy: NPCI (28ms), RBI (94ms), Card Core (112ms).');
+        }
+      }, 600);
+    });
+  }
+}
+
+/**
+ * ============================================================================
+ * SUBPAGE 3: PLATFORM REPORTS & ANALYTICS FEATURES
+ * ============================================================================
+ */
+function initAdminReportsFeatures() {
+  const periodSelect = document.getElementById('adminReportPeriodSelect');
+  if (periodSelect) {
+    periodSelect.addEventListener('change', () => {
+      const label = periodSelect.options[periodSelect.selectedIndex].text;
+      if (typeof showToast === 'function') {
+        showToast(`Reporting window adjusted to: ${label}`);
+      }
+    });
+  }
+
+  const dispatchAuditBtn = document.getElementById('btnTriggerAdminAuditPack');
+  if (dispatchAuditBtn) {
+    dispatchAuditBtn.addEventListener('click', () => {
+      dispatchAuditBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Dispatching...';
+      dispatchAuditBtn.disabled = true;
+
+      setTimeout(() => {
+        dispatchAuditBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Dispatch Treasury Packet Now';
+        dispatchAuditBtn.disabled = false;
+        if (typeof showToast === 'function') {
+          showToast('Regulatory treasury packet compiled & emailed to treasury-ops@stackly.finance.');
+        }
+      }, 700);
+    });
+  }
+}
+
+/**
+ * ============================================================================
+ * SUBPAGE 4: SYSTEM SETTINGS & GOVERNANCE FEATURES
+ * ============================================================================
+ */
+function initAdminSettingsFeatures() {
+  // Toggle Master Key visibility
+  const toggleKeyBtn = document.getElementById('btnToggleMasterKey');
+  const masterKeyInput = document.getElementById('masterAdminApiKey');
+  if (toggleKeyBtn && masterKeyInput) {
+    toggleKeyBtn.addEventListener('click', () => {
+      const isPassword = masterKeyInput.type === 'password';
+      masterKeyInput.type = isPassword ? 'text' : 'password';
+      const icon = toggleKeyBtn.querySelector('i');
+      if (icon) {
+        icon.className = isPassword ? 'fas fa-eye-slash' : 'fas fa-eye';
+      }
+    });
+  }
+
+  // Copy Master Key
+  const copyKeyBtn = document.getElementById('btnCopyMasterKey');
+  if (copyKeyBtn && masterKeyInput) {
+    copyKeyBtn.addEventListener('click', () => {
+      navigator.clipboard?.writeText(masterKeyInput.value).then(() => {
+        if (typeof showToast === 'function') {
+          showToast('Master root access token copied to clipboard!');
+        }
+      });
+    });
+  }
+
+  // Rotate master signing secret
+  const rotateSecretBtn = document.getElementById('btnRotateMasterSecret');
+  if (rotateSecretBtn) {
+    rotateSecretBtn.addEventListener('click', () => {
+      if (typeof showToast === 'function') {
+        showToast('HMAC-SHA256 master signing secret rotated and updated in HSM vault.');
+      }
+    });
+  }
+
+  // Save Risk Governance
+  const saveRiskBtn = document.getElementById('btnSaveRiskGovernance');
+  if (saveRiskBtn) {
+    saveRiskBtn.addEventListener('click', () => {
+      if (typeof showToast === 'function') {
+        showToast('Risk governance and velocity threshold rules saved successfully.');
+      }
+    });
+  }
+
+  // Save All Admin Settings
+  const saveAllBtn = document.getElementById('btnSaveAdminSettings');
+  if (saveAllBtn) {
+    saveAllBtn.addEventListener('click', () => {
+      if (typeof showToast === 'function') {
+        showToast('Platform engine configuration and webhook policies saved.');
+      }
+    });
+  }
+
+  // Force logout other sessions
+  const forceLogoutBtn = document.getElementById('btnForceLogoutAdmins');
+  if (forceLogoutBtn) {
+    forceLogoutBtn.addEventListener('click', () => {
+      if (typeof showToast === 'function') {
+        showToast('1 remote administrator session terminated. Only current device authorized.');
+      }
+    });
+  }
+}

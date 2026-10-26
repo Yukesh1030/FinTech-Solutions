@@ -327,53 +327,334 @@
         <!-- ==========================================================================
              VIEW: ACCOUNTS & CUSTOMERS
              ========================================================================== -->
+        <!-- ==========================================================================
+             VIEW: ACCOUNTS & CUSTOMERS
+             ========================================================================== -->
         <div class="dashboard-view-section" id="view-accounts" style="display: none;">
+          <!-- Subpage Header Banner -->
+          <div class="subpage-header-banner">
+            <div class="subpage-banner-info">
+              <h2 class="subpage-banner-title">
+                <i class="fas fa-users-gear text-mint"></i> Enterprise Merchant &amp; Customer Registry
+              </h2>
+              <p class="subpage-banner-subtitle">
+                Supervise merchant KYC verification lifecycles, institutional liquidity pools, risk limits, and account status controls.
+              </p>
+            </div>
+            <div class="subpage-banner-actions">
+              <button type="button" class="btn btn-sm btn-accent" id="btnAdminOnboardMerchant">
+                <i class="fas fa-user-plus"></i> Onboard Merchant
+              </button>
+              <button type="button" class="btn btn-sm btn-outline btn-download-statement">
+                <i class="fas fa-file-export"></i> Export Merchant Roster
+              </button>
+            </div>
+          </div>
+
+          <!-- KPI Mini Grid -->
+          <div class="kpi-mini-grid">
+            <div class="kpi-mini-card accent-mint">
+              <div class="kpi-mini-top">
+                <span class="kpi-mini-title">Active Merchant Entities</span>
+                <div class="kpi-mini-icon mint-bg"><i class="fas fa-building-circle-check"></i></div>
+              </div>
+              <div class="kpi-mini-value" id="kpiAdminMerchants">418</div>
+              <div class="kpi-mini-subtext positive">
+                <i class="fas fa-arrow-trend-up"></i> +8 onboarded this week
+              </div>
+            </div>
+
+            <div class="kpi-mini-card accent-navy">
+              <div class="kpi-mini-top">
+                <span class="kpi-mini-title">Total Merchant Liquidity</span>
+                <div class="kpi-mini-icon navy-bg"><i class="fas fa-vault text-mint"></i></div>
+              </div>
+              <div class="kpi-mini-value">₹4.82 Cr</div>
+              <div class="kpi-mini-subtext">
+                <i class="fas fa-shield-halved"></i> 100% escrow collateralized
+              </div>
+            </div>
+
+            <div class="kpi-mini-card accent-amber">
+              <div class="kpi-mini-top">
+                <span class="kpi-mini-title">Pending KYC Verification</span>
+                <div class="kpi-mini-icon amber-bg"><i class="fas fa-id-card-clip"></i></div>
+              </div>
+              <div class="kpi-mini-value">7 Review</div>
+              <div class="kpi-mini-subtext">
+                <i class="fas fa-clock" style="color: #b45309;"></i> Avg SLA turnaround: 3.2 hrs
+              </div>
+            </div>
+
+            <div class="kpi-mini-card accent-blue">
+              <div class="kpi-mini-top">
+                <span class="kpi-mini-title">Velocity Quarantined</span>
+                <div class="kpi-mini-icon blue-bg"><i class="fas fa-triangle-exclamation"></i></div>
+              </div>
+              <div class="kpi-mini-value">2 Held</div>
+              <div class="kpi-mini-subtext negative">
+                <i class="fas fa-hand"></i> Requires compliance signoff
+              </div>
+            </div>
+          </div>
+
+          <!-- Merchant Filter & Search Toolbar -->
+          <div class="client-filter-toolbar">
+            <div class="filter-search-wrap">
+              <i class="fas fa-magnifying-glass"></i>
+              <input type="text" id="merchantSearchInput" class="filter-search-input" placeholder="Search merchant name, Account ID, assigned IBAN..." aria-label="Search merchants">
+            </div>
+            <div class="filter-controls-group">
+              <select id="merchantKycFilter" class="filter-select" aria-label="Filter KYC status">
+                <option value="all">All KYC Tiers</option>
+                <option value="tier3">Tier 3 (Enterprise)</option>
+                <option value="tier2">Tier 2 (Standard)</option>
+                <option value="under_review">Under Review</option>
+              </select>
+              <select id="merchantStatusFilter" class="filter-select" aria-label="Filter account status">
+                <option value="all">All Account Statuses</option>
+                <option value="active">Active</option>
+                <option value="restricted">Restricted / Held</option>
+                <option value="pending">Pending Activation</option>
+              </select>
+              <select id="merchantRiskFilter" class="filter-select" aria-label="Filter risk level">
+                <option value="all">All Risk Profiles</option>
+                <option value="low">Low Risk</option>
+                <option value="medium">Medium Risk</option>
+                <option value="high">High Watchlist</option>
+              </select>
+              <button type="button" class="btn btn-sm btn-outline" id="btnResetMerchantFilters" title="Reset Filters">
+                <i class="fas fa-rotate-left"></i> Reset
+              </button>
+            </div>
+          </div>
+
+          <!-- Merchant Directory Table Panel -->
           <div class="dashboard-panel">
             <div class="panel-header">
               <div>
-                <h2 class="panel-title">Customer &amp; Merchant Directory</h2>
-                <p style="font-size: 0.85rem; margin: 0;">Registered accounts and treasury limits</p>
+                <h3 class="panel-title">Institutional Merchant Directory</h3>
+                <p style="font-size: 0.85rem; margin: 0; color: var(--navy-text-muted);">
+                  Corporate client accounts, assigned virtual settlement IBANs, and transaction limits
+                </p>
+              </div>
+              <div class="panel-actions">
+                <span class="live-pulse-badge">
+                  <span class="live-pulse-dot"></span> 418 Monitored
+                </span>
               </div>
             </div>
+
             <div class="table-responsive">
-              <table class="data-table">
+              <table class="data-table" id="adminMerchantTable">
                 <thead>
                   <tr>
                     <th>Account ID</th>
-                    <th>Customer Name</th>
-                    <th>KYC Status</th>
-                    <th>Assigned IBAN</th>
-                    <th>Total Volume</th>
-                    <th>Status</th>
+                    <th>Merchant Entity &amp; Sector</th>
+                    <th>KYC Tier</th>
+                    <th>Assigned Virtual IBAN</th>
+                    <th>Float Balance</th>
+                    <th>30-Day Volume</th>
+                    <th>Risk Rating</th>
+                    <th>Action</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
+                <tbody id="adminMerchantTableBody">
+                  <tr data-kyc="tier3" data-status="active" data-risk="low">
                     <td><strong>ACC-1082</strong></td>
-                    <td>Apex Global Technologies Ltd.</td>
-                    <td><span class="status-badge completed">Verified</span></td>
+                    <td>
+                      <strong style="display:block; color:var(--navy);">Apex Global Technologies Ltd.</strong>
+                      <small style="color:var(--navy-text-muted);">B2B SaaS / IT Services</small>
+                    </td>
+                    <td><span class="status-badge completed"><i class="fas fa-check"></i> Tier 3 Full</span></td>
                     <td><code>IN82STAK001928401</code></td>
+                    <td><strong class="text-mint">₹14.20 Lakhs</strong></td>
                     <td>₹18,40,000</td>
-                    <td><span class="status-badge completed">Active</span></td>
+                    <td><span class="status-badge completed">Low Risk</span></td>
+                    <td>
+                      <button class="btn btn-sm btn-outline" onclick="inspectMerchant('ACC-1082', 'Apex Global Technologies Ltd.', 'Tier 3 Full', 'IN82STAK001928401', '₹14.20 Lakhs', 'Active')">Inspect</button>
+                    </td>
                   </tr>
-                  <tr>
+                  <tr data-kyc="tier3" data-status="active" data-risk="low">
                     <td><strong>ACC-1083</strong></td>
-                    <td>CloudScale Digital LLP</td>
-                    <td><span class="status-badge completed">Verified</span></td>
+                    <td>
+                      <strong style="display:block; color:var(--navy);">CloudScale Digital LLP</strong>
+                      <small style="color:var(--navy-text-muted);">Cloud Hosting &amp; DevOps</small>
+                    </td>
+                    <td><span class="status-badge completed"><i class="fas fa-check"></i> Tier 3 Full</span></td>
                     <td><code>IN82STAK001928402</code></td>
+                    <td><strong class="text-mint">₹8.50 Lakhs</strong></td>
                     <td>₹9,25,000</td>
-                    <td><span class="status-badge completed">Active</span></td>
+                    <td><span class="status-badge completed">Low Risk</span></td>
+                    <td>
+                      <button class="btn btn-sm btn-outline" onclick="inspectMerchant('ACC-1083', 'CloudScale Digital LLP', 'Tier 3 Full', 'IN82STAK001928402', '₹8.50 Lakhs', 'Active')">Inspect</button>
+                    </td>
                   </tr>
-                  <tr>
+                  <tr data-kyc="under_review" data-status="restricted" data-risk="high">
                     <td><strong>ACC-1084</strong></td>
-                    <td>Zenith Logistics Solutions</td>
-                    <td><span class="status-badge pending">Under Review</span></td>
+                    <td>
+                      <strong style="display:block; color:var(--navy);">Zenith Logistics Solutions</strong>
+                      <small style="color:var(--navy-text-muted);">Freight &amp; Cargo Fleet</small>
+                    </td>
+                    <td><span class="status-badge pending"><i class="fas fa-hourglass-half"></i> Under Review</span></td>
                     <td><code>IN82STAK001928403</code></td>
+                    <td><strong>₹2.10 Lakhs</strong></td>
                     <td>₹2,80,000</td>
-                    <td><span class="status-badge pending">Restricted</span></td>
+                    <td><span class="status-badge failed">High Watchlist</span></td>
+                    <td>
+                      <button class="btn btn-sm btn-accent" onclick="inspectMerchant('ACC-1084', 'Zenith Logistics Solutions', 'Under Review', 'IN82STAK001928403', '₹2.10 Lakhs', 'Restricted')">Audit</button>
+                    </td>
+                  </tr>
+                  <tr data-kyc="tier2" data-status="active" data-risk="medium">
+                    <td><strong>ACC-1085</strong></td>
+                    <td>
+                      <strong style="display:block; color:var(--navy);">HyperPay Retail Hub India</strong>
+                      <small style="color:var(--navy-text-muted);">E-Commerce Direct Gateway</small>
+                    </td>
+                    <td><span class="status-badge completed"><i class="fas fa-check"></i> Tier 2 Standard</span></td>
+                    <td><code>IN82STAK001928404</code></td>
+                    <td><strong class="text-mint">₹22.40 Lakhs</strong></td>
+                    <td>₹34,10,000</td>
+                    <td><span class="status-badge pending">Medium</span></td>
+                    <td>
+                      <button class="btn btn-sm btn-outline" onclick="inspectMerchant('ACC-1085', 'HyperPay Retail Hub India', 'Tier 2 Standard', 'IN82STAK001928404', '₹22.40 Lakhs', 'Active')">Inspect</button>
+                    </td>
+                  </tr>
+                  <tr data-kyc="tier3" data-status="active" data-risk="low">
+                    <td><strong>ACC-1086</strong></td>
+                    <td>
+                      <strong style="display:block; color:var(--navy);">NeoBank Infrastructure Corp</strong>
+                      <small style="color:var(--navy-text-muted);">Embedded Banking APIs</small>
+                    </td>
+                    <td><span class="status-badge completed"><i class="fas fa-check"></i> Tier 3 Full</span></td>
+                    <td><code>IN82STAK001928405</code></td>
+                    <td><strong class="text-mint">₹54.10 Lakhs</strong></td>
+                    <td>₹88,40,000</td>
+                    <td><span class="status-badge completed">Low Risk</span></td>
+                    <td>
+                      <button class="btn btn-sm btn-outline" onclick="inspectMerchant('ACC-1086', 'NeoBank Infrastructure Corp', 'Tier 3 Full', 'IN82STAK001928405', '₹54.10 Lakhs', 'Active')">Inspect</button>
+                    </td>
+                  </tr>
+                  <tr data-kyc="tier2" data-status="restricted" data-risk="medium">
+                    <td><strong>ACC-1087</strong></td>
+                    <td>
+                      <strong style="display:block; color:var(--navy);">Titan Capital Asset Managers</strong>
+                      <small style="color:var(--navy-text-muted);">Wealth &amp; Portfolio Escrow</small>
+                    </td>
+                    <td><span class="status-badge pending"><i class="fas fa-shield"></i> Re-Verification</span></td>
+                    <td><code>IN82STAK001928406</code></td>
+                    <td><strong>₹11.80 Lakhs</strong></td>
+                    <td>₹15,20,000</td>
+                    <td><span class="status-badge pending">Medium</span></td>
+                    <td>
+                      <button class="btn btn-sm btn-outline" onclick="inspectMerchant('ACC-1087', 'Titan Capital Asset Managers', 'Tier 2 Standard', 'IN82STAK001928406', '₹11.80 Lakhs', 'Restricted')">Audit</button>
+                    </td>
                   </tr>
                 </tbody>
               </table>
+            </div>
+
+            <div id="merchantEmptyState" style="display: none; text-align: center; padding: 2.5rem 1rem;">
+              <i class="fas fa-user-slash" style="font-size: 2.2rem; color: var(--navy-text-muted); margin-bottom: 0.8rem;"></i>
+              <h4 style="color: var(--navy); margin-bottom: 0.3rem;">No merchant accounts matched criteria</h4>
+              <p style="font-size: 0.86rem; color: var(--navy-text-muted); margin-bottom: 1rem;">Try clearing your search query or broadening the KYC and risk filters.</p>
+              <button type="button" class="btn btn-sm btn-outline" id="btnEmptyResetMerchants">Reset Filters</button>
+            </div>
+
+            <div class="table-scroll-hint">
+              <i class="fas fa-arrows-left-right"></i> Scroll table horizontally to view assigned virtual IBANs &amp; liquidity balances
+            </div>
+          </div>
+
+          <!-- Secondary Two-Column: Merchant Industry Share & Onboarding SLA Tracker -->
+          <div class="dashboard-two-col" style="margin-top: 1.5rem;">
+            <!-- Left: Industry Distribution -->
+            <div class="dashboard-panel">
+              <div class="panel-header">
+                <div>
+                  <h3 class="panel-title">Merchant Sector Allocation</h3>
+                  <p style="font-size: 0.85rem; margin: 0; color: var(--navy-text-muted);">Distribution of onboarded corporate clients</p>
+                </div>
+              </div>
+
+              <div class="progress-rail-list">
+                <div class="progress-rail-item">
+                  <div class="progress-rail-label">
+                    <span><i class="fas fa-cloud text-navy"></i> B2B SaaS &amp; Cloud Infrastructure</span>
+                    <span>175 Merchants (42%)</span>
+                  </div>
+                  <div class="progress-rail-track">
+                    <div class="progress-rail-fill" style="width: 42%; background: var(--navy);"></div>
+                  </div>
+                </div>
+
+                <div class="progress-rail-item">
+                  <div class="progress-rail-label">
+                    <span><i class="fas fa-cart-shopping text-mint"></i> E-Commerce &amp; Digital Retail</span>
+                    <span>117 Merchants (28%)</span>
+                  </div>
+                  <div class="progress-rail-track">
+                    <div class="progress-rail-fill" style="width: 28%; background: var(--mint);"></div>
+                  </div>
+                </div>
+
+                <div class="progress-rail-item">
+                  <div class="progress-rail-label">
+                    <span><i class="fas fa-truck-fast"></i> Logistics, Fleet &amp; Supply Chain</span>
+                    <span>75 Merchants (18%)</span>
+                  </div>
+                  <div class="progress-rail-track">
+                    <div class="progress-rail-fill" style="width: 18%; background: #f59e0b;"></div>
+                  </div>
+                </div>
+
+                <div class="progress-rail-item">
+                  <div class="progress-rail-label">
+                    <span><i class="fas fa-landmark"></i> Financial Advisory &amp; NBFC Portals</span>
+                    <span>51 Merchants (12%)</span>
+                  </div>
+                  <div class="progress-rail-track">
+                    <div class="progress-rail-fill" style="width: 12%; background: #3b82f6;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Onboarding SLA Tracker -->
+            <div class="dashboard-panel">
+              <div class="panel-header">
+                <div>
+                  <h3 class="panel-title">KYC Verification SLA</h3>
+                  <p style="font-size: 0.85rem; margin: 0; color: var(--navy-text-muted);">Autonomous OCR &amp; MCA verification engine</p>
+                </div>
+              </div>
+
+              <div class="reconciliation-card">
+                <div>
+                  <div class="reconcile-metric-row">
+                    <span style="color: var(--navy-text-muted);">OCR Document Engine:</span>
+                    <span class="status-badge completed"><i class="fas fa-check"></i> Operational (99.4%)</span>
+                  </div>
+                  <div class="reconcile-metric-row">
+                    <span style="color: var(--navy-text-muted);">Average KYC Turnaround:</span>
+                    <strong style="color: var(--navy);">3.2 Hours (SLA &lt; 6h)</strong>
+                  </div>
+                  <div class="reconcile-metric-row">
+                    <span style="color: var(--navy-text-muted);">Automated Tax Match:</span>
+                    <strong style="color: #0b7252;">100% NSDL / GSTIN Verified</strong>
+                  </div>
+                  <div class="reconcile-metric-row">
+                    <span style="color: var(--navy-text-muted);">Flagged Applications:</span>
+                    <strong style="color: #b45309;">2 Requiring Manual Review</strong>
+                  </div>
+                </div>
+
+                <div style="margin-top: 1.2rem;">
+                  <button type="button" class="btn btn-sm btn-outline w-100" id="btnRunKycBatch">
+                    <i class="fas fa-id-card"></i> Process KYC Verification Queue
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -514,9 +795,30 @@
         <div>Amount: <strong id="modalTxnAmount" class="text-navy">₹4,500</strong></div>
         <div>Status: <span id="modalTxnStatus" class="text-mint font-weight-bold">Completed</span></div>
         <div>Channel: <span>UPI Fast Settlement (Simulated)</span></div>
-        <div>Timestamp: <span>2026-10-22 13:06:17</span></div>
+        <div>Timestamp: <span>2026-10-24 13:06:17</span></div>
       </div>
       <button type="button" class="btn btn-primary modal-close-trigger w-100">Close Record</button>
+    </div>
+  </div>
+
+  <!-- Merchant Detail Modal -->
+  <div class="modal-overlay" id="merchantInspectModal" role="dialog" aria-modal="true" aria-label="Merchant Account Details">
+    <div class="modal-box">
+      <button type="button" class="modal-close-btn" aria-label="Close modal"><i class="fas fa-times"></i></button>
+      <h3 style="margin-bottom: 0.5rem; font-size: 1.35rem; color: var(--navy);">Merchant Profile</h3>
+      <p style="font-size: 0.85rem; color: var(--navy-text-muted); margin-bottom: 1.2rem;">Institutional Merchant Account Record</p>
+      <div style="background: var(--white-surface); border-radius: var(--radius-sm); padding: 1.2rem; margin-bottom: 1.5rem; line-height: 1.9; font-size: 0.9rem;">
+        <div>Account ID: <strong id="merchantModalId">ACC-1082</strong></div>
+        <div>Entity Name: <span id="merchantModalName">Apex Global Technologies Ltd.</span></div>
+        <div>KYC Verification: <span id="merchantModalKyc" class="text-mint font-weight-bold">Tier 3 Full</span></div>
+        <div>Assigned IBAN: <code id="merchantModalIban">IN82STAK001928401</code></div>
+        <div>Liquidity Pool: <strong id="merchantModalFloat" class="text-navy">₹14.20 Lakhs</strong></div>
+        <div>Account Status: <span id="merchantModalStatus" class="status-badge completed">Active</span></div>
+      </div>
+      <div style="display: flex; gap: 0.8rem;">
+        <button type="button" class="btn btn-outline modal-close-trigger w-50">Close</button>
+        <button type="button" class="btn btn-accent w-50" id="btnToggleMerchantStatus">Toggle Status</button>
+      </div>
     </div>
   </div>
 
