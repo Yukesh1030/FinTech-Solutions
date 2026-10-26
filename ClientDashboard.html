@@ -298,58 +298,328 @@
              VIEW: TRANSACTIONS
              ========================================================================== -->
         <div class="dashboard-view-section" id="view-transactions" style="display: none;">
+          <!-- Subpage Header Banner -->
+          <div class="subpage-header-banner">
+            <div class="subpage-banner-info">
+              <h2 class="subpage-banner-title">
+                <i class="fas fa-money-bill-transfer text-mint"></i> Real-Time Settlement &amp; Ledger
+              </h2>
+              <p class="subpage-banner-subtitle">
+                Automated multi-rail transaction reconciliation across instant UPI 2.0, NEFT/RTGS, and corporate virtual IBANs.
+              </p>
+            </div>
+            <div class="subpage-banner-actions">
+              <button type="button" class="btn btn-sm btn-outline btn-download-statement" id="btnExportTxnCsv">
+                <i class="fas fa-file-csv"></i> Export CSV
+              </button>
+              <button type="button" class="btn btn-sm btn-accent" id="btnReconcileSweep">
+                <i class="fas fa-arrows-rotate"></i> Reconcile Now
+              </button>
+            </div>
+          </div>
+
+          <!-- KPI Mini Grid -->
+          <div class="kpi-mini-grid">
+            <div class="kpi-mini-card accent-mint">
+              <div class="kpi-mini-top">
+                <span class="kpi-mini-title">Total Settled Volume</span>
+                <div class="kpi-mini-icon mint-bg"><i class="fas fa-vault"></i></div>
+              </div>
+              <div class="kpi-mini-value" id="kpiTxnTotalVol">₹1,48,200</div>
+              <div class="kpi-mini-subtext positive">
+                <i class="fas fa-arrow-trend-up"></i> +14.2% vs previous period
+              </div>
+            </div>
+
+            <div class="kpi-mini-card accent-navy">
+              <div class="kpi-mini-top">
+                <span class="kpi-mini-title">Net Inbound (Credits)</span>
+                <div class="kpi-mini-icon navy-bg"><i class="fas fa-arrow-down-left text-mint"></i></div>
+              </div>
+              <div class="kpi-mini-value" id="kpiTxnInbound">+₹1,12,500</div>
+              <div class="kpi-mini-subtext">
+                <i class="fas fa-circle-check text-mint"></i> 28 settled remittances
+              </div>
+            </div>
+
+            <div class="kpi-mini-card accent-amber">
+              <div class="kpi-mini-top">
+                <span class="kpi-mini-title">Net Outbound (Debits)</span>
+                <div class="kpi-mini-icon amber-bg"><i class="fas fa-arrow-up-right"></i></div>
+              </div>
+              <div class="kpi-mini-value" id="kpiTxnOutbound">-₹35,700</div>
+              <div class="kpi-mini-subtext">
+                <i class="fas fa-clock"></i> 14 vendor dispatches
+              </div>
+            </div>
+
+            <div class="kpi-mini-card accent-blue">
+              <div class="kpi-mini-top">
+                <span class="kpi-mini-title">Rail Settlement Latency</span>
+                <div class="kpi-mini-icon blue-bg"><i class="fas fa-bolt"></i></div>
+              </div>
+              <div class="kpi-mini-value" id="kpiTxnLatency">1.4s</div>
+              <div class="kpi-mini-subtext positive">
+                <i class="fas fa-shield-halved"></i> 99.98% instant clearing
+              </div>
+            </div>
+          </div>
+
+          <!-- Transaction Filter & Search Toolbar -->
+          <div class="client-filter-toolbar">
+            <div class="filter-search-wrap">
+              <i class="fas fa-magnifying-glass"></i>
+              <input type="text" id="txnSearchInput" class="filter-search-input" placeholder="Search reference, description, counterparty..." aria-label="Search transactions">
+            </div>
+            <div class="filter-controls-group">
+              <select id="txnTypeFilter" class="filter-select" aria-label="Filter by type">
+                <option value="all">All Types</option>
+                <option value="credit">Inbound / Credit (+)</option>
+                <option value="debit">Outbound / Debit (-)</option>
+              </select>
+              <select id="txnStatusFilter" class="filter-select" aria-label="Filter by status">
+                <option value="all">All Statuses</option>
+                <option value="completed">Settled</option>
+                <option value="pending">Pending</option>
+                <option value="processing">Processing</option>
+              </select>
+              <select id="txnRailFilter" class="filter-select" aria-label="Filter by rail">
+                <option value="all">All Rails</option>
+                <option value="upi">UPI Instant</option>
+                <option value="rtgs">RTGS/NEFT Core</option>
+                <option value="virtual">Virtual IBAN</option>
+                <option value="card">Card Gateway</option>
+              </select>
+              <button type="button" class="btn btn-sm btn-outline" id="btnResetTxnFilters" title="Reset Filters">
+                <i class="fas fa-rotate-left"></i> Reset
+              </button>
+            </div>
+          </div>
+
+          <!-- Main Transaction Ledger Table Panel -->
           <div class="dashboard-panel">
             <div class="panel-header">
               <div>
-                <h2 class="panel-title">Client Transaction History</h2>
-                <p style="font-size: 0.85rem; margin: 0;">Completed inflows and authorized outflows</p>
+                <h3 class="panel-title">Audited Transactions Ledger</h3>
+                <p style="font-size: 0.85rem; margin: 0; color: var(--navy-text-muted);">
+                  Showing synchronized settlement events recorded on your corporate account
+                </p>
               </div>
               <div class="panel-actions">
-                <button type="button" class="btn btn-sm btn-outline btn-download-statement"><i class="fas fa-download"></i> Export History</button>
+                <span class="live-pulse-badge">
+                  <span class="live-pulse-dot"></span> Live Sync Active
+                </span>
               </div>
             </div>
+
             <div class="table-responsive">
-              <table class="data-table">
+              <table class="data-table" id="clientTxnTable">
                 <thead>
                   <tr>
                     <th>Reference</th>
-                    <th>Date</th>
-                    <th>Description</th>
+                    <th>Date &amp; Time</th>
+                    <th>Counterparty &amp; Description</th>
+                    <th>Payment Rail</th>
                     <th>Type</th>
                     <th>Amount</th>
                     <th>Status</th>
+                    <th>Action</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
+                <tbody id="clientTxnTableBody">
+                  <tr data-type="debit" data-status="completed" data-rail="card" data-ref="TXN-9081">
                     <td><strong>TXN-9081</strong></td>
-                    <td>Oct 22, 2026</td>
-                    <td>Cloud Infrastructure Payment</td>
+                    <td>Oct 24, 2026 • 14:22</td>
+                    <td>AWS Cloud Infrastructure Hosting</td>
+                    <td><span class="status-badge" style="background:#f1f5f9; color:var(--navy); font-size:0.75rem;">Card Gateway</span></td>
                     <td>Debit</td>
-                    <td><strong>₹4,500</strong></td>
+                    <td><strong>₹4,500.00</strong></td>
                     <td><span class="status-badge completed">Settled</span></td>
+                    <td>
+                      <button class="btn btn-sm btn-outline btn-txn-receipt" onclick="viewClientInvoice('TXN-9081', 'AWS Cloud Infrastructure Hosting', 4500, 'Oct 24, 2026')">Receipt</button>
+                    </td>
                   </tr>
-                  <tr>
+                  <tr data-type="credit" data-status="completed" data-rail="virtual" data-ref="TXN-9080">
                     <td><strong>TXN-9080</strong></td>
-                    <td>Oct 20, 2026</td>
-                    <td>Client Retainer Inflow</td>
+                    <td>Oct 22, 2026 • 11:05</td>
+                    <td>Nexus Enterprise Solutions Retainer</td>
+                    <td><span class="status-badge" style="background:rgba(66,214,176,0.15); color:#0b7252; font-size:0.75rem;">Virtual IBAN</span></td>
                     <td>Credit</td>
-                    <td><strong class="text-mint">+₹38,000</strong></td>
+                    <td><strong class="text-mint">+₹38,000.00</strong></td>
                     <td><span class="status-badge completed">Settled</span></td>
+                    <td>
+                      <button class="btn btn-sm btn-outline btn-txn-receipt" onclick="viewClientInvoice('TXN-9080', 'Nexus Enterprise Solutions Retainer', 38000, 'Oct 22, 2026')">Receipt</button>
+                    </td>
                   </tr>
-                  <tr>
+                  <tr data-type="debit" data-status="completed" data-rail="rtgs" data-ref="TXN-9079">
                     <td><strong>TXN-9079</strong></td>
-                    <td>Oct 18, 2026</td>
-                    <td>SaaS Subscription Annual</td>
+                    <td>Oct 20, 2026 • 16:40</td>
+                    <td>SaaS CRM Enterprise Annual License</td>
+                    <td><span class="status-badge" style="background:#e8f0fe; color:#1a56db; font-size:0.75rem;">RTGS / NEFT</span></td>
                     <td>Debit</td>
-                    <td><strong>₹12,000</strong></td>
+                    <td><strong>₹12,000.00</strong></td>
                     <td><span class="status-badge completed">Settled</span></td>
+                    <td>
+                      <button class="btn btn-sm btn-outline btn-txn-receipt" onclick="viewClientInvoice('TXN-9079', 'SaaS CRM Enterprise Annual License', 12000, 'Oct 20, 2026')">Receipt</button>
+                    </td>
+                  </tr>
+                  <tr data-type="credit" data-status="completed" data-rail="upi" data-ref="TXN-9078">
+                    <td><strong>TXN-9078</strong></td>
+                    <td>Oct 19, 2026 • 09:15</td>
+                    <td>FinTech Advisory Consulting Inflow</td>
+                    <td><span class="status-badge" style="background:rgba(66,214,176,0.15); color:#0b7252; font-size:0.75rem;">UPI Instant</span></td>
+                    <td>Credit</td>
+                    <td><strong class="text-mint">+₹25,000.00</strong></td>
+                    <td><span class="status-badge completed">Settled</span></td>
+                    <td>
+                      <button class="btn btn-sm btn-outline btn-txn-receipt" onclick="viewClientInvoice('TXN-9078', 'FinTech Advisory Consulting Inflow', 25000, 'Oct 19, 2026')">Receipt</button>
+                    </td>
+                  </tr>
+                  <tr data-type="debit" data-status="completed" data-rail="rtgs" data-ref="TXN-9077">
+                    <td><strong>TXN-9077</strong></td>
+                    <td>Oct 16, 2026 • 13:50</td>
+                    <td>CyberGuard Penetration Testing Retainer</td>
+                    <td><span class="status-badge" style="background:#e8f0fe; color:#1a56db; font-size:0.75rem;">RTGS / NEFT</span></td>
+                    <td>Debit</td>
+                    <td><strong>₹4,700.00</strong></td>
+                    <td><span class="status-badge completed">Settled</span></td>
+                    <td>
+                      <button class="btn btn-sm btn-outline btn-txn-receipt" onclick="viewClientInvoice('TXN-9077', 'CyberGuard Penetration Testing Retainer', 4700, 'Oct 16, 2026')">Receipt</button>
+                    </td>
+                  </tr>
+                  <tr data-type="credit" data-status="completed" data-rail="card" data-ref="TXN-9076">
+                    <td><strong>TXN-9076</strong></td>
+                    <td>Oct 14, 2026 • 17:30</td>
+                    <td>Vendor Hardware Device Refund</td>
+                    <td><span class="status-badge" style="background:#f1f5f9; color:var(--navy); font-size:0.75rem;">Card Gateway</span></td>
+                    <td>Credit</td>
+                    <td><strong class="text-mint">+₹1,200.00</strong></td>
+                    <td><span class="status-badge completed">Settled</span></td>
+                    <td>
+                      <button class="btn btn-sm btn-outline btn-txn-receipt" onclick="viewClientInvoice('TXN-9076', 'Vendor Hardware Device Refund', 1200, 'Oct 14, 2026')">Receipt</button>
+                    </td>
+                  </tr>
+                  <tr data-type="credit" data-status="completed" data-rail="upi" data-ref="TXN-9075">
+                    <td><strong>TXN-9075</strong></td>
+                    <td>Oct 11, 2026 • 10:12</td>
+                    <td>Zenith Capital Platform Subscription</td>
+                    <td><span class="status-badge" style="background:rgba(66,214,176,0.15); color:#0b7252; font-size:0.75rem;">UPI Instant</span></td>
+                    <td>Credit</td>
+                    <td><strong class="text-mint">+₹48,300.00</strong></td>
+                    <td><span class="status-badge completed">Settled</span></td>
+                    <td>
+                      <button class="btn btn-sm btn-outline btn-txn-receipt" onclick="viewClientInvoice('TXN-9075', 'Zenith Capital Platform Subscription', 48300, 'Oct 11, 2026')">Receipt</button>
+                    </td>
+                  </tr>
+                  <tr data-type="debit" data-status="pending" data-rail="virtual" data-ref="TXN-9074">
+                    <td><strong>TXN-9074</strong></td>
+                    <td>Oct 09, 2026 • 18:04</td>
+                    <td>Offshore Contractor Disbursal (Pending Signoff)</td>
+                    <td><span class="status-badge" style="background:rgba(66,214,176,0.15); color:#0b7252; font-size:0.75rem;">Virtual IBAN</span></td>
+                    <td>Debit</td>
+                    <td><strong>₹14,500.00</strong></td>
+                    <td><span class="status-badge pending">Pending</span></td>
+                    <td>
+                      <button class="btn btn-sm btn-accent" onclick="payInvoice('TXN-9074', 14500)">Approve</button>
+                    </td>
                   </tr>
                 </tbody>
               </table>
             </div>
+
+            <div id="txnEmptyState" style="display: none; text-align: center; padding: 2.5rem 1rem;">
+              <i class="fas fa-filter-circle-xmark" style="font-size: 2.2rem; color: var(--navy-text-muted); margin-bottom: 0.8rem;"></i>
+              <h4 style="color: var(--navy); margin-bottom: 0.3rem;">No transactions matched your filters</h4>
+              <p style="font-size: 0.86rem; color: var(--navy-text-muted); margin-bottom: 1rem;">
+                Try resetting your search query or selecting a broader rail/status criteria.
+              </p>
+              <button type="button" class="btn btn-sm btn-outline" id="btnEmptyReset">Reset Filters</button>
+            </div>
+
             <div class="table-scroll-hint">
-              <i class="fas fa-arrows-left-right"></i> Scroll table horizontally to view details &amp; status
+              <i class="fas fa-arrows-left-right"></i> Scroll table horizontally to view full transaction timestamps &amp; rails
+            </div>
+          </div>
+
+          <!-- Secondary Two-Column: Rail Volume Distribution & Bank Reconcile Status -->
+          <div class="dashboard-two-col" style="margin-top: 1.5rem;">
+            <!-- Left: Rail Volume Distribution -->
+            <div class="dashboard-panel">
+              <div class="panel-header">
+                <div>
+                  <h3 class="panel-title">Payment Rails Distribution</h3>
+                  <p style="font-size: 0.85rem; margin: 0; color: var(--navy-text-muted);">Volume share across active clearing channels</p>
+                </div>
+              </div>
+
+              <div class="progress-rail-list">
+                <div class="progress-rail-item">
+                  <div class="progress-rail-label">
+                    <span><i class="fas fa-qrcode text-mint"></i> UPI 2.0 Immediate Settlement</span>
+                    <span>₹77,064 (52%)</span>
+                  </div>
+                  <div class="progress-rail-track">
+                    <div class="progress-rail-fill" style="width: 52%; background: var(--mint);"></div>
+                  </div>
+                </div>
+
+                <div class="progress-rail-item">
+                  <div class="progress-rail-label">
+                    <span><i class="fas fa-building-columns text-navy"></i> Virtual Escrow &amp; NEFT Core</span>
+                    <span>₹45,942 (31%)</span>
+                  </div>
+                  <div class="progress-rail-track">
+                    <div class="progress-rail-fill" style="width: 31%; background: var(--navy);"></div>
+                  </div>
+                </div>
+
+                <div class="progress-rail-item">
+                  <div class="progress-rail-label">
+                    <span><i class="fas fa-credit-card"></i> Corporate Card &amp; Payment Gateway</span>
+                    <span>₹25,194 (17%)</span>
+                  </div>
+                  <div class="progress-rail-track">
+                    <div class="progress-rail-fill" style="width: 17%; background: #3b82f6;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Instant Bank Reconciliation Health -->
+            <div class="dashboard-panel">
+              <div class="panel-header">
+                <div>
+                  <h3 class="panel-title">Reconciliation Health</h3>
+                  <p style="font-size: 0.85rem; margin: 0; color: var(--navy-text-muted);">Multi-bank automated ledger audit</p>
+                </div>
+              </div>
+
+              <div class="reconciliation-card">
+                <div>
+                  <div class="reconcile-metric-row">
+                    <span style="color: var(--navy-text-muted);">Primary Bank Node:</span>
+                    <strong style="color: var(--navy);">HDFC Core (#8829)</strong>
+                  </div>
+                  <div class="reconcile-metric-row">
+                    <span style="color: var(--navy-text-muted);">Reconciliation Status:</span>
+                    <span class="status-badge completed"><i class="fas fa-check"></i> 100% Matched</span>
+                  </div>
+                  <div class="reconcile-metric-row">
+                    <span style="color: var(--navy-text-muted);">Unmatched Records:</span>
+                    <strong style="color: #0b7252;">0 Discrepancies</strong>
+                  </div>
+                  <div class="reconcile-metric-row">
+                    <span style="color: var(--navy-text-muted);">Virtual Escrow Pool:</span>
+                    <strong class="text-mint">₹52,400.00</strong>
+                  </div>
+                </div>
+
+                <div style="margin-top: 1.2rem;">
+                  <button type="button" class="btn btn-sm btn-outline w-100" id="btnManualReconcile">
+                    <i class="fas fa-arrows-spin"></i> Trigger Manual Audit Sweep
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -358,26 +628,258 @@
              VIEW: INVOICES & PAYMENTS
              ========================================================================== -->
         <div class="dashboard-view-section" id="view-invoices" style="display: none;">
+          <!-- Subpage Header Banner -->
+          <div class="subpage-header-banner">
+            <div class="subpage-banner-info">
+              <h2 class="subpage-banner-title">
+                <i class="fas fa-file-invoice-dollar text-mint"></i> Invoices &amp; Billing Center
+              </h2>
+              <p class="subpage-banner-subtitle">
+                Manage commercial receivables, approve supplier payables, and generate on-demand customer collection links.
+              </p>
+            </div>
+            <div class="subpage-banner-actions">
+              <button type="button" class="btn btn-sm btn-accent" id="btnScrollToLinkCreator">
+                <i class="fas fa-link"></i> Create Payment Link
+              </button>
+              <button type="button" class="btn btn-sm btn-outline btn-download-statement">
+                <i class="fas fa-download"></i> Export Invoice Ledger
+              </button>
+            </div>
+          </div>
+
+          <!-- KPI Mini Grid -->
+          <div class="kpi-mini-grid">
+            <div class="kpi-mini-card accent-amber">
+              <div class="kpi-mini-top">
+                <span class="kpi-mini-title">Pending Payables Due</span>
+                <div class="kpi-mini-icon amber-bg"><i class="fas fa-clock"></i></div>
+              </div>
+              <div class="kpi-mini-value">₹26,400</div>
+              <div class="kpi-mini-subtext">
+                <i class="fas fa-triangle-exclamation" style="color: #b45309;"></i> 3 invoices awaiting clearance
+              </div>
+            </div>
+
+            <div class="kpi-mini-card accent-mint">
+              <div class="kpi-mini-top">
+                <span class="kpi-mini-title">Settled This Month</span>
+                <div class="kpi-mini-icon mint-bg"><i class="fas fa-circle-check text-mint"></i></div>
+              </div>
+              <div class="kpi-mini-value">₹38,000</div>
+              <div class="kpi-mini-subtext positive">
+                <i class="fas fa-check"></i> 100% on-time settlement
+              </div>
+            </div>
+
+            <div class="kpi-mini-card accent-navy">
+              <div class="kpi-mini-top">
+                <span class="kpi-mini-title">Avg Collection Cycle (DSO)</span>
+                <div class="kpi-mini-icon navy-bg"><i class="fas fa-gauge-high"></i></div>
+              </div>
+              <div class="kpi-mini-value">11.4 Days</div>
+              <div class="kpi-mini-subtext positive">
+                <i class="fas fa-arrow-trend-down"></i> Top 5% speed in B2B SaaS
+              </div>
+            </div>
+          </div>
+
+          <!-- Actionable Commercial Payables -->
           <div class="dashboard-panel">
             <div class="panel-header">
               <div>
-                <h2 class="panel-title">Invoices &amp; Billing Records</h2>
-                <p style="font-size: 0.85rem; margin: 0;">Invoices generated for your organization and outstanding dues</p>
+                <h3 class="panel-title">Pending Commercial Payables</h3>
+                <p style="font-size: 0.85rem; margin: 0; color: var(--navy-text-muted);">
+                  Actionable vendor invoices requiring treasury clearance
+                </p>
               </div>
             </div>
+
             <div class="grid-3">
-              <div class="card" style="padding: 1.5rem;">
-                <span class="status-badge pending" style="margin-bottom: 0.5rem;">Due Soon</span>
-                <h4>INV-8419 - Cloud Hosting</h4>
-                <p style="font-size: 1.25rem; font-weight: 700; color: var(--navy); margin: 0.5rem 0;">₹14,500</p>
-                <button class="btn btn-sm btn-accent w-100" onclick="payInvoice('INV-8419', 14500)">Pay Invoice</button>
+              <div class="card" style="padding: 1.5rem; display: flex; flex-direction: column;">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
+                  <span class="status-badge pending">Due in 2 Days</span>
+                  <small style="color: var(--navy-text-muted); font-weight: 600;">INV-8419</small>
+                </div>
+                <h4 style="margin-bottom: 0.2rem; color: var(--navy);">AWS Cloud Infrastructure Hosting</h4>
+                <p style="font-size: 0.8rem; color: var(--navy-text-muted); margin-bottom: 0.8rem;">Vendor: Amazon Web Services Inc.</p>
+                <div style="font-size: 1.4rem; font-weight: 700; color: var(--navy); margin-bottom: 1.2rem;">₹14,500.00</div>
+                <div style="margin-top: auto; display: flex; gap: 0.6rem;">
+                  <button class="btn btn-sm btn-accent w-50" onclick="payInvoice('INV-8419', 14500)">Pay Now</button>
+                  <button class="btn btn-sm btn-outline w-50" onclick="viewClientInvoice('INV-8419', 'AWS Cloud Infrastructure Hosting', 14500, 'Oct 28, 2026')">View PDF</button>
+                </div>
               </div>
-              <div class="card" style="padding: 1.5rem;">
-                <span class="status-badge completed" style="margin-bottom: 0.5rem;">Settled</span>
-                <h4>INV-8102 - Retainer Sep 2026</h4>
-                <p style="font-size: 1.25rem; font-weight: 700; color: var(--navy); margin: 0.5rem 0;">₹38,000</p>
-                <button class="btn btn-sm btn-outline w-100" onclick="viewClientInvoice('INV-8102', 'Retainer Sep 2026', 38000, 'Paid')">Receipt</button>
+
+              <div class="card" style="padding: 1.5rem; display: flex; flex-direction: column;">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
+                  <span class="status-badge pending">Due in 7 Days</span>
+                  <small style="color: var(--navy-text-muted); font-weight: 600;">INV-8420</small>
+                </div>
+                <h4 style="margin-bottom: 0.2rem; color: var(--navy);">SaaS CRM Enterprise License</h4>
+                <p style="font-size: 0.8rem; color: var(--navy-text-muted); margin-bottom: 0.8rem;">Vendor: Salesforce Corporate Cloud</p>
+                <div style="font-size: 1.4rem; font-weight: 700; color: var(--navy); margin-bottom: 1.2rem;">₹7,200.00</div>
+                <div style="margin-top: auto; display: flex; gap: 0.6rem;">
+                  <button class="btn btn-sm btn-accent w-50" onclick="payInvoice('INV-8420', 7200)">Pay Now</button>
+                  <button class="btn btn-sm btn-outline w-50" onclick="viewClientInvoice('INV-8420', 'SaaS CRM Enterprise License', 7200, 'Nov 02, 2026')">View PDF</button>
+                </div>
               </div>
+
+              <div class="card" style="padding: 1.5rem; display: flex; flex-direction: column;">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
+                  <span class="status-badge pending">Due in 15 Days</span>
+                  <small style="color: var(--navy-text-muted); font-weight: 600;">INV-8421</small>
+                </div>
+                <h4 style="margin-bottom: 0.2rem; color: var(--navy);">External Security Audit Retainer</h4>
+                <p style="font-size: 0.8rem; color: var(--navy-text-muted); margin-bottom: 0.8rem;">Vendor: CyberGuard Security Labs</p>
+                <div style="font-size: 1.4rem; font-weight: 700; color: var(--navy); margin-bottom: 1.2rem;">₹4,700.00</div>
+                <div style="margin-top: auto; display: flex; gap: 0.6rem;">
+                  <button class="btn btn-sm btn-accent w-50" onclick="payInvoice('INV-8421', 4700)">Pay Now</button>
+                  <button class="btn btn-sm btn-outline w-50" onclick="viewClientInvoice('INV-8421', 'External Security Audit Retainer', 4700, 'Nov 10, 2026')">View PDF</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Unique Section: Smart Payment Link & Instant Invoice Generator -->
+          <div class="payment-generator-panel" id="paymentLinkGeneratorSection">
+            <div class="panel-header">
+              <div>
+                <h3 class="panel-title"><i class="fas fa-wand-magic-sparkles text-mint"></i> Smart Customer Payment Link Generator</h3>
+                <p style="font-size: 0.85rem; margin: 0; color: var(--navy-text-muted);">
+                  Create dynamic, multi-rail collection links to send instantly to clients via WhatsApp, Email, or SMS
+                </p>
+              </div>
+            </div>
+
+            <form id="clientPaymentLinkForm" onsubmit="return false;">
+              <div class="gen-form-grid">
+                <div>
+                  <label class="form-label">Client / Customer Name</label>
+                  <input type="text" id="linkCustomerName" class="auth-input" placeholder="e.g. Acme FinTech Corp" style="padding-left: 1rem;" required>
+                </div>
+                <div>
+                  <label class="form-label">Billing Purpose / Memo</label>
+                  <input type="text" id="linkMemo" class="auth-input" placeholder="e.g. Q4 Platform Subscription Retainer" style="padding-left: 1rem;" required>
+                </div>
+                <div>
+                  <label class="form-label">Amount (INR ₹)</label>
+                  <input type="number" id="linkAmount" class="auth-input" placeholder="25000" min="100" style="padding-left: 1rem;" required>
+                </div>
+                <div>
+                  <label class="form-label">Link Expiry Period</label>
+                  <select id="linkExpiry" class="panel-select w-100" style="padding: 0.8rem 1rem;">
+                    <option value="24h">Valid for 24 Hours</option>
+                    <option value="3d" selected>Valid for 3 Days</option>
+                    <option value="7d">Valid for 7 Days</option>
+                    <option value="none">No Expiration</option>
+                  </select>
+                </div>
+              </div>
+
+              <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                <div style="display: flex; gap: 1rem; align-items: center; font-size: 0.85rem; color: var(--navy-text-muted); flex-wrap: wrap;">
+                  <span>Payment rails enabled:</span>
+                  <label style="display: flex; align-items: center; gap: 0.35rem; cursor: pointer;">
+                    <input type="checkbox" checked disabled> UPI QR
+                  </label>
+                  <label style="display: flex; align-items: center; gap: 0.35rem; cursor: pointer;">
+                    <input type="checkbox" checked disabled> Cards &amp; NetBanking
+                  </label>
+                  <label style="display: flex; align-items: center; gap: 0.35rem; cursor: pointer;">
+                    <input type="checkbox" checked disabled> Virtual Escrow
+                  </label>
+                </div>
+
+                <button type="button" class="btn btn-primary" id="btnGeneratePaymentLink">
+                  <i class="fas fa-bolt"></i> Generate Branded Link
+                </button>
+              </div>
+            </form>
+
+            <!-- Dynamic Output Container -->
+            <div id="generatedLinkContainer" style="display: none;">
+              <div class="copyable-link-box">
+                <span class="qr-mini-badge"><i class="fas fa-qrcode"></i> UPI Ready</span>
+                <span class="copyable-link-text" id="generatedLinkUrl">https://pay.stackly.finance/inv_998124</span>
+                <button type="button" class="btn btn-sm btn-accent" id="btnCopyGenLink">
+                  <i class="fas fa-copy"></i> Copy Link
+                </button>
+                <button type="button" class="btn btn-sm btn-outline" id="btnShareGenLink">
+                  <i class="fas fa-share-nodes"></i> Share
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Settled Historical Invoices Ledger Table -->
+          <div class="dashboard-panel" style="margin-top: 1.5rem;">
+            <div class="panel-header">
+              <div>
+                <h3 class="panel-title">Historical Settled Invoices</h3>
+                <p style="font-size: 0.85rem; margin: 0; color: var(--navy-text-muted);">
+                  Permanently archived commercial bills with digital tax receipts
+                </p>
+              </div>
+            </div>
+
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Invoice ID</th>
+                    <th>Vendor / Service</th>
+                    <th>Settled Date</th>
+                    <th>Payment Method</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Receipt</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>INV-8102</strong></td>
+                    <td>Apex Systems Retainer Sep 2026</td>
+                    <td>Oct 20, 2026</td>
+                    <td>HDFC Virtual IBAN (#8829)</td>
+                    <td><strong>₹38,000.00</strong></td>
+                    <td><span class="status-badge completed">Settled</span></td>
+                    <td>
+                      <button class="btn btn-sm btn-outline" onclick="viewClientInvoice('INV-8102', 'Apex Systems Retainer Sep 2026', 38000, 'Settled Oct 20')">
+                        <i class="fas fa-receipt"></i> Receipt
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>INV-8088</strong></td>
+                    <td>Data Center Infrastructure Hosting Q3</td>
+                    <td>Sep 28, 2026</td>
+                    <td>UPI Auto-Debit Protocol</td>
+                    <td><strong>₹18,200.00</strong></td>
+                    <td><span class="status-badge completed">Settled</span></td>
+                    <td>
+                      <button class="btn btn-sm btn-outline" onclick="viewClientInvoice('INV-8088', 'Data Center Hosting Q3', 18200, 'Settled Sep 28')">
+                        <i class="fas fa-receipt"></i> Receipt
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>INV-8041</strong></td>
+                    <td>Annual SOC-2 Compliance Audit Retainer</td>
+                    <td>Sep 15, 2026</td>
+                    <td>NEFT Corporate Rail</td>
+                    <td><strong>₹24,000.00</strong></td>
+                    <td><span class="status-badge completed">Settled</span></td>
+                    <td>
+                      <button class="btn btn-sm btn-outline" onclick="viewClientInvoice('INV-8041', 'SOC-2 Compliance Audit', 24000, 'Settled Sep 15')">
+                        <i class="fas fa-receipt"></i> Receipt
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="table-scroll-hint">
+              <i class="fas fa-arrows-left-right"></i> Scroll table horizontally to view settled receipts
             </div>
           </div>
         </div>
@@ -386,23 +888,257 @@
              VIEW: REPORTS & INSIGHTS
              ========================================================================== -->
         <div class="dashboard-view-section" id="view-reports" style="display: none;">
-          <div class="dashboard-panel">
-            <div class="panel-header">
-              <div>
-                <h2 class="panel-title">Downloadable Sample Statements</h2>
-                <p style="font-size: 0.85rem; margin: 0;">Export financial spreadsheets and receipts for tax and accounting audits</p>
+          <!-- Subpage Header Banner -->
+          <div class="subpage-header-banner">
+            <div class="subpage-banner-info">
+              <h2 class="subpage-banner-title">
+                <i class="fas fa-chart-pie text-mint"></i> Financial Intelligence &amp; Tax Compliance
+              </h2>
+              <p class="subpage-banner-subtitle">
+                Consolidated working capital runways, operational burn rates, and digitally signed tax audit slips.
+              </p>
+            </div>
+            <div class="subpage-banner-actions">
+              <select class="panel-select" id="reportPeriodSelect" aria-label="Report Period">
+                <option value="q4">Q4 2026 (Oct - Dec)</option>
+                <option value="q3">Q3 2026 (Jul - Sep)</option>
+                <option value="fy26">Fiscal Year 2026-27</option>
+              </select>
+              <button type="button" class="btn btn-sm btn-outline btn-download-statement">
+                <i class="fas fa-file-pdf"></i> Export Fiscal Packet
+              </button>
+            </div>
+          </div>
+
+          <!-- KPI Mini Grid -->
+          <div class="kpi-mini-grid">
+            <div class="kpi-mini-card accent-mint">
+              <div class="kpi-mini-top">
+                <span class="kpi-mini-title">Working Capital Runway</span>
+                <div class="kpi-mini-icon mint-bg"><i class="fas fa-shield-halved"></i></div>
+              </div>
+              <div class="kpi-mini-value">14.6 Months</div>
+              <div class="kpi-mini-subtext positive">
+                <i class="fas fa-circle-check text-mint"></i> Based on 6-month burn average
               </div>
             </div>
-            <div class="grid-3">
-              <div class="card" style="padding: 1.5rem;">
-                <h4>October 2026 Statement</h4>
-                <p style="font-size: 0.85rem;">Consolidated debits and credits ledger in CSV.</p>
-                <button class="btn btn-sm btn-outline btn-download-statement"><i class="fas fa-download"></i> Download CSV</button>
+
+            <div class="kpi-mini-card accent-navy">
+              <div class="kpi-mini-top">
+                <span class="kpi-mini-title">Operating Expense Ratio</span>
+                <div class="kpi-mini-icon navy-bg"><i class="fas fa-scale-balanced"></i></div>
               </div>
-              <div class="card" style="padding: 1.5rem;">
-                <h4>Annual Tax Deduction Slip</h4>
-                <p style="font-size: 0.85rem;">GST &amp; TDS tax deduction summary.</p>
-                <button class="btn btn-sm btn-outline btn-download-statement"><i class="fas fa-download"></i> Download CSV</button>
+              <div class="kpi-mini-value">24.8%</div>
+              <div class="kpi-mini-subtext positive">
+                <i class="fas fa-arrow-trend-down"></i> -2.1% efficiency gain vs Q2
+              </div>
+            </div>
+
+            <div class="kpi-mini-card accent-blue">
+              <div class="kpi-mini-top">
+                <span class="kpi-mini-title">Cash Velocity Multiplier</span>
+                <div class="kpi-mini-icon blue-bg"><i class="fas fa-arrows-spin"></i></div>
+              </div>
+              <div class="kpi-mini-value">4.2x</div>
+              <div class="kpi-mini-subtext">
+                <i class="fas fa-bolt"></i> Optimal liquidity turnaround
+              </div>
+            </div>
+          </div>
+
+          <!-- Two-Column Expense Analysis & Strategic Insights -->
+          <div class="dashboard-two-col">
+            <!-- Left: Outflow Distribution by Ledger Tag -->
+            <div class="dashboard-panel">
+              <div class="panel-header">
+                <div>
+                  <h3 class="panel-title">Operational Expense Allocation</h3>
+                  <p style="font-size: 0.85rem; margin: 0; color: var(--navy-text-muted);">Current fiscal outflow tagged by cost center</p>
+                </div>
+              </div>
+
+              <div class="progress-rail-list">
+                <div class="progress-rail-item">
+                  <div class="progress-rail-label">
+                    <span><i class="fas fa-cloud text-navy"></i> Software &amp; Cloud Infrastructure</span>
+                    <span>₹14,500 (45%)</span>
+                  </div>
+                  <div class="progress-rail-track">
+                    <div class="progress-rail-fill" style="width: 45%; background: var(--navy);"></div>
+                  </div>
+                </div>
+
+                <div class="progress-rail-item">
+                  <div class="progress-rail-label">
+                    <span><i class="fas fa-user-tie text-mint"></i> Contractor &amp; Engineering Services</span>
+                    <span>₹7,200 (23%)</span>
+                  </div>
+                  <div class="progress-rail-track">
+                    <div class="progress-rail-fill" style="width: 23%; background: var(--mint);"></div>
+                  </div>
+                </div>
+
+                <div class="progress-rail-item">
+                  <div class="progress-rail-label">
+                    <span><i class="fas fa-scale-unbalanced"></i> Legal, Compliance &amp; Audit Fees</span>
+                    <span>₹4,700 (15%)</span>
+                  </div>
+                  <div class="progress-rail-track">
+                    <div class="progress-rail-fill" style="width: 15%; background: #f59e0b;"></div>
+                  </div>
+                </div>
+
+                <div class="progress-rail-item">
+                  <div class="progress-rail-label">
+                    <span><i class="fas fa-network-wired"></i> Payment Gateway &amp; Rail Interchange</span>
+                    <span>₹3,200 (10%)</span>
+                  </div>
+                  <div class="progress-rail-track">
+                    <div class="progress-rail-fill" style="width: 10%; background: #3b82f6;"></div>
+                  </div>
+                </div>
+
+                <div class="progress-rail-item">
+                  <div class="progress-rail-label">
+                    <span><i class="fas fa-briefcase"></i> Office Logistics &amp; Subscriptions</span>
+                    <span>₹2,100 (7%)</span>
+                  </div>
+                  <div class="progress-rail-track">
+                    <div class="progress-rail-fill" style="width: 7%; background: #94a3b8;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Automated Audit Insights -->
+            <div class="dashboard-panel">
+              <div class="panel-header">
+                <div>
+                  <h3 class="panel-title">Regulatory &amp; Treasury Notes</h3>
+                  <p style="font-size: 0.85rem; margin: 0; color: var(--navy-text-muted);">Real-time intelligence generated by core ledger</p>
+                </div>
+              </div>
+
+              <div style="display: flex; flex-direction: column; gap: 1rem;">
+                <div style="background: var(--white-surface); border-left: 3px solid var(--mint); padding: 1rem; border-radius: var(--radius-sm);">
+                  <div style="font-weight: 600; font-size: 0.9rem; color: var(--navy); margin-bottom: 0.2rem;">
+                    <i class="fas fa-circle-arrow-up text-mint"></i> Positive Inflow Trajectory
+                  </div>
+                  <p style="font-size: 0.82rem; color: var(--navy-text-muted); margin: 0; line-height: 1.5;">
+                    Client deposits exceeded recurring outflow by <strong>+18.2%</strong> this billing cycle, strengthening cash reserves.
+                  </p>
+                </div>
+
+                <div style="background: var(--white-surface); border-left: 3px solid #3b82f6; padding: 1rem; border-radius: var(--radius-sm);">
+                  <div style="font-weight: 600; font-size: 0.9rem; color: var(--navy); margin-bottom: 0.2rem;">
+                    <i class="fas fa-receipt text-blue"></i> TDS Withholding Synchronized
+                  </div>
+                  <p style="font-size: 0.82rem; color: var(--navy-text-muted); margin: 0; line-height: 1.5;">
+                    Form 16A TDS certificates for vendor payments under Section 194J are pre-matched against NSDL GSTIN data.
+                  </p>
+                </div>
+
+                <div style="background: var(--white-surface); border-left: 3px solid #f59e0b; padding: 1rem; border-radius: var(--radius-sm);">
+                  <div style="font-weight: 600; font-size: 0.9rem; color: var(--navy); margin-bottom: 0.2rem;">
+                    <i class="fas fa-globe text-amber"></i> Cross-Border Remittance Cleared
+                  </div>
+                  <p style="font-size: 0.82rem; color: var(--navy-text-muted); margin: 0; line-height: 1.5;">
+                    Foreign Inward Remittance Certificate (FIRC) filed for foreign inward transfers from Singapore subsidiary.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Certified Audit Statements & Regulatory Tax Dossiers -->
+          <div class="dashboard-panel" style="margin-top: 1.5rem;">
+            <div class="panel-header">
+              <div>
+                <h3 class="panel-title">Downloadable Certified Statements &amp; Tax Slips</h3>
+                <p style="font-size: 0.85rem; margin: 0; color: var(--navy-text-muted);">
+                  Pre-compiled audit packets ready for filing and accountant handoff
+                </p>
+              </div>
+            </div>
+
+            <div class="grid-4">
+              <div class="card" style="padding: 1.4rem; display: flex; flex-direction: column;">
+                <div style="font-size: 1.4rem; color: var(--navy); margin-bottom: 0.6rem;"><i class="fas fa-file-excel text-mint"></i></div>
+                <h4 style="font-size: 0.98rem; margin-bottom: 0.3rem;">October 2026 General Ledger</h4>
+                <p style="font-size: 0.8rem; color: var(--navy-text-muted); margin-bottom: 1rem;">Consolidated debits and credits ledger with digital SHA-256 seal.</p>
+                <button class="btn btn-sm btn-outline w-100 btn-download-statement" style="margin-top: auto;">
+                  <i class="fas fa-download"></i> Download CSV
+                </button>
+              </div>
+
+              <div class="card" style="padding: 1.4rem; display: flex; flex-direction: column;">
+                <div style="font-size: 1.4rem; color: #1a56db; margin-bottom: 0.6rem;"><i class="fas fa-file-invoice"></i></div>
+                <h4 style="font-size: 0.98rem; margin-bottom: 0.3rem;">Q3 GST &amp; TDS Tax Dossier</h4>
+                <p style="font-size: 0.8rem; color: var(--navy-text-muted); margin-bottom: 1rem;">Input Tax Credit (ITC) breakdown &amp; Form 26AS matching slip.</p>
+                <button class="btn btn-sm btn-outline w-100 btn-download-statement" style="margin-top: auto;">
+                  <i class="fas fa-download"></i> Download CSV
+                </button>
+              </div>
+
+              <div class="card" style="padding: 1.4rem; display: flex; flex-direction: column;">
+                <div style="font-size: 1.4rem; color: #b45309; margin-bottom: 0.6rem;"><i class="fas fa-file-lines"></i></div>
+                <h4 style="font-size: 0.98rem; margin-bottom: 0.3rem;">Vendor Payouts &amp; Withholding</h4>
+                <p style="font-size: 0.8rem; color: var(--navy-text-muted); margin-bottom: 1rem;">B2B supplier disbursements certified for statutory reporting.</p>
+                <button class="btn btn-sm btn-outline w-100 btn-download-statement" style="margin-top: auto;">
+                  <i class="fas fa-download"></i> Download CSV
+                </button>
+              </div>
+
+              <div class="card" style="padding: 1.4rem; display: flex; flex-direction: column;">
+                <div style="font-size: 1.4rem; color: var(--mint); margin-bottom: 0.6rem;"><i class="fas fa-file-shield"></i></div>
+                <h4 style="font-size: 0.98rem; margin-bottom: 0.3rem;">Forex Inward Remittances</h4>
+                <p style="font-size: 0.8rem; color: var(--navy-text-muted); margin-bottom: 1rem;">SWIFT MT103 receipts and statutory FIRC clearance certificates.</p>
+                <button class="btn btn-sm btn-outline w-100 btn-download-statement" style="margin-top: auto;">
+                  <i class="fas fa-download"></i> Download CSV
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Automated Scheduled Delivery & Webhook Feed Status -->
+          <div class="dashboard-panel" style="margin-top: 1.5rem;">
+            <div class="panel-header">
+              <div>
+                <h3 class="panel-title">Automated Scheduled Reports Delivery</h3>
+                <p style="font-size: 0.85rem; margin: 0; color: var(--navy-text-muted);">Autonomous reporting feeds dispatched to your corporate finance team</p>
+              </div>
+              <div class="panel-actions">
+                <button type="button" class="btn btn-sm btn-accent" id="btnSendTestReport">
+                  <i class="fas fa-paper-plane"></i> Send Test Report Now
+                </button>
+              </div>
+            </div>
+
+            <div class="dashboard-two-col">
+              <div style="background: var(--white-surface); border: 1px solid var(--navy-border); border-radius: var(--radius-sm); padding: 1.2rem;">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
+                  <span style="font-weight: 600; font-size: 0.9rem; color: var(--navy);">
+                    <i class="fas fa-envelope text-mint"></i> Weekly Treasury Digest
+                  </span>
+                  <span class="status-badge completed">Active</span>
+                </div>
+                <p style="font-size: 0.82rem; color: var(--navy-text-muted); margin-bottom: 0.5rem;">
+                  Dispatched every Monday at 08:00 AM IST to <code>finance@apextech.com</code>.
+                </p>
+                <small style="color: var(--navy-text-muted);"><i class="fas fa-clock"></i> Next dispatch: Oct 27, 2026, 08:00 IST</small>
+              </div>
+
+              <div style="background: var(--white-surface); border: 1px solid var(--navy-border); border-radius: var(--radius-sm); padding: 1.2rem;">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
+                  <span style="font-weight: 600; font-size: 0.9rem; color: var(--navy);">
+                    <i class="fas fa-code-commit text-blue"></i> Real-Time Audit Webhook
+                  </span>
+                  <span class="status-badge completed">200 OK</span>
+                </div>
+                <p style="font-size: 0.82rem; color: var(--navy-text-muted); margin-bottom: 0.5rem;">
+                  Instant JSON event streaming to <code>https://api.apextech.com/v1/stackly-webhook</code>.
+                </p>
+                <small style="color: var(--navy-text-muted);"><i class="fas fa-wifi"></i> Latency: 118ms (Last ping 14m ago)</small>
               </div>
             </div>
           </div>
@@ -412,24 +1148,271 @@
              VIEW: PROFILE & SETTINGS
              ========================================================================== -->
         <div class="dashboard-view-section" id="view-settings" style="display: none;">
-          <div class="dashboard-panel" style="max-width: 600px;">
-            <div class="panel-header">
-              <h2 class="panel-title">Profile &amp; Notification Preferences</h2>
+          <!-- Subpage Header Banner -->
+          <div class="subpage-header-banner">
+            <div class="subpage-banner-info">
+              <h2 class="subpage-banner-title">
+                <i class="fas fa-sliders text-mint"></i> Corporate Profile &amp; Governance Settings
+              </h2>
+              <p class="subpage-banner-subtitle">
+                Configure corporate entity billing records, multi-factor security rules, linked settlement accounts, and developer API credentials.
+              </p>
             </div>
-            <div style="display: flex; flex-direction: column; gap: 1.2rem;">
-              <div>
-                <label class="form-label">Client Name</label>
-                <input type="text" class="auth-input" value="Apex Global Technologies Ltd." style="padding-left: 1rem;">
+            <div class="subpage-banner-actions">
+              <button type="button" class="btn btn-sm btn-primary" id="btnSaveAllSettings">
+                <i class="fas fa-floppy-disk"></i> Save Preferences
+              </button>
+            </div>
+          </div>
+
+          <!-- Two-Column Settings Layout -->
+          <div class="dashboard-two-col">
+            <!-- Left Column: Corporate Profile & Linked Accounts -->
+            <div>
+              <!-- Corporate Entity Profile Panel -->
+              <div class="dashboard-panel">
+                <div class="panel-header">
+                  <div>
+                    <h3 class="panel-title">Corporate Billing Identity</h3>
+                    <p style="font-size: 0.85rem; margin: 0; color: var(--navy-text-muted);">
+                      Legal entity details printed on invoices &amp; tax declarations
+                    </p>
+                  </div>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 1rem;">
+                  <div>
+                    <label class="form-label">Registered Legal Entity Name</label>
+                    <input type="text" class="auth-input" id="settingCompanyName" value="Apex Global Technologies Ltd." style="padding-left: 1rem;">
+                  </div>
+
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div>
+                      <label class="form-label">GSTIN / Tax ID</label>
+                      <input type="text" class="auth-input" id="settingGstin" value="33AABCU9603R1ZM" style="padding-left: 1rem;">
+                    </div>
+                    <div>
+                      <label class="form-label">Corporate CIN</label>
+                      <input type="text" class="auth-input" id="settingCin" value="U72900TN2022PTC148921" style="padding-left: 1rem;">
+                    </div>
+                  </div>
+
+                  <div>
+                    <label class="form-label">Primary Billing &amp; Invoicing Email</label>
+                    <input type="email" class="auth-input" id="settingBillingEmail" value="finance@apextech.com" style="padding-left: 1rem;">
+                  </div>
+
+                  <div>
+                    <label class="form-label">Registered Corporate Address</label>
+                    <textarea class="auth-input" id="settingAddress" rows="2" style="padding: 0.75rem 1rem; resize: vertical;">Olympia Tech Park, 4th Floor, Guindy, Chennai - 600032, Tamil Nadu</textarea>
+                  </div>
+
+                  <div>
+                    <label class="form-label">Base Accounting Currency</label>
+                    <select class="panel-select w-100" id="settingCurrency" style="padding: 0.8rem 1rem;">
+                      <option value="INR" selected>INR (₹) - Indian Rupee (Default Settlement)</option>
+                      <option value="USD">USD ($) - United States Dollar</option>
+                      <option value="EUR">EUR (€) - Euro SEPA</option>
+                      <option value="GBP">GBP (£) - British Pound</option>
+                    </select>
+                  </div>
+
+                  <div style="padding-top: 0.5rem;">
+                    <button type="button" class="btn btn-sm btn-primary" id="btnSaveCorporateInfo">
+                      <i class="fas fa-check"></i> Update Entity Profile
+                    </button>
+                  </div>
+                </div>
               </div>
-              <div>
-                <label class="form-label">Primary Email for Invoices</label>
-                <input type="email" class="auth-input" value="finance@apextech.com" style="padding-left: 1rem;">
+
+              <!-- Linked Bank Accounts & Virtual Escrows Panel -->
+              <div class="dashboard-panel" style="margin-top: 1.5rem;">
+                <div class="panel-header">
+                  <div>
+                    <h3 class="panel-title">Linked Settlement Accounts</h3>
+                    <p style="font-size: 0.85rem; margin: 0; color: var(--navy-text-muted);">
+                      Commercial accounts configured for automated receivables and payables
+                    </p>
+                  </div>
+                  <div class="panel-actions">
+                    <button type="button" class="btn btn-sm btn-outline" id="btnLinkAccount">
+                      <i class="fas fa-plus"></i> Add Account
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Account 1: HDFC Bank -->
+                <div class="linked-account-card">
+                  <div class="account-card-header">
+                    <div class="account-bank-identity">
+                      <div class="account-bank-icon"><i class="fas fa-building-columns text-navy"></i></div>
+                      <div>
+                        <strong style="color: var(--navy); display: block; font-size: 0.95rem;">HDFC Bank Ltd.</strong>
+                        <small style="color: var(--navy-text-muted);">Corporate Current Account</small>
+                      </div>
+                    </div>
+                    <span class="status-badge completed">Primary Settlement</span>
+                  </div>
+                  <div class="account-num-display">•••• •••• •••• 8829</div>
+                  <div class="account-meta-flex" style="margin-top: 0.6rem;">
+                    <span>IFSC: <strong>HDFC0001248</strong></span>
+                    <span>Branch: <strong>Guindy Corporate Branch</strong></span>
+                    <span>Auto-Debit: <strong>Enabled</strong></span>
+                  </div>
+                </div>
+
+                <!-- Account 2: ICICI Virtual Escrow -->
+                <div class="linked-account-card">
+                  <div class="account-card-header">
+                    <div class="account-bank-identity">
+                      <div class="account-bank-icon"><i class="fas fa-vault text-mint"></i></div>
+                      <div>
+                        <strong style="color: var(--navy); display: block; font-size: 0.95rem;">ICICI Smart Virtual Escrow</strong>
+                        <small style="color: var(--navy-text-muted);">Automated Inbound Collection Pool</small>
+                      </div>
+                    </div>
+                    <span class="status-badge completed">Active</span>
+                  </div>
+                  <div class="account-num-display">•••• •••• •••• 4102</div>
+                  <div class="account-meta-flex" style="margin-top: 0.6rem;">
+                    <span>Virtual IBAN: <strong>STACKAPEX4102</strong></span>
+                    <span>Balance: <strong class="text-mint">₹52,400.00</strong></span>
+                    <span>Multi-Currency: <strong>Yes (INR/USD)</strong></span>
+                  </div>
+                </div>
               </div>
-              <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 0.5rem;">
-                <span>Email me upon invoice creation</span>
-                <input type="checkbox" checked style="width: 20px; height: 20px; accent-color: var(--navy);">
+            </div>
+
+            <!-- Right Column: Security, API Keys, Notifications -->
+            <div>
+              <!-- Security & Access Governance Panel -->
+              <div class="dashboard-panel">
+                <div class="panel-header">
+                  <div>
+                    <h3 class="panel-title">Security &amp; Dual Governance</h3>
+                    <p style="font-size: 0.85rem; margin: 0; color: var(--navy-text-muted);">
+                      Multi-factor authentication &amp; payout authorization rules
+                    </p>
+                  </div>
+                </div>
+
+                <div class="setting-item-row">
+                  <div class="setting-item-info">
+                    <div class="setting-item-title">Two-Factor Authentication (2FA)</div>
+                    <p class="setting-item-desc">Require hardware token or authenticator app TOTP code on login</p>
+                  </div>
+                  <label class="toggle-switch">
+                    <input type="checkbox" id="toggle2FA" checked>
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
+
+                <div class="setting-item-row">
+                  <div class="setting-item-info">
+                    <div class="setting-item-title">Dual-Approval Payout Threshold</div>
+                    <p class="setting-item-desc">Require two senior signatories for outward disbursals above ₹50,000</p>
+                  </div>
+                  <label class="toggle-switch">
+                    <input type="checkbox" id="toggleDualSignoff" checked>
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
+
+                <div class="setting-item-row">
+                  <div class="setting-item-info">
+                    <div class="setting-item-title">Auto Session Inactivity Timeout</div>
+                    <p class="setting-item-desc">Automatically lock the client session after idle duration</p>
+                  </div>
+                  <select class="panel-select" id="selectSessionTimeout">
+                    <option value="15">15 Minutes</option>
+                    <option value="30" selected>30 Minutes</option>
+                    <option value="60">1 Hour</option>
+                  </select>
+                </div>
               </div>
-              <button class="btn btn-primary" onclick="showToast('Profile preferences updated.')">Save Changes</button>
+
+              <!-- Developer API Keys & Webhooks Panel -->
+              <div class="dashboard-panel" style="margin-top: 1.5rem;">
+                <div class="panel-header">
+                  <div>
+                    <h3 class="panel-title">Developer API Credentials &amp; Webhooks</h3>
+                    <p style="font-size: 0.85rem; margin: 0; color: var(--navy-text-muted);">
+                      Programmatic access tokens and event notification endpoints
+                    </p>
+                  </div>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 1.2rem;">
+                  <div>
+                    <label class="form-label">Live API Secret Key (Restricted Scope)</label>
+                    <div class="copyable-input-wrap">
+                      <input type="password" id="clientApiKey" value="stackly_live_key_89f029c71a39d88e0018b2c451" readonly>
+                      <button type="button" class="icon-toggle-btn" id="btnToggleApiKey" title="Show/Hide API Key">
+                        <i class="fas fa-eye"></i>
+                      </button>
+                      <button type="button" class="btn btn-sm btn-outline" id="btnCopyApiKey">
+                        <i class="fas fa-copy"></i> Copy
+                      </button>
+                    </div>
+                    <small style="color: var(--navy-text-muted); display: block; margin-top: 0.3rem;">
+                      <i class="fas fa-lock"></i> Never share secret keys. Rotated automatically every 90 days.
+                    </small>
+                  </div>
+
+                  <div>
+                    <label class="form-label">Webhook Destination URL</label>
+                    <div class="copyable-input-wrap">
+                      <input type="url" id="clientWebhookUrl" value="https://api.apextech.com/v1/stackly-webhook">
+                      <button type="button" class="btn btn-sm btn-accent" id="btnPingWebhook">
+                        <i class="fas fa-paper-plane"></i> Test Ping
+                      </button>
+                    </div>
+                    <small style="color: var(--navy-text-muted); display: block; margin-top: 0.3rem;">
+                      Signing Secret: <code>stackly_whsec_demo_67c82a10d93</code>
+                    </small>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Automated Notification & Alert Rules Panel -->
+              <div class="dashboard-panel" style="margin-top: 1.5rem;">
+                <div class="panel-header">
+                  <div>
+                    <h3 class="panel-title">Notification &amp; Alert Rules</h3>
+                    <p style="font-size: 0.85rem; margin: 0; color: var(--navy-text-muted);">
+                      Choose which financial events trigger immediate alerts
+                    </p>
+                  </div>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 0.9rem;">
+                  <label style="display: flex; align-items: center; justify-content: space-between; font-size: 0.88rem; cursor: pointer;">
+                    <span>Instant SMS alert for debits exceeding ₹10,000</span>
+                    <input type="checkbox" id="notifyLargeDebits" checked style="width: 18px; height: 18px; accent-color: var(--navy);">
+                  </label>
+
+                  <label style="display: flex; align-items: center; justify-content: space-between; font-size: 0.88rem; cursor: pointer;">
+                    <span>Daily morning balance &amp; settlement digest email</span>
+                    <input type="checkbox" id="notifyDailyDigest" checked style="width: 18px; height: 18px; accent-color: var(--navy);">
+                  </label>
+
+                  <label style="display: flex; align-items: center; justify-content: space-between; font-size: 0.88rem; cursor: pointer;">
+                    <span>Customer payment receipt confirmations</span>
+                    <input type="checkbox" id="notifyCustomerReceipts" checked style="width: 18px; height: 18px; accent-color: var(--navy);">
+                  </label>
+
+                  <label style="display: flex; align-items: center; justify-content: space-between; font-size: 0.88rem; cursor: pointer;">
+                    <span>Suspicious login alerts from unrecognized IP ranges</span>
+                    <input type="checkbox" id="notifySecurityLogins" checked style="width: 18px; height: 18px; accent-color: var(--navy);">
+                  </label>
+
+                  <div style="padding-top: 0.6rem;">
+                    <button type="button" class="btn btn-sm btn-outline w-100" id="btnSaveNotificationPreferences">
+                      <i class="fas fa-bell"></i> Update Alert Channels
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
