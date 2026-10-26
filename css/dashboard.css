@@ -142,12 +142,18 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 0.5rem;
+  background-color: var(--navy);
+  flex-shrink: 0;
 }
 
 .user-mini-profile {
   display: flex;
   align-items: center;
   gap: 0.75rem;
+  min-width: 0;
+  flex: 1;
+  overflow: hidden;
 }
 
 .user-avatar-circle {
@@ -161,6 +167,13 @@
   align-items: center;
   justify-content: center;
   font-size: 0.95rem;
+  flex-shrink: 0;
+}
+
+.user-meta {
+  min-width: 0;
+  flex: 1;
+  overflow: hidden;
 }
 
 .user-meta span {
@@ -168,12 +181,18 @@
   font-size: 0.88rem;
   font-weight: 600;
   color: var(--white);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .user-meta small {
   display: block;
   font-size: 0.75rem;
   color: var(--white-text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .logout-icon-btn {
@@ -183,6 +202,11 @@
   cursor: pointer;
   font-size: 1.1rem;
   transition: var(--transition);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem;
 }
 
 .logout-icon-btn:hover {
