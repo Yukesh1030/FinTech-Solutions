@@ -208,7 +208,7 @@ function initAdminChart() {
   });
 }
 
-// Filter and Search Transactions Table
+// Dashboard View Recent Transactions Filter
 function initTransactionFiltering() {
   const searchInput = document.getElementById('adminTxnSearch');
   const statusSelect = document.getElementById('adminTxnStatusFilter');
@@ -272,7 +272,7 @@ function initRefreshControls() {
           processedVolEl.textContent = `₹${randomLakhs}L`;
         }
 
-        // 2. Prepend a new simulated transaction
+        // 2. Prepend a new simulated transaction to recent table
         const tableBody = document.getElementById('adminTxnTableBody');
         if (tableBody) {
           const newRefNum = Math.floor(2042 + Math.random() * 100);
