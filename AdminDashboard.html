@@ -1243,31 +1243,230 @@
              VIEW: SETTINGS
              ========================================================================== -->
         <div class="dashboard-view-section" id="view-settings" style="display: none;">
-          <div class="dashboard-panel" style="max-width: 700px;">
-            <div class="panel-header">
-              <h2 class="panel-title">System &amp; Staff Permissions</h2>
+          <!-- Subpage Header Banner -->
+          <div class="subpage-header-banner">
+            <div class="subpage-banner-info">
+              <h2 class="subpage-banner-title">
+                <i class="fas fa-sliders text-mint"></i> Platform Governance, Security &amp; Engine Controls
+              </h2>
+              <p class="subpage-banner-subtitle">
+                Configure global risk parameters, velocity throttles, biometric mandates, webhook backoff policies, and master administrator credentials.
+              </p>
             </div>
-            <div style="display: flex; flex-direction: column; gap: 1.2rem;">
-              <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 1rem; border-bottom: 1px solid var(--navy-border);">
-                <div>
-                  <strong style="color: var(--navy);">Two-Factor Biometric Mandate</strong>
-                  <p style="font-size: 0.85rem; margin: 0;">Require WebAuthn/FIDO2 keys for settlements exceeding ₹50,000</p>
+            <div class="subpage-banner-actions">
+              <button type="button" class="btn btn-sm btn-primary" id="btnSaveAdminSettings">
+                <i class="fas fa-floppy-disk"></i> Save System Config
+              </button>
+            </div>
+          </div>
+
+          <!-- Two-Column Settings Layout -->
+          <div class="dashboard-two-col">
+            <!-- Left Column: Risk Governance & Engine Architecture -->
+            <div>
+              <!-- Risk Governance Panel -->
+              <div class="dashboard-panel">
+                <div class="panel-header">
+                  <div>
+                    <h3 class="panel-title">Risk Management &amp; Velocity Rules</h3>
+                    <p style="font-size: 0.85rem; margin: 0; color: var(--navy-text-muted);">
+                      Automated anti-fraud and anomaly interception rules
+                    </p>
+                  </div>
                 </div>
-                <input type="checkbox" checked style="width: 20px; height: 20px; accent-color: var(--navy);">
+
+                <div class="setting-item-row">
+                  <div class="setting-item-info">
+                    <div class="setting-item-title">Two-Factor Biometric Mandate</div>
+                    <p class="setting-item-desc">Require WebAuthn/FIDO2 hardware keys for settlements exceeding ₹50,000</p>
+                  </div>
+                  <label class="toggle-switch">
+                    <input type="checkbox" id="toggleBiometricMandate" checked>
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
+
+                <div class="setting-item-row">
+                  <div class="setting-item-info">
+                    <div class="setting-item-title">Automated Velocity Throttle</div>
+                    <p class="setting-item-desc">Hold accounts attempting more than 5 high-value payouts within 60 seconds</p>
+                  </div>
+                  <label class="toggle-switch">
+                    <input type="checkbox" id="toggleVelocityThrottle" checked>
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
+
+                <div class="setting-item-row">
+                  <div class="setting-item-info">
+                    <div class="setting-item-title">Real-time Anomaly Quarantine</div>
+                    <p class="setting-item-desc">Temporarily hold transactions deviating &gt;3σ from baseline merchant volume</p>
+                  </div>
+                  <label class="toggle-switch">
+                    <input type="checkbox" id="toggleAnomalyQuarantine" checked>
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
+
+                <div style="margin-top: 1rem;">
+                  <label class="form-label">Single Transaction Hard Cap (INR ₹)</label>
+                  <input type="text" class="auth-input" id="adminMaxTxnCap" value="₹10,00,000" style="padding-left: 1rem;">
+                </div>
+
+                <div style="padding-top: 0.8rem;">
+                  <button type="button" class="btn btn-sm btn-primary" id="btnSaveRiskGovernance">
+                    <i class="fas fa-shield"></i> Update Risk Rules
+                  </button>
+                </div>
               </div>
-              <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 1rem; border-bottom: 1px solid var(--navy-border);">
-                <div>
-                  <strong style="color: var(--navy);">Automated Webhook Retry Backoff</strong>
-                  <p style="font-size: 0.85rem; margin: 0;">Exponential backoff up to 72 hours for client HTTP 5xx errors</p>
+
+              <!-- High Availability Engine Architecture Panel -->
+              <div class="dashboard-panel" style="margin-top: 1.5rem;">
+                <div class="panel-header">
+                  <div>
+                    <h3 class="panel-title">Engine Clusters &amp; Databases</h3>
+                    <p style="font-size: 0.85rem; margin: 0; color: var(--navy-text-muted);">
+                      Core transactional infrastructure status
+                    </p>
+                  </div>
                 </div>
-                <input type="checkbox" checked style="width: 20px; height: 20px; accent-color: var(--navy);">
+
+                <div class="reconcile-metric-row">
+                  <span style="color: var(--navy-text-muted);">Primary Database:</span>
+                  <strong style="color: var(--navy);">PostgreSQL Core (ap-south-1)</strong>
+                </div>
+                <div class="reconcile-metric-row">
+                  <span style="color: var(--navy-text-muted);">Read Replica Lag:</span>
+                  <strong style="color: #0b7252;">1.8ms (Synced)</strong>
+                </div>
+                <div class="reconcile-metric-row">
+                  <span style="color: var(--navy-text-muted);">Redis In-Memory Cache:</span>
+                  <strong style="color: #0b7252;">99.98% Hit Rate</strong>
+                </div>
+                <div class="reconcile-metric-row">
+                  <span style="color: var(--navy-text-muted);">Weekly Maintenance Window:</span>
+                  <select class="panel-select" id="selectMaintenanceWindow" style="font-size: 0.82rem; padding: 0.3rem 0.6rem;">
+                    <option value="sun_02">Sunday 02:00 - 03:00 IST</option>
+                    <option value="sat_02">Saturday 02:00 - 03:00 IST</option>
+                  </select>
+                </div>
               </div>
-              <div style="display: flex; justify-content: space-between; align-items: center;">
-                <div>
-                  <strong style="color: var(--navy);">Real-time Anomaly Quarantine</strong>
-                  <p style="font-size: 0.85rem; margin: 0;">Temporarily hold transactions deviating &gt;3σ from baseline volume</p>
+            </div>
+
+            <!-- Right Column: Webhook Infrastructure & Master Keys -->
+            <div>
+              <!-- Webhook Policies Panel -->
+              <div class="dashboard-panel">
+                <div class="panel-header">
+                  <div>
+                    <h3 class="panel-title">Webhook Infrastructure &amp; Alerts</h3>
+                    <p style="font-size: 0.85rem; margin: 0; color: var(--navy-text-muted);">
+                      Outbound event delivery and failure backoff rules
+                    </p>
+                  </div>
                 </div>
-                <input type="checkbox" checked style="width: 20px; height: 20px; accent-color: var(--navy);">
+
+                <div class="setting-item-row">
+                  <div class="setting-item-info">
+                    <div class="setting-item-title">Automated Webhook Retry Backoff</div>
+                    <p class="setting-item-desc">Exponential retry backoff up to 72 hours for client HTTP 5xx errors</p>
+                  </div>
+                  <label class="toggle-switch">
+                    <input type="checkbox" id="toggleWebhookBackoff" checked>
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
+
+                <div class="setting-item-row">
+                  <div class="setting-item-info">
+                    <div class="setting-item-title">Worker Dispatch Concurrency</div>
+                    <p class="setting-item-desc">Parallel HTTP dispatch threads for high-volume bursts</p>
+                  </div>
+                  <select class="panel-select" id="selectWebhookWorkers">
+                    <option value="50">50 Parallel Workers</option>
+                    <option value="100" selected>100 Parallel Workers</option>
+                    <option value="250">250 Parallel Workers</option>
+                  </select>
+                </div>
+
+                <div style="margin-top: 1rem;">
+                  <label class="form-label">System Critical Alerts Email</label>
+                  <input type="email" class="auth-input" id="adminAlertEmail" value="ops-alerts@stackly.finance" style="padding-left: 1rem;">
+                </div>
+              </div>
+
+              <!-- Master System Credentials Panel -->
+              <div class="dashboard-panel" style="margin-top: 1.5rem;">
+                <div class="panel-header">
+                  <div>
+                    <h3 class="panel-title">Master Platform Access Tokens</h3>
+                    <p style="font-size: 0.85rem; margin: 0; color: var(--navy-text-muted);">
+                      Root administrative tokens for multi-switch reconciliation
+                    </p>
+                  </div>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 1.2rem;">
+                  <div>
+                    <label class="form-label">Master Platform Root Key</label>
+                    <div class="copyable-input-wrap">
+                      <input type="password" id="masterAdminApiKey" value="stackly_master_root_99a81c7201dfb" readonly>
+                      <button type="button" class="icon-toggle-btn" id="btnToggleMasterKey" title="Show/Hide Key">
+                        <i class="fas fa-eye"></i>
+                      </button>
+                      <button type="button" class="btn btn-sm btn-outline" id="btnCopyMasterKey">
+                        <i class="fas fa-copy"></i> Copy
+                      </button>
+                    </div>
+                    <small style="color: var(--navy-text-muted); display: block; margin-top: 0.3rem;">
+                      <i class="fas fa-lock"></i> Full administrative clearance. Hardware HSM encrypted.
+                    </small>
+                  </div>
+
+                  <div>
+                    <label class="form-label">Master Signing Secret (HMAC-SHA256)</label>
+                    <div class="copyable-input-wrap">
+                      <input type="text" value="stackly_whsec_root_8849b201" readonly style="font-family: monospace;">
+                      <button type="button" class="btn btn-sm btn-accent" id="btnRotateMasterSecret">
+                        <i class="fas fa-rotate"></i> Rotate
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Staff Sessions & Security Auditing Panel -->
+              <div class="dashboard-panel" style="margin-top: 1.5rem;">
+                <div class="panel-header">
+                  <div>
+                    <h3 class="panel-title">Active Administrator Sessions</h3>
+                    <p style="font-size: 0.85rem; margin: 0; color: var(--navy-text-muted);">Current staff logins and security telemetry</p>
+                  </div>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 0.8rem;">
+                  <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem;">
+                    <div>
+                      <strong style="color: var(--navy); display: block;">admin@stackly.finance (This Device)</strong>
+                      <small style="color: var(--navy-text-muted);">Chrome on Windows • IP 115.240.88.14 (Chennai, IN)</small>
+                    </div>
+                    <span class="status-badge completed">Current</span>
+                  </div>
+
+                  <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; padding-top: 0.4rem; border-top: 1px solid rgba(16,29,50,0.06);">
+                    <div>
+                      <strong style="color: var(--navy); display: block;">ops-lead@stackly.finance</strong>
+                      <small style="color: var(--navy-text-muted);">Firefox on macOS • IP 49.207.210.8 (Bangalore, IN)</small>
+                    </div>
+                    <span class="status-badge completed">Active</span>
+                  </div>
+
+                  <div style="padding-top: 0.6rem;">
+                    <button type="button" class="btn btn-sm btn-outline w-100" id="btnForceLogoutAdmins">
+                      <i class="fas fa-arrow-right-from-bracket"></i> Terminate All Other Staff Sessions
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

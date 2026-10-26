@@ -10,10 +10,15 @@ document.addEventListener('DOMContentLoaded', () => {
 function initAdminDashboard() {
   initSidebarToggle();
   initSidebarMenuSwitching();
+  initAdminHashRouting();
   initAdminChart();
   initTransactionFiltering();
   initRefreshControls();
   initUserSession();
+  initAccountsFeatures();
+  initAdminLedgerFeatures();
+  initAdminReportsFeatures();
+  initAdminSettingsFeatures();
 }
 
 function initUserSession() {
@@ -296,7 +301,6 @@ function initRefreshControls() {
           adminVolumeChart.update();
         }
 
-        // Toast feedback
         if (typeof showToast === 'function') {
           showToast('Admin demonstration metrics refreshed live!');
         }
