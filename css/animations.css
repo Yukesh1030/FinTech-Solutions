@@ -146,6 +146,258 @@
   background: radial-gradient(circle, rgba(16, 29, 50, 0.08) 0%, rgba(16, 29, 50, 0) 70%);
 }
 
+/* ==========================================================================
+   STACKLY FINTECH - BRAND PRELOADER ANIMATION SYSTEM
+   ========================================================================== */
+
+.stackly-preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100vh;
+  max-width: 100vw;
+  max-height: 100vh;
+  z-index: 9999999;
+  background-color: #070B14;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-sizing: border-box;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.45s ease;
+  will-change: opacity, visibility;
+}
+
+.preloader-backdrop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 50% 45%, #0e1e38 0%, #080d1a 65%, #04060c 100%);
+}
+
+.preloader-glow-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.38;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.preloader-glow-orb.orb-1 {
+  width: 340px;
+  height: 340px;
+  background: radial-gradient(circle, #00d2ff 0%, rgba(0, 210, 255, 0) 70%);
+  top: 35%;
+  left: 32%;
+  transform: translate(-50%, -50%);
+  animation: orbFloat1 6s ease-in-out infinite alternate;
+}
+
+.preloader-glow-orb.orb-2 {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, #00f5a0 0%, rgba(0, 245, 160, 0) 70%);
+  bottom: 30%;
+  right: 32%;
+  transform: translate(50%, 50%);
+  animation: orbFloat2 7s ease-in-out infinite alternate;
+}
+
+.preloader-card {
+  position: relative;
+  z-index: 2;
+  background: rgba(13, 22, 41, 0.78);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.8), 0 0 40px rgba(0, 210, 255, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  border-radius: 24px;
+  padding: 2.8rem 3.4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 90vw;
+  box-sizing: border-box;
+  animation: preloaderCardEntrance 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.preloader-logo-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.4rem 2.2rem;
+  margin-bottom: 1.2rem;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(0, 210, 255, 0.18);
+  box-shadow: 0 0 30px rgba(0, 210, 255, 0.16), inset 0 0 15px rgba(0, 245, 160, 0.05);
+}
+
+.preloader-aura-ring {
+  position: absolute;
+  inset: -2px;
+  border-radius: 22px;
+  background: linear-gradient(90deg, #00d2ff, #00f5a0, #3b82f6, #00d2ff);
+  background-size: 300% 300%;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  padding: 1.5px;
+  animation: borderGlowFlow 3.5s ease infinite;
+  pointer-events: none;
+}
+
+.preloader-pulse-ring {
+  position: absolute;
+  inset: -8px;
+  border-radius: 28px;
+  background: radial-gradient(circle at center, rgba(0, 210, 255, 0.18) 0%, rgba(0, 245, 160, 0) 70%);
+  animation: ringPulse 2.8s ease-out infinite;
+  pointer-events: none;
+}
+
+.preloader-logo {
+  width: 195px;
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 4px 18px rgba(0, 210, 255, 0.45));
+  animation: preloaderLogoBreathe 2.6s ease-in-out infinite alternate;
+}
+
+.preloader-progress-track {
+  width: 220px;
+  max-width: 70vw;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  margin: 1.1rem auto 1.3rem;
+}
+
+.preloader-progress-bar {
+  height: 100%;
+  width: 50%;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #00d2ff, #3b82f6, #00f5a0);
+  box-shadow: 0 0 10px rgba(0, 210, 255, 0.8);
+  animation: preloaderProgressSweep 1.8s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+.preloader-status-container {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.4rem 0.95rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 999px;
+}
+
+.preloader-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #00f5a0;
+  box-shadow: 0 0 8px #00f5a0, 0 0 14px rgba(0, 245, 160, 0.6);
+  animation: dotBlink 1.4s ease-in-out infinite;
+}
+
+.preloader-status-text {
+  font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: #94a3b8;
+  text-transform: uppercase;
+}
+
+/* Dismissal and transitions */
+.stackly-preloader.preloader-dismissed {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+.stackly-preloader.preloader-hidden {
+  display: none !important;
+}
+
+/* Keyframe Animations */
+@keyframes orbFloat1 {
+  0% { transform: translate(-50%, -50%) scale(1); }
+  100% { transform: translate(-45%, -55%) scale(1.15); }
+}
+
+@keyframes orbFloat2 {
+  0% { transform: translate(50%, 50%) scale(1); }
+  100% { transform: translate(45%, 40%) scale(1.12); }
+}
+
+@keyframes borderGlowFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes ringPulse {
+  0% { transform: scale(0.96); opacity: 0.6; }
+  50% { transform: scale(1.04); opacity: 0.2; }
+  100% { transform: scale(1.14); opacity: 0; }
+}
+
+@keyframes preloaderLogoBreathe {
+  0% { transform: scale(1); filter: drop-shadow(0 4px 14px rgba(0, 210, 255, 0.3)); }
+  100% { transform: scale(1.035); filter: drop-shadow(0 6px 24px rgba(0, 210, 255, 0.6)); }
+}
+
+@keyframes preloaderProgressSweep {
+  0% { transform: translateX(-100%); }
+  50% { transform: translateX(100%); }
+  100% { transform: translateX(200%); }
+}
+
+@keyframes dotBlink {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(0.85); }
+}
+
+@keyframes preloaderCardEntrance {
+  0% { opacity: 0; transform: translateY(18px) scale(0.97); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 576px) {
+  .preloader-card {
+    padding: 2.2rem 1.8rem;
+    border-radius: 20px;
+  }
+  .preloader-logo {
+    width: 155px;
+  }
+  .preloader-progress-track {
+    width: 175px;
+  }
+  .preloader-status-text {
+    font-size: 0.65rem;
+  }
+}
+
 /* Accessibility: Respect Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -165,5 +417,8 @@
   .float-element,
   .float-element-delayed {
     animation: none !important;
+  }
+  .stackly-preloader {
+    display: none !important;
   }
 }
