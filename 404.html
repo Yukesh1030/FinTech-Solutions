@@ -160,6 +160,33 @@
 </head>
 <body>
 
+  <!-- ==========================================================================
+       STACKLY BRAND PRELOADER ANIMATION
+       ========================================================================== -->
+  <div id="stackly-preloader" class="stackly-preloader" aria-label="Loading STACKLY FinTech" role="status" aria-live="polite">
+    <div class="preloader-backdrop">
+      <div class="preloader-glow-orb orb-1"></div>
+      <div class="preloader-glow-orb orb-2"></div>
+    </div>
+    
+    <div class="preloader-card">
+      <div class="preloader-logo-container">
+        <div class="preloader-aura-ring"></div>
+        <div class="preloader-pulse-ring"></div>
+        <img src="Assets/Brand-logo.webp" alt="STACKLY FinTech" class="preloader-logo" width="195" height="54">
+      </div>
+
+      <div class="preloader-progress-track">
+        <div class="preloader-progress-bar"></div>
+      </div>
+
+      <div class="preloader-status-container">
+        <span class="preloader-status-dot"></span>
+        <span class="preloader-status-text">INITIALIZING SECURE SESSION</span>
+      </div>
+    </div>
+  </div>
+
   <div class="error-page-wrapper">
     <!-- Top Brand Logo -->
     <header class="error-top-brand">
@@ -206,6 +233,7 @@
 
   <!-- GSAP Animation Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="js/preloader.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       // History back action
