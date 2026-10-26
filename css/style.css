@@ -166,6 +166,20 @@ button, input, select, textarea {
   transition: var(--transition);
   text-align: center;
   white-space: nowrap;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.w-100 {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.btn.w-100 {
+  display: flex !important;
+  white-space: normal !important;
+  word-break: break-word;
 }
 
 .btn-primary {
