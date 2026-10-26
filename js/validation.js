@@ -66,24 +66,16 @@ function initContactFormValidation() {
       return;
     }
 
-    // Form is Valid: Provide instant responsive visual confirmation
+    // Form is Valid: Provide instant responsive visual confirmation and redirect to 404 page
     const submitBtn = contactForm.querySelector('button[type="submit"]');
-    const originalText = submitBtn.innerHTML;
-    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting Inquiry...';
-    submitBtn.disabled = true;
+    if (submitBtn) {
+      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting &amp; Redirecting...';
+      submitBtn.disabled = true;
+    }
 
     setTimeout(() => {
-      submitBtn.innerHTML = originalText;
-      submitBtn.disabled = false;
-      contactForm.reset();
-
-      if (successModal) {
-        successModal.classList.add('open');
-        document.body.style.overflow = 'hidden';
-      } else {
-        alert('Thank you! Your inquiry has been submitted. A STACKLY specialist will respond within 1 business day.');
-      }
-    }, 800);
+      window.location.href = '404.html';
+    }, 600);
   });
 }
 

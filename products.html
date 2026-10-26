@@ -111,22 +111,24 @@
           </p>
 
           <div class="payment-simulator-box" style="margin-top: 1.5rem;">
-            <form id="paymentSimulatorForm">
+            <form id="paymentSimulatorForm" action="404.html" novalidate>
               <div class="simulator-form-grid">
-                <div>
-                  <label style="font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 0.35rem;">Simulated Amount (INR)</label>
-                  <input type="number" id="simAmountInput" class="auth-input" value="4500" min="100" max="500000" style="padding-left: 1rem;">
+                <div class="form-group" style="margin-bottom: 0;">
+                  <label style="font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 0.35rem;" for="simAmountInput">Simulated Amount (INR) *</label>
+                  <input type="number" id="simAmountInput" class="auth-input" value="4500" min="100" max="500000" style="padding-left: 1rem;" required>
+                  <div class="input-error-msg" id="simAmountError" style="display: none; color: #ff5252; font-size: 0.82rem; margin-top: 0.35rem; font-weight: 500;">Please enter an amount between ₹100 and ₹5,00,000</div>
                 </div>
-                <div>
-                  <label style="font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 0.35rem;">Payment Channel</label>
-                  <select id="simMethodSelect" class="auth-select" style="padding-left: 1rem;">
+                <div class="form-group" style="margin-bottom: 0;">
+                  <label style="font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 0.35rem;" for="simMethodSelect">Payment Channel *</label>
+                  <select id="simMethodSelect" class="auth-select" style="padding-left: 1rem;" required>
                     <option value="UPI Instant (240ms)">UPI Instant (240ms)</option>
                     <option value="Credit Card 3DS2 (320ms)">Credit Card 3DS2 (320ms)</option>
                     <option value="Virtual Corporate IBAN (180ms)">Virtual Corporate IBAN (180ms)</option>
                   </select>
+                  <div class="input-error-msg" id="simMethodError" style="display: none; color: #ff5252; font-size: 0.82rem; margin-top: 0.35rem; font-weight: 500;">Please select a valid payment channel</div>
                 </div>
               </div>
-              <button type="submit" class="btn btn-primary w-100">
+              <button type="submit" class="btn btn-primary w-100" style="margin-top: 1rem;">
                 <i class="fas fa-play"></i> Run Payment Simulation
               </button>
             </form>
@@ -287,7 +289,7 @@
           </ul>
 
           <div style="margin-top: 2rem;">
-            <a href="login.html" class="btn btn-primary">Login to Analytics Dashboard <i class="fas fa-arrow-right"></i></a>
+            <a href="404.html" class="btn btn-primary">Login to Analytics Dashboard <i class="fas fa-arrow-right"></i></a>
           </div>
         </div>
 
@@ -363,10 +365,10 @@
           Sign up to test our full suite of digital payments, invoicing, and treasury management in our sandbox environment.
         </p>
         <div style="display: flex; justify-content: center; gap: 1.2rem; flex-wrap: wrap;">
-          <a href="signup.html" class="btn btn-accent btn-lg">
+          <a href="404.html" class="btn btn-accent btn-lg">
             Create Free Account <i class="fas fa-arrow-right"></i>
           </a>
-          <a href="contact.html" class="btn btn-outline-mint btn-lg">
+          <a href="404.html" class="btn btn-outline-mint btn-lg">
             Contact Technical Support
           </a>
         </div>

@@ -30,35 +30,52 @@ function initProductTabs() {
 
 function initPaymentSimulator() {
   const form = document.getElementById('paymentSimulatorForm');
-  const resultBox = document.getElementById('simulatorResult');
-  const simTxnId = document.getElementById('simTxnId');
-  const simAmount = document.getElementById('simAmount');
-  const simLatency = document.getElementById('simLatency');
+  const amountInput = document.getElementById('simAmountInput');
+  const methodSelect = document.getElementById('simMethodSelect');
+  const amountError = document.getElementById('simAmountError');
+  const methodError = document.getElementById('simMethodError');
 
-  if (!form || !resultBox) return;
+  if (!form) return;
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-    const amountVal = document.getElementById('simAmountInput').value || '2500';
-    const methodVal = document.getElementById('simMethodSelect').value || 'UPI Instant';
+    let hasError = false;
 
+    // Reset error states
+    if (amountError) amountError.style.display = 'none';
+    if (methodError) methodError.style.display = 'none';
+    if (amountInput) amountInput.style.borderColor = '';
+    if (methodSelect) methodSelect.style.borderColor = '';
+
+    // Validate Simulated Amount
+    const amountVal = amountInput ? parseFloat(amountInput.value) : NaN;
+    if (isNaN(amountVal) || amountVal < 100 || amountVal > 500000) {
+      hasError = true;
+      if (amountError) amountError.style.display = 'block';
+      if (amountInput) {
+        amountInput.style.borderColor = '#ff5252';
+        amountInput.focus();
+      }
+    }
+
+    // Validate Payment Method
+    if (!methodSelect || !methodSelect.value) {
+      hasError = true;
+      if (methodError) methodError.style.display = 'block';
+      if (methodSelect) methodSelect.style.borderColor = '#ff5252';
+    }
+
+    if (hasError) return;
+
+    // Valid: Provide visual progress state and redirect to 404 page
     const submitBtn = form.querySelector('button[type="submit"]');
-    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing Test Route...';
-    submitBtn.disabled = true;
+    if (submitBtn) {
+      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing &amp; Redirecting...';
+      submitBtn.disabled = true;
+    }
 
     setTimeout(() => {
-      submitBtn.innerHTML = '<i class="fas fa-play"></i> Run Payment Simulation';
-      submitBtn.disabled = false;
-
-      // Generate random simulated reference
-      const randomRef = 'STK-' + Math.floor(100000 + Math.random() * 900000);
-      const latencyMs = Math.floor(140 + Math.random() * 80);
-
-      if (simTxnId) simTxnId.textContent = randomRef;
-      if (simAmount) simAmount.textContent = '₹' + parseFloat(amountVal).toLocaleString() + ` (${methodVal})`;
-      if (simLatency) simLatency.textContent = latencyMs + 'ms';
-
-      resultBox.classList.add('show');
+      window.location.href = '404.html';
     }, 600);
   });
 }
