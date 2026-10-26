@@ -88,6 +88,33 @@ function initSidebarMenuSwitching() {
       if (overlay) overlay.classList.remove('active');
     });
   });
+
+  const brandLogo = document.querySelector('.sidebar-brand');
+  if (brandLogo) {
+    brandLogo.addEventListener('click', (e) => {
+      e.preventDefault();
+      menuItems.forEach(i => {
+        if (i.getAttribute('data-menu') === 'dashboard') {
+          i.classList.add('active');
+        } else {
+          i.classList.remove('active');
+        }
+      });
+      if (pageTitle) {
+        pageTitle.textContent = 'Admin Overview';
+      }
+      viewSections.forEach(sec => sec.style.display = 'none');
+      const defaultSec = document.getElementById('view-dashboard');
+      if (defaultSec) defaultSec.style.display = 'block';
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      const sidebar = document.querySelector('.dashboard-sidebar');
+      const overlay = document.querySelector('.dashboard-sidebar-overlay');
+      if (sidebar) sidebar.classList.remove('active');
+      if (overlay) overlay.classList.remove('active');
+    });
+  }
 }
 
 // Transaction Volume Chart
